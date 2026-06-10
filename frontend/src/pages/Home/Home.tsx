@@ -35,7 +35,7 @@ function Home(){
                     
                     <div className="h-16 w-14 aspect-square bg-blue-300 shrink-0"></div>
 
-                    <div className="flex flex-col flex-1 h-16">
+                    <div className="flex flex-col flex-1 justify-center h-16">
                         <p>Guess the Anime: Winter 2026</p>
                         <p className="text-sm text-gray-400">Kusogaki's Guess the Anime is now live!</p>
                     </div>
@@ -85,7 +85,7 @@ function Home(){
                             return <div key={index} className="flex rounded shadow">
                                 <div className="w-28 aspect-[3/4] bg-blue-300 rounded-l"></div>
 
-                                <div className="flex gap-2 p-3.5 w-full bg-white rounded">
+                                <div className="flex justify-between gap-2 p-3.5 w-full bg-white rounded">
                                     <div className="flex flex-col gap-2 justify-between text-sm">
                                         <p className="text-blue-300">jujune</p>
                                         <p>Plans to watch Frieren: Beyond Journey's End Season 2</p>
@@ -125,7 +125,7 @@ function Home(){
                 </div>}
             </section>
 
-            <footer className="flex flex-col gap-6 py-8 px-10 text-base bg-zinc-800 text-white">
+            <footer className="flex flex-col gap-6 p-8 md:p-10 text-base md:text-sm bg-zinc-800 text-white">
                 <div className="flex flex-col gap-3">
                     <p className="text-lg text-blue-400">Site Theme</p>   
 
