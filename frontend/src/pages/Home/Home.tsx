@@ -125,7 +125,7 @@ function Home(){
                 </div>}
             </section>
 
-            <footer className="flex flex-col gap-6 p-8 md:p-10 text-base md:text-sm bg-zinc-800 text-white">
+            <footer className="flex flex-col gap-6 p-8 md:p-10 text-base md:text-sm md:font-medium bg-zinc-800 text-white">
                 <div className="flex flex-col gap-3">
                     <p className="text-lg text-blue-400">Site Theme</p>   
 
