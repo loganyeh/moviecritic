@@ -22,22 +22,22 @@ function Home(){
 
     const handleNavClick = () => {
         setIsNav(!isNav);
-        console.log(isNav);
+        // console.log(isNav);
     };
     
     return(
         <>
             {/* page container */}
-            <div className="flex flex-col gap-5 px-5 py-10 bg-gray-100">
+            <div className="flex flex-col gap-5 px-5 pt-10 py-14 bg-gray-100">
 
                 {/* Pop Up - Section */}
-                <section className="border flex gap-2 p-3.5 rounded">
+                <section className="flex gap-2 p-3.5 rounded bg-zinc-800 text-white">
                     
                     <div className="h-16 w-14 aspect-square bg-blue-300 shrink-0"></div>
 
-                    <div className="border flex flex-col flex-1 h-16">
+                    <div className="flex flex-col flex-1 h-16">
                         <p>Guess the Anime: Winter 2026</p>
-                        <p className="text-sm">Kusogaki's Guess the Anime is now live!</p>
+                        <p className="text-sm text-gray-400">Kusogaki's Guess the Anime is now live!</p>
                     </div>
 
                     {/* <i className='bx bx-x text-4xl'></i> */}
@@ -53,8 +53,8 @@ function Home(){
                                 <div className="w-22 aspect-[3/4] bg-blue-300 rounded-l shrink-0"></div>
 
                                 <div className="flex flex-col justify-between p-3 min-w-0 w-full">
-                                    <p className="text-[15px] line-clamp-2">BOCCHI THE ROCK!</p>
-                                    <p className="text-xs">Progress: 9/12 +</p>
+                                    <p className="text-sm font-light line-clamp-2">BOCCHI THE ROCK!</p>
+                                    <p className="text-xs font-light">Progress: 9/12 +</p>
                                 </div>
                             </div>
                         })}
@@ -69,9 +69,9 @@ function Home(){
                         <div className="flex gap-2 items-center">
                             <i className='bx bxs-filter-alt text-base'></i>
 
-                            <div className="flex text-xs bg-white rounded">
-                                <p className="px-4 py-2">Following</p>
-                                <p className="px-4 py-2">Global</p>
+                            <div className="flex text-xs font-light bg-white rounded">
+                                <p className="px-3 py-1.5 font-medium">Following</p>
+                                <p className="px-3 py-1.5">Global</p>
                             </div>
                         </div>
                     </div>
@@ -85,15 +85,15 @@ function Home(){
                             return <div key={index} className="flex rounded shadow">
                                 <div className="w-28 aspect-[3/4] bg-blue-300 rounded-l"></div>
 
-                                <div className="flex gap-2 p-3.5 w-full text-[13px] bg-white rounded">
-                                    <div className="flex flex-col gap-2 justify-between">
-                                        <p>jujune</p>
+                                <div className="flex gap-2 p-3.5 w-full bg-white rounded">
+                                    <div className="flex flex-col gap-2 justify-between text-sm">
+                                        <p className="text-blue-300">jujune</p>
                                         <p>Plans to watch Frieren: Beyond Journey's End Season 2</p>
                                         <div className="w-10 aspect-square bg-blue-300 rounded"></div>
                                     </div>
 
                                     <div className="flex flex-col justify-between items-end text-[11px] shrink-0">
-                                        <time>1 week ago</time>
+                                        <time className="font-semibold">1 week ago</time>
 
                                         <div className="flex gap-2 text-sm">
                                             <i className='bx bxs-chat' ></i>
@@ -105,7 +105,7 @@ function Home(){
                         })}
                     </div>
 
-                    <button className="p-3.5 text-sm bg-white rounded shadow">Load More</button>
+                    <button className="p-3.5 text-sm font-semibold bg-white rounded shadow">Load More</button>
 
                 </section>
 
@@ -115,20 +115,19 @@ function Home(){
             <section className="fixed bottom-5 right-5 flex justify-center items-center bg-white rounded shadow-2xl">
                 {!isNav && <i onClick={() => handleNavClick()} className='bx bx-menu p-0.5 text-blue-400 text-5xl' ></i>}
 
-                {isNav && <div className="border border-gray-100 grid grid-cols-3 gap-4 px-2 py-4 rounded shadow">
+                {isNav && <div className="border border-gray-100 grid grid-cols-3 gap-3 px-2 py-4 rounded shadow">
                     {navIcons.map((nav, index) => {
                         return <div key={index} className="flex gap-1 flex-col justify-center items-center">
                             <i onClick={index === 8 ? handleNavClick : undefined} className={`${nav.icon} text-3xl`} ></i>
-                            <p className="text-[10px]">{nav.text}</p>
+                            <p className="text-[10px] font-medium">{nav.text}</p>
                         </div>
                     })}
                 </div>}
             </section>
 
-            <footer className="flex flex-col gap-6 p-[28px] text-base bg-zinc-900 text-white">
-
+            <footer className="flex flex-col gap-6 py-8 px-10 text-base bg-zinc-800 text-white">
                 <div className="flex flex-col gap-3">
-                    <p className="text-lg">Site Theme</p>   
+                    <p className="text-lg text-blue-400">Site Theme</p>   
 
                     <div className="flex gap-4">
                         {Array.from({ length: 4}).map((_, index) => {
@@ -145,7 +144,7 @@ function Home(){
 
                             {section.map((text, index) => {
                                 return <div key={index}>
-                                    <p>{text}</p>
+                                    <p className="text-gray-300">{text}</p>
                                 </div>
                             })}
 
