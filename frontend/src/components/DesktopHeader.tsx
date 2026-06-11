@@ -1,0 +1,41 @@
+
+
+function DesktopHeader(){
+    const headerText = [
+        { text: "Home" },
+        { text: "Profile" },
+        { text: "Anime List" },
+        { text: "Manga List" },
+        { text: "Browse" },
+        { text: "Forum" },
+    ];
+
+    return(
+        <>
+            <header className="hidden xl:flex justify-center p-2.5 bg-gray-900 text-gray-300">
+                <div className="flex justify-between items-center max-w-5xl 2xl:max-w-6xl w-full">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/AniList_logo.svg/1280px-AniList_logo.svg.png" className="w-12 aspect-square bg-blue-300" />
+                    {/* <div className="w-12 aspect-square bg-blue-300"></div> */}
+
+                    <div className="flex gap-10 items-center">
+                        {headerText.map((text, index) => {
+                            return <div key={index}>
+                                <p className="text-sm">{text.text}</p>
+                            </div>
+                        })}
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                        <i className='bx bx-search text-2xl' ></i>
+                        {/* <div className="w-10 aspect-square bg-blue-300 rounded"></div> */}
+                        <img src="https://i.pinimg.com/736x/0c/8a/1f/0c8a1f42df3622a03adeded0e08c08a6.jpg" className="w-10 aspect-square bg-blue-300 rounded" />
+                        <div className="flex justify-center items-center h-5 w-5 text-sm bg-red-400 text-white rounded-full">2</div>
+                    </div>
+                </div>
+
+            </header>
+        </>
+    );
+};
+
+export default DesktopHeader;
