@@ -1,13 +1,13 @@
-
+import { Link } from "react-router-dom";
 
 function DesktopHeader(){
     const headerText = [
-        { text: "Home" },
-        { text: "Profile" },
-        { text: "Anime List" },
-        { text: "Manga List" },
-        { text: "Browse" },
-        { text: "Forum" },
+        { text: "Home", route: "/" },
+        { text: "Profile", route: "/" },
+        { text: "Anime List", route: "/" },
+        { text: "Manga List", route: "/" },
+        { text: "Browse", route: "/browse" },
+        { text: "Forum", route: "/" },
     ];
 
     return(
@@ -19,9 +19,9 @@ function DesktopHeader(){
 
                     <div className="flex gap-10 items-center">
                         {headerText.map((text, index) => {
-                            return <div key={index}>
+                            return <Link key={index} to={text.route}>
                                 <p className="text-sm">{text.text}</p>
-                            </div>
+                            </Link>
                         })}
                     </div>
 
