@@ -1,10 +1,10 @@
-import DesktopHeader from "../../../components/DesktopHeader";
-import FloatingNav from "../../../components/FloatingNav";
-import Footer from "../../../components/Footer";
+import DesktopHeader from "../../components/DesktopHeader";
+import FloatingNav from "../../components/FloatingNav";
+import Footer from "../../components/Footer";
 
-import Activity from "../../Home/Activity";
+import Activity from "../Home/Activity";
 import ProfileBanner from "./ProfileBanner";
-import ProfileNav from "../../../components/ProfileNav";
+import ProfileNav from "../../components/ProfileNav";
 import ActivityHistory from "./ActivityHistory";
 import GenreOverview from "./GenreOverview";
 import FavoritesCard from "./FavoritesCard";
