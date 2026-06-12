@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 function ProfileNav(){
     const profileNav = [
         { text: 'Overview', route: '/overview'},
-        { text: 'Anime List', route: '/overview'},
-        { text: 'Manga List', route: '/overview'},
+        { text: 'Anime List', route: '/animelist'},
+        { text: 'Manga List', route: '/animelist'},
         { text: 'Favorites', route: '/favorites'},
         { text: 'Stats', route: '/overview'},
         { text: 'Social', route: '/overview'},

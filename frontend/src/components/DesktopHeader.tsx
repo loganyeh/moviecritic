@@ -4,8 +4,8 @@ function DesktopHeader(){
     const headerText = [
         { text: "Home", route: "/" },
         { text: "Profile", route: "/overview" },
-        { text: "Anime List", route: "/" },
-        { text: "Manga List", route: "/" },
+        { text: "Anime List", route: "/animelist" },
+        { text: "Manga List", route: "/animelist" },
         { text: "Browse", route: "/browse" },
         { text: "Forum", route: "/" },
     ];
