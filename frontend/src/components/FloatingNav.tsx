@@ -8,11 +8,11 @@ function FloatingNav(){
         { icon: 'bx bx-play', text: 'anime list', route: '/' },
         { icon: 'bx bxs-book-alt', text: 'manga list', route: '/' },
         { icon: 'bx bxs-chat', text: 'forum', route: '/' },
-        { icon: 'bx bxs-user', text: 'profile', route: '/' },
+        { icon: 'bx bxs-user', text: 'profile', route: '/overview' },
         { icon: 'bx bxs-envelope', text: 'notifications', route: '/' },
         { icon: 'bx bxs-cog', text: 'settings', route: '/' },
         { icon: 'bx bx-search', text: 'search', route: '/browse' },
-        { icon: 'bx bx-x', text: '', route: '/' },
+        { icon: 'bx bx-x', text: '', route: '' },
     ];
 
     const handleNavClick = () => {

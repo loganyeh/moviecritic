@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function DesktopHeader(){
     const headerText = [
         { text: "Home", route: "/" },
-        { text: "Profile", route: "/" },
+        { text: "Profile", route: "/overview" },
         { text: "Anime List", route: "/" },
         { text: "Manga List", route: "/" },
         { text: "Browse", route: "/browse" },
