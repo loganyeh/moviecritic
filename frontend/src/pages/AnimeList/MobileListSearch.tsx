@@ -1,6 +1,6 @@
 
 
-function ListSearch(){
+function MobileListSearch(){
 
     return(
         <>
@@ -18,4 +18,4 @@ function ListSearch(){
     );
 };
 
-export default ListSearch;
+export default MobileListSearch;
