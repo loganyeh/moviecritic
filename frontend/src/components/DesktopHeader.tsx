@@ -14,7 +14,9 @@ function DesktopHeader(){
         <>
             <header className="hidden xl:flex justify-center p-2.5 bg-gray-900 text-gray-300">
                 <div className="flex justify-between items-center max-w-5xl 2xl:max-w-6xl w-full">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/AniList_logo.svg/1280px-AniList_logo.svg.png" className="w-12 aspect-square bg-blue-300" />
+                    <Link to={'/'}>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/AniList_logo.svg/1280px-AniList_logo.svg.png" className="w-12 aspect-square bg-blue-300" />
+                    </Link>
                     {/* <div className="w-12 aspect-square bg-blue-300"></div> */}
 
                     <div className="flex gap-10 items-center">

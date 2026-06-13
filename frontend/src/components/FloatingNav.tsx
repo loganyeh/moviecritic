@@ -10,7 +10,7 @@ function FloatingNav(){
         { icon: 'bx bxs-chat', text: 'forum', route: '/' },
         { icon: 'bx bxs-user', text: 'profile', route: '/overview' },
         { icon: 'bx bxs-envelope', text: 'notifications', route: '/' },
-        { icon: 'bx bxs-cog', text: 'settings', route: '/' },
+        { icon: 'bx bxs-cog', text: 'settings', route: '/info' },
         { icon: 'bx bx-search', text: 'search', route: '/browse' },
         { icon: 'bx bx-x', text: '', route: '' },
     ];
