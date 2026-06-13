@@ -26,9 +26,13 @@ function DesktopHeader(){
                     </div>
 
                     <div className="flex items-center gap-2">
-                        <i className='bx bx-search text-2xl' ></i>
+                        <Link to={'/browse'} className="flex justify-center items-center">
+                            <i className='bx bx-search text-2xl' ></i>
+                        </Link>
                         {/* <div className="w-10 aspect-square bg-blue-300 rounded"></div> */}
-                        <img src="https://i.pinimg.com/736x/0c/8a/1f/0c8a1f42df3622a03adeded0e08c08a6.jpg" className="w-10 aspect-square bg-blue-300 rounded" />
+                        <Link to={'/overview'} className="flex justify-center items-center">
+                            <img src="https://i.pinimg.com/736x/0c/8a/1f/0c8a1f42df3622a03adeded0e08c08a6.jpg" className="w-10 aspect-square bg-blue-300 rounded" />
+                        </Link>
                         <div className="flex justify-center items-center h-5 w-5 text-sm bg-red-400 text-white rounded-full">2</div>
                     </div>
                 </div>
