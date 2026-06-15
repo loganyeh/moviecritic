@@ -88,7 +88,7 @@ function Info(){
         { logo: 'bx bxl-medium', bgColor: 'bg-red-600', site: 'Netflix', region: '' },
         { logo: 'bx bxl-play-store', bgColor: 'bg-blue-500', site: 'WeTV', region: '' },
         { logo: 'bx bxl-youtube', bgColor: 'bg-red-600', site: 'Youtube', region: '(JP)' },
-        { logo: 'bx bxl-youtube', bgColor: 'bg-red-600', site: 'Youtuve', region: '(EN)' },
+        { logo: 'bx bxl-youtube', bgColor: 'bg-red-600', site: 'Youtube', region: '(EN)' },
         { logo: 'bx bxl-audible', bgColor: 'bg-green-500', site: 'iQ', region: '' },
     ];
     const tags = [
