@@ -61,7 +61,43 @@ function Info(){
     const watch = [
         {thumbnail: '', episodeName: 'Episode 130 - Scent of'},
         {thumbnail: '', episodeName: 'Episode 129 - It All Started'},
-    ]
+    ];
+    const recommendations = [
+        {title: "Hunter x Hunter (2011)"},
+        {title: "Naruto"},
+        {title: "Naruto Shippuden"},
+    ];
+    const reviews = [
+        {
+            review: 'One Piece is a great adventure series, with a lovable cast of characters.',
+            likes: '563',
+        },
+        {
+            review: 'A really fun adventure comprised of a wacky crew...',
+            likes: '209',
+        },
+    ];
+    const streamingLinks = [
+        { logo: 'bx bx-link', bgColor: 'bg-blue-500', site: 'Official Site', region: 'JP' },
+        { logo: 'bx bxl-instagram', bgColor: 'bg-purple-500', site: 'Instagram', region: 'JP' },
+        { logo: 'bx bxl-twitter', bgColor: 'bg-black', site: 'Twitter', region: 'JP' },
+        { logo: 'bx bx-tv', bgColor: 'bg-blue-300', site: 'Bilibili TV', region: '' },
+        { logo: 'bx bx-tennis-ball', bgColor: 'bg-orange-500', site: 'Crunchyroll', region: '' },
+        { logo: 'bx bxl-unity', bgColor: 'bg-blue-500', site: 'Hoopla', region: '' },
+        { logo: 'bx bxl-facebook-circle', bgColor: 'bg-green-500', site: 'Hulu', region: '' },
+        { logo: 'bx bxl-medium', bgColor: 'bg-red-600', site: 'Netflix', region: '' },
+        { logo: 'bx bxl-play-store', bgColor: 'bg-blue-500', site: 'WeTV', region: '' },
+        { logo: 'bx bxl-youtube', bgColor: 'bg-red-600', site: 'Youtube', region: '(JP)' },
+        { logo: 'bx bxl-youtube', bgColor: 'bg-red-600', site: 'Youtuve', region: '(EN)' },
+        { logo: 'bx bxl-audible', bgColor: 'bg-green-500', site: 'iQ', region: '' },
+    ];
+    const tags = [
+        { tag: 'Pirates', percentage: '98' },
+        { tag: 'Travel', percentage: '94' },
+        { tag: 'Shounen', percentage: '93' },
+        { tag: 'Ensemble Cast', percentage: '93' },
+        { tag: 'Super Power', percentage: '90' },
+    ];
 
     return(
         <>
@@ -76,7 +112,7 @@ function Info(){
 
             {/* Movie Watch Status */}
             <section className="relative flex justify-end gap-3 p-3">
-                <div className="absolute -top-24 left-5 h-36 w-24 bg-red-300 rounded"></div>
+                <div className="absolute -top-24 left-5 h-36 w-25 bg-red-300 rounded"></div>
 
                 <div className="flex justify-center items-center px-14 bg-blue-400 text-white rounded">Watching</div>
                 <div className="flex justify-center items-center bg-red-600 rounded">
@@ -86,13 +122,13 @@ function Info(){
 
             {/* Movie Title */}
             <section className="px-4 py-1">
-                <h1 className="text-lg font-semibold text-gray-600">BOCCHI THE ROCK!</h1>
+                <h1 className="text-lg font-semibold text-gray-600">ONE PIECE</h1>
             </section>
 
             <ProfileNav />
 
             {/* page container */}
-            <div className="flex flex-col gap-10 p-5 py-10 bg-gray-200">
+            <div className="flex flex-col gap-10 p-5 py-10 pb-24 bg-gray-200">
 
                 {/* Movie Details */}
                 <section className="bg-white rounded shadow">
@@ -207,7 +243,7 @@ function Info(){
                             })}
                         </div>
 
-                        <div className="flex h-2">
+                        <div className="flex h-3">
                             <div className="h-full w-6/12 bg-green-500 rounded-bl"></div>
                             <div className="h-full w-2/12 bg-blue-500"></div>
                             <div className="h-full w-2/12 bg-purple-500"></div>
@@ -258,6 +294,120 @@ function Info(){
                         </div>
                         <p className="flex justify-center flex-1 font-light">Paused</p>
                     </div>
+                </section>
+
+                {/* Recommendations */}
+                <section className="flex flex-col gap-3">
+                    <div className="flex justify-between items-center text-gray-600">
+                        <h2 className="text-sm font-medium">Recommendations</h2>
+                        <i className='bx bx-plus text-xl'></i>
+                    </div>
+
+                    <div className="flex gap-6 overflow-x-scroll">
+                        {recommendations.map((recommendations, index) => {
+                            return <div key={index} className="flex flex-col gap-2">
+                                <div className="w-32 aspect-[3/4] bg-red-300 shrink-0 rounded"></div>  
+                                <p className="text-sm font-medium text-gray-600">{recommendations.title}</p>
+                            </div>
+                        })}
+                    </div>
+                </section>
+
+                {/* Threads */}
+                <section className="flex flex-col gap-3">
+                    <div className="flex justify-between items-center text-gray-600">
+                        <h2 className="text-sm font-medium">Threads</h2>
+                        <p className="text-xs">Create New Thread</p>
+                    </div>
+
+                    <div className="flex flex-col gap-5">
+                        {Array.from({length: 2}).map((_, index) => {
+                            return <div key={index} className="flex flex-col gap-3 p-4 bg-white rounded shadow">
+                                <div className="flex gap-5">
+                                    <p className="min-w-0 text-sm text-gray-600 line-clamp-3">[Spoilers] One Piece - Episode 1165 Discussion</p>
+
+                                    <div className="flex gap-3 text-gray-500 shrink-0">
+                                        <div className="flex gap-0.5">
+                                            <i className='bx bx-bar-chart text-sm' ></i>
+                                            <p className="text-xs">268</p>
+                                        </div>
+
+                                        <div className="flex gap-0.5">
+                                            <i className='bx bxs-chat text-sm'></i>
+                                            <p className="text-xs">13</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center gap-2.5 text-gray-600">
+                                    <div className="w-6 aspect-square bg-blue-300 rounded"></div>
+                                    <p className="text-xs">Hanni replied 22 hours ago</p>
+                                </div>
+
+                                <div className="px-2 py-0.5 w-fit text-xs bg-blue-400 text-white rounded-full">anime</div>
+                            </div>
+                        })}
+                    </div>
+                </section>
+
+                {/* Reviews */}
+                <section className="flex flex-col gap-3">
+                    <h2 className="text-sm font-medium text-gray-600">Reviews</h2>
+
+                    <div className="flex flex-col gap-4">
+                        {reviews.map((review, index) => {
+                            return <div key={index} className="flex items-start gap-6">
+                                <div className="w-12 aspect-square bg-blue-300 rounded shrink-0"></div>
+
+                                <div className="relative p-4 bg-white rounded shadow">
+                                    <p className="text-sm text-center text-gray-600">{review.review}</p>
+
+                                    <div className="absolute bottom-1 right-2 flex justify-end items-center gap-1 text-xs text-gray-500">
+                                        <i className='bx bxs-like' ></i>
+                                        <p>{review.likes}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        })}
+                    </div>
+                </section>
+
+                {/* External * Streaming Links */}
+                <section className="flex flex-col gap-3">
+                    <h2 className="text-sm font-medium text-gray-600">External & Streaming Links</h2>
+
+                    <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+                        {streamingLinks.map((link, index) => {
+                            return <div key={index} className="flex items-center gap-2.5 bg-white rounded shadow">
+                                <div className={`flex justify-center items-center p-0.5 w-fit ${link.bgColor} rounded`}>
+                                    <i className={`${link.logo} text-2xl text-white`} ></i>
+                                </div>
+
+                                <div className="flex items-end gap-1">
+                                    <p className="text-xs font-semibold text-gray-600">{link.site}</p>
+                                    <p className="text-[10px] font-medium text-gray-500">{link.region}</p>
+                                </div>
+                            </div>
+                        })}
+                    </div>
+                </section>
+
+                {/* Tags */}
+                <section className="flex flex-col gap-3">
+                    <h2 className="text-sm font-medium text-gray-600">Following</h2>
+
+                    <div className="flex flex-col gap-3">
+                        {tags.map((tag, index) => {
+                            return <div key={index} className="py-2 px-3 bg-white rounded shadow">
+                                <div className="flex justify-between items-center">
+                                    <p className="text-sm text-gray-600">{tag.tag}</p>
+                                    <p className="text-xs font-light text-gray-500">{tag.percentage}%</p>
+                                </div>
+                            </div>
+                        })}
+                    </div>
+                    
+                    <p className="text-xs text-gray-500">Show 17 spoiler tags</p>
                 </section>
 
             </div>
