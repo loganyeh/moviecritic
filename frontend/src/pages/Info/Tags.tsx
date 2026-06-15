@@ -12,7 +12,7 @@ function Tags(){
     return(
         <>
             <section className="flex flex-col gap-3">
-                <h2 className="text-sm font-medium text-gray-600">Following</h2>
+                <h2 className="text-sm font-medium text-gray-600">Tags</h2>
 
                 <div className="flex flex-col gap-3">
                     {tags.map((tag, index) => {

@@ -14,7 +14,7 @@ function StatusDistribution(){
                 <h2 className="text-sm font-medium text-gray-600">Status Distribution</h2>
 
                 <div className="shadow">
-                    <div className="flex justify-between px-3 py-4 bg-white rounded-t">
+                    <div className="flex justify-between md:justify-around px-3 py-4 bg-white rounded-t">
                         {statusDistribution.map((status, index) => {
                             return <div key={index} className="flex flex-col gap-2">
                                 <p className={`px-3 py-1.5 text-sm ${status.bgColor} text-white rounded`}>{status.status}</p>

@@ -21,7 +21,7 @@ function Streaming(){
             <section className="flex flex-col gap-3">
                 <h2 className="text-sm font-medium text-gray-600">External & Streaming Links</h2>
 
-                <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+                <div className="grid grid-cols-2 md:flex md:flex-col gap-x-6 gap-y-3">
                     {streamingLinks.map((link, index) => {
                         return <div key={index} className="flex items-center gap-2.5 bg-white rounded shadow">
                             <div className={`flex justify-center items-center p-0.5 w-fit ${link.bgColor} rounded`}>

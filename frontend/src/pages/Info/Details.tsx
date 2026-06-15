@@ -27,7 +27,7 @@ function Details(){
     return(
         <>
             <section className="bg-white rounded shadow">
-                <div className="flex gap-5 p-5 text-sm overflow-x-scroll">
+                <div className="flex md:flex-col gap-5 p-5 text-sm overflow-x-scroll">
                     {movieDetails.map((category, index) => {
                         return <div key={index} className="shrink-0">
                             <p className="text-gray-500">{category.category}</p>

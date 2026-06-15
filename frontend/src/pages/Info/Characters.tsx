@@ -15,7 +15,7 @@ function Characters(){
             <section className="flex flex-col gap-3">
                 <h2 className="text-sm font-medium text-gray-600">Characters</h2>
 
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col xl:grid xl:grid-cols-2 2xl:grid-cols-3 gap-4 xl:gap-x-[32px]">
                     {characters.map((character, index) => {
                         return <div key={index} className="flex justify-between shadow">
                             <div className="h-20 w-16 apsect-[3/4] bg-blue-300 rounded-l"></div>

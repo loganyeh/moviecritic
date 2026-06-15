@@ -22,7 +22,7 @@ function Reviews(){
                         return <div key={index} className="flex items-start gap-6">
                             <div className="w-12 aspect-square bg-blue-300 rounded shrink-0"></div>
 
-                            <div className="relative p-4 bg-white rounded shadow">
+                            <div className="relative p-4 md:w-full bg-white rounded shadow">
                                 <p className="text-sm text-center text-gray-600">{review.review}</p>
 
                                 <div className="absolute bottom-1 right-2 flex justify-end items-center gap-1 text-xs text-gray-500">
