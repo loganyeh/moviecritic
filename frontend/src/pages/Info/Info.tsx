@@ -34,50 +34,57 @@ function Info(){
             <DesktopHeader />
             <MovieBanner />
 
-            <div className="flex flex-col md:flex-row gap-5 p-5 pb-0">
-                <div className="md:max-w-[275px] md:w-full">
-                    {/* Movie Watch Status */}
-                    <section className="relative flex justify-end">
-                        <div className="md:hidden absolute -top-27 left-0 h-36 w-25 bg-red-300 rounded"></div>
+            <div className="flex justify-center">
+                <div className="flex flex-col md:flex-row gap-[32px] p-5 md:p-[32px] md:pb-0 pb-0 xl:px-0 max-w-5xl 2xl:max-w-7xl w-full">
+                    <div className="md:max-w-[275px] md:w-fit">
+                        {/* Movie Watch Status */}
+                        <section className="relative flex justify-end md:items-end md:gap-5 md:h-52 lg:mb-5">
+                            <div className="md:absolute absolute -top-27 md:-top-32 left-0 h-36 md:h-auto w-25 md:w-52 md:aspect-[3/4] bg-red-300 rounded"></div>
 
-                        <div className="flex gap-4">
-                            <div className="flex justify-center items-center px-12 bg-blue-400 text-white rounded">Watching</div>
-                            <div className="flex justify-center items-center bg-red-600 rounded">
-                                <i className='bx bxs-heart p-2 aspect-square text-lg text-white' ></i>
+                            <div className="flex gap-4 md:w-52">
+                                <div className="flex justify-center items-center md:flex-1 px-12 md:px-0 bg-blue-400 text-white rounded">Watching</div>
+                                <div className="flex justify-center items-center bg-red-600 rounded">
+                                    <i className='bx bxs-heart p-2 aspect-square text-xl text-white' ></i>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div className="md:flex md:flex-col md:justify-between flex-1 md:gap-5 min-w-0">
+                        <div className="md:flex md:flex-col md:gap-3">
+                            {/* Movie Title */}
+                            <section className="">
+                                <h1 className="text-lg font-semibold md:font-normal text-gray-600">ONE PIECE</h1>
+                            </section>
+
+                            {/* Description */}
+                            <div className="">
+                                <p className="hidden md:block text-sm bg-white text-gray-500 break-words">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                                    Pariatur nisi dicta modi, nihil nemo optio id, praesentium ex tempora animi 
+                                    laboriosam sunt totam ea nesciunt alias blanditiis vel fugit nam!
+                                    laboriosam sunt totam ea nesciunt alias blanditiis vel fugit nam!
+                                    laboriosam sunt totam ea nesciunt alias blanditiis vel fugit nam!
+                                    laboriosam sunt totam ea nesciunt alias blanditiis vel fugit nam!
+                                    laboriosam sunt totam ea nesciunt alias blanditiis vel fugit nam!
+                                    laboriosam sunt totam ea nesciunt alias blanditiis vel fugit nam!
+                                    laboriosam sunt totam ea nesciunt alias blanditiis vel fugit nam!
+                                </p>
+
                             </div>
                         </div>
-                    </section>
-                </div>
 
-                <div className="flex-1">
-                    {/* Movie Title */}
-                    <section className="">
-                        <h1 className="text-lg font-semibold md:font-normal text-gray-600">ONE PIECE</h1>
-                    </section>
-
-                    {/* Description */}
-                    <p className="hidden md:block text-sm bg-white text-gray-500">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Pariatur nisi dicta modi, nihil nemo optio id, praesentium ex tempora animi 
-                        laboriosam sunt totam ea nesciunt alias blanditiis vel fugit nam!
-                        laboriosam sunt totam ea nesciunt alias blanditiis vel fugit nam!
-                        laboriosam sunt totam ea nesciunt alias blanditiis vel fugit nam!
-                        laboriosam sunt totam ea nesciunt alias blanditiis vel fugit nam!
-                        laboriosam sunt totam ea nesciunt alias blanditiis vel fugit nam!
-                        laboriosam sunt totam ea nesciunt alias blanditiis vel fugit nam!
-                        laboriosam sunt totam ea nesciunt alias blanditiis vel fugit nam!
-                    </p>
-
-                    {/* Info Nav Texts */}
-                    <section>
-                        <div className="flex overflow-x-scroll">
-                            {infoNav.map((nav, index) => {
-                                return <div key={index} className="px-3 py-3 text-sm font-light text-gray-600">
-                                    {nav.text}
-                                </div>
-                            })}
-                        </div>
-                    </section>
+                        {/* Info Nav Texts */}
+                        <section className="2xl:flex 2xl:justify-center">
+                            <div className="flex lg:justify-around 2xl:justify-between max-w-3xl w-full overflow-x-scroll lg:overflow-x-hidden">
+                                {infoNav.map((nav, index) => {
+                                    return <div key={index} className="px-3 py-3 text-sm font-light text-gray-600">
+                                        {nav.text}
+                                    </div>
+                                })}
+                            </div>
+                        </section>
+                    </div>
                 </div>
             </div>
 
