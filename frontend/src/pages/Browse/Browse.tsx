@@ -16,7 +16,14 @@ import { fetchMovie } from "../../services/tmdb/search";
 import type { MovieListsType } from "../../services/tmdb/movieLists";
 import SearchQuery from "./SearchQuery";
 
-function Browse(){
+type BrowseProps = {
+    currentMovieId: number, 
+    setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
+};
+
+import { fetchDetails } from "../../services/tmdb/movies";
+
+function Browse({ currentMovieId, setCurrentMovieId }: BrowseProps ){
     const [search, setSearch] = useState<MovieListsType[]>([]);
     const [query, setQuery] = useState("");
     const [trendingNow, setTrendingNow] = useState<MovieListsType[]>([]);
@@ -56,20 +63,20 @@ function Browse(){
                     <BrowseDropdown />
 
                     <MobileSearch setQuery={setQuery} />
-                    <DesktopSearch setQuery={setQuery} />
+                    <DesktopSearch setQuery={setQuery} setCurrentMovieId={setCurrentMovieId} />
 
                     {!query && <div className="flex flex-col gap-12">
-                        <CurrentMovies categoryName="TRENDING NOW" movieData={trendingNow} />
-                        <CurrentMovies categoryName="POPULAR THIS SEASON" movieData={trendingNow} />
-                        <CurrentMovies categoryName="UPCOMING NEXT SEASON" movieData={trendingNow} />
-                        <CurrentMovies categoryName="ALL TIME POPULAR" movieData={trendingNow} />
+                        <CurrentMovies categoryName="TRENDING NOW" movieData={trendingNow} setCurrentMovieId={setCurrentMovieId} />
+                        {/* <CurrentMovies categoryName="POPULAR THIS SEASON" movieData={trendingNow} setCurrentMovieId={setCurrentMovieId} /> */}
+                        {/* <CurrentMovies categoryName="UPCOMING NEXT SEASON" movieData={trendingNow} setCurrentMovieId={setCurrentMovieId} /> */}
+                        {/* <CurrentMovies categoryName="ALL TIME POPULAR" movieData={trendingNow} setCurrentMovieId={setCurrentMovieId} /> */}
                     </div>}
 
                     {!query && <MobileTopList movieData={topRated} />}
                     {!query && <DesktopTopList movieData={topRated} />}
 
                     {/* Movie Query Search */}
-                    {query && <SearchQuery search={search} query={query} />}
+                    {query && <SearchQuery search={search} query={query} setCurrentMovieId={setCurrentMovieId} />}
 
                 </div>
             </div>

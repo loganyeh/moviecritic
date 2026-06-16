@@ -4,9 +4,10 @@ import type { MovieListsType } from "../../services/tmdb/movieLists";
 type SearchQueryProps = {
     search: MovieListsType[],
     query: string,
+    setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
 };
 
-function SearchQuery({ search, query }: SearchQueryProps ){
+function SearchQuery({ search, query, setCurrentMovieId }: SearchQueryProps ){
 
     return(
         <>
@@ -39,8 +40,8 @@ function SearchQuery({ search, query }: SearchQueryProps ){
                     {search.map((movie, index) => {
                         return <div key={index}>
                             <div className="aspect-[3/4] rounded-md">
-                                <Link to={'/info'}>
-                                    <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="" className="h-full w-full object-contain object-cover rounded-md"/>
+                                <Link to={'/info'} onClick={() => setCurrentMovieId(movie.id)}>
+                                    <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="" className="h-full w-full object-cover rounded-md"/>
                                 </Link>
                             </div>
                             {/* <div className="aspect-[3/4] bg-blue-300 rounded-md"></div> */}
