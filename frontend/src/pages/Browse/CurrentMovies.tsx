@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
-import type { NowPlayingType } from "../../services/tmdb/search";
+import type { MovieListsType } from "../../services/tmdb/movieLists";
 
 type CurrentMoviesProp = {
     categoryName: string,
-    movieData: NowPlayingType[],
+    movieData: MovieListsType[],
 };
 
 
