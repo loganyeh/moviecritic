@@ -9,11 +9,25 @@ import MobileSearch from "./MobileSearch";
 import MobileTopList from "./MobileTopList";
 import CurrentMovies from "./CurrentMovies";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+import { fetchNowPlaying } from "../../services/tmdb/search";
+import type { NowPlayingType } from "../../services/tmdb/search";
 
 function Browse(){
     const [isSearch, setIsSearch] = useState(false);
+    const [trendingNow, setTrendingNow] = useState<NowPlayingType[]>([]);
 
+    useEffect(() => {
+        async function getNowPlaying(){
+            const data = await fetchNowPlaying();
+            setTrendingNow(data);
+            console.log(data.slice(0, 5));
+        };
+
+        getNowPlaying();
+        
+    }, []);
 
     return(
         <>
@@ -28,10 +42,10 @@ function Browse(){
                     <DesktopSearch />
 
                     {!isSearch && <div className="flex flex-col gap-12">
-                        <CurrentMovies categoryName="TRENDING NOW" />
-                        <CurrentMovies categoryName="POPULAR THIS SEASON" />
-                        <CurrentMovies categoryName="UPCOMING NEXT SEASON" />
-                        <CurrentMovies categoryName="ALL TIME POPULAR" />
+                        <CurrentMovies categoryName="TRENDING NOW" movieData={trendingNow} />
+                        {/* <CurrentMovies categoryName="POPULAR THIS SEASON" /> */}
+                        {/* <CurrentMovies categoryName="UPCOMING NEXT SEASON" /> */}
+                        {/* <CurrentMovies categoryName="ALL TIME POPULAR" /> */}
                     </div>}
 
                     {!isSearch && <MobileTopList />}
