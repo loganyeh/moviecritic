@@ -50,7 +50,7 @@ function Info({ currentMovieId }: InfoProps ){
 
             <div className="flex justify-center">
                 <div className="flex flex-col md:flex-row gap-[32px] p-5 md:p-[32px] md:pb-0 pb-0 xl:px-0 max-w-5xl 2xl:max-w-7xl w-full">
-                    <WatchingStatus poster_path={info?.poster_path || ""} />
+                    <WatchingStatus movieData={info} />
 
                     <div className="md:flex md:flex-col md:justify-between flex-1 md:gap-5 min-w-0">
                         <div className="md:flex md:flex-col md:gap-3">
