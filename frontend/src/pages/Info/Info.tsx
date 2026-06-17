@@ -23,7 +23,25 @@ import WatchingStatus from "./WatchingStatus";
 import AllTimeRankings from "./AllTimeRankings";
 import WriteAReview from "./WriteAReview";
 
-function Info(){
+type InfoProps = {
+    currentMovieId: number, 
+};
+
+import type { MovieListsType } from "../../services/tmdb/movieLists";
+import { fetchDetails } from "../../services/tmdb/movies";
+import { useState, useEffect } from "react";
+
+function Info({ currentMovieId }: InfoProps ){
+    const [info, setInfo] = useState<MovieListsType>()
+
+    useEffect(() => {
+        async function getDetails(currentMovieId: number){
+            const data = await fetchDetails(currentMovieId);
+            setInfo(data);
+        };
+
+        getDetails(currentMovieId);
+    }, [currentMovieId]);
 
     return(
         <>
@@ -32,11 +50,11 @@ function Info(){
 
             <div className="flex justify-center">
                 <div className="flex flex-col md:flex-row gap-[32px] p-5 md:p-[32px] md:pb-0 pb-0 xl:px-0 max-w-5xl 2xl:max-w-7xl w-full">
-                    <WatchingStatus />
+                    <WatchingStatus poster_path={info?.poster_path || ""} />
 
                     <div className="md:flex md:flex-col md:justify-between flex-1 md:gap-5 min-w-0">
                         <div className="md:flex md:flex-col md:gap-3">
-                            <MovieTitle />
+                            <MovieTitle title={info?.title || ""} />
                             {/* Description */}
                             <p className="hidden md:block text-sm bg-white text-gray-500 break-words">
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. 

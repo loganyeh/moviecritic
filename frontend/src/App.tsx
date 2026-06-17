@@ -6,20 +6,23 @@ import Favorites from "./pages/Favorites/Favorites";
 import AnimeList from "./pages/AnimeList/AnimeList";
 import Info from "./pages/Info/Info";
 
+import { useState } from "react";
+
 import { Routes, Route } from "react-router-dom";
 
 function App() {
+  const [currentMovieId, setCurrentMovieId] = useState(374205);
 
   return (
     <>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/browse" element={<Browse />} />
-      <Route path="/overview" element={<Overview />} />
-      <Route path="/favorites" element={<Favorites />} />
-      <Route path="/animelist" element={<AnimeList />} />
-      <Route path="/info" element={<Info />} />
-    </Routes>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/browse" element={<Browse setCurrentMovieId={setCurrentMovieId} />} />
+        <Route path="/overview" element={<Overview />} />
+        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/animelist" element={<AnimeList />} />
+        <Route path="/info" element={<Info currentMovieId={currentMovieId} />} />
+      </Routes>
     </>
   )
 };

@@ -1,6 +1,13 @@
 
+import type { MovieListsType } from "../../services/tmdb/movieLists";
 
-function DesktopTopList(){
+
+type DesktopTopListProps = {
+    movieData: MovieListsType[];
+};
+
+
+function DesktopTopList({ movieData }: DesktopTopListProps ){
 
     return(
         <>
@@ -11,17 +18,18 @@ function DesktopTopList(){
                 </div>
 
                 <div className="border-0 border-blue-600 flex gap-6 flex-col p-2">
-                    {Array.from({length: 10}).map((_, index) => {
-                        return <div key={index} className="flex">
+                    {movieData.slice(0, 10).map((movie, index) => {
+                        return <div key={movie.id} className="flex">
                             <div className="flex justify-center items-center px-6 text-2xl shrink-0">#{index + 1}</div>
 
                             <div className="p-2.5 bg-white w-full rounded shadow-xl">
                                 <div className="flex h-16">
-                                    <div className="h-full w-13 aspect-[3-4] bg-blue-300 rounded"></div>
+                                    {/* <div className="h-full w-13 aspect-[3-4] bg-blue-300 rounded"></div> */}
+                                    <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="" className="h-full w-13 aspect-[3-4] rounded"/>
 
                                     <div className="flex justify-between p-2 px-4 w-full">
                                         <div className="flex flex-col gap-1.5">
-                                            <p>Frieren: Beyond Journey's End</p>
+                                            <p>{movie.title}</p>
                                             <div className="text-[10px] text-white">
                                                 <p className="px-2 w-fit bg-green-500 rounded-full">adventure</p>
                                             </div>
