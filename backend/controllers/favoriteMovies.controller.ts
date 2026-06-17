@@ -35,6 +35,14 @@ export async function getMovie(req: Request, res:Response){
 export async function createMovie(req: Request, res: Response){
     const { id, title, backdrop_path, poster_path } = req.body;
 
+    const existingMovie = await Movie.findOne({ id });
+    
+    if(existingMovie) {
+        return res.status(409).json({
+            message: 'Movie is already in your favorites',
+        });
+    };
+
     try {
         const movie = await Movie.create({ id, title, backdrop_path, poster_path });
         res.status(200).json(movie);
