@@ -17,13 +17,11 @@ import type { MovieListsType } from "../../services/tmdb/movieLists";
 import SearchQuery from "./SearchQuery";
 
 type BrowseProps = {
-    currentMovieId: number, 
     setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
 };
 
-import { fetchDetails } from "../../services/tmdb/movies";
 
-function Browse({ currentMovieId, setCurrentMovieId }: BrowseProps ){
+function Browse({ setCurrentMovieId }: BrowseProps ){
     const [search, setSearch] = useState<MovieListsType[]>([]);
     const [query, setQuery] = useState("");
     const [trendingNow, setTrendingNow] = useState<MovieListsType[]>([]);
@@ -63,7 +61,7 @@ function Browse({ currentMovieId, setCurrentMovieId }: BrowseProps ){
                     <BrowseDropdown />
 
                     <MobileSearch setQuery={setQuery} />
-                    <DesktopSearch setQuery={setQuery} setCurrentMovieId={setCurrentMovieId} />
+                    <DesktopSearch setQuery={setQuery} />
 
                     {!query && <div className="flex flex-col gap-12">
                         <CurrentMovies categoryName="TRENDING NOW" movieData={trendingNow} setCurrentMovieId={setCurrentMovieId} />

@@ -1,10 +1,9 @@
 
 type DesktopSearchProps = {
     setQuery: React.Dispatch<React.SetStateAction<string>>,
-    setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
 };
 
-function DesktopSearch({ setQuery, setCurrentMovieId }: DesktopSearchProps ){
+function DesktopSearch({ setQuery }: DesktopSearchProps ){
 
     return(
         <>

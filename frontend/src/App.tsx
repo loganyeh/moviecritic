@@ -15,14 +15,14 @@ function App() {
 
   return (
     <>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/browse" element={<Browse currentMovieId={currentMovieId} setCurrentMovieId={setCurrentMovieId} />} />
-      <Route path="/overview" element={<Overview />} />
-      <Route path="/favorites" element={<Favorites />} />
-      <Route path="/animelist" element={<AnimeList />} />
-      <Route path="/info" element={<Info currentMovieId={currentMovieId} setCurrentMovieId={setCurrentMovieId} />} />
-    </Routes>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/browse" element={<Browse setCurrentMovieId={setCurrentMovieId} />} />
+        <Route path="/overview" element={<Overview />} />
+        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/animelist" element={<AnimeList />} />
+        <Route path="/info" element={<Info currentMovieId={currentMovieId} />} />
+      </Routes>
     </>
   )
 };
