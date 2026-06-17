@@ -32,9 +32,17 @@ export async function getMovie(req: Request, res:Response){
 };
 
 // CREATE a movie
-export async function createMovie(){
+export async function createMovie(req: Request, res: Response){
+    const { id, title, backdrop_path, poster_path } = req.body;
 
-}
+    try {
+        const movie = await Movie.create({ id, title, backdrop_path, poster_path });
+        res.status(200).json(movie);
+    } catch (error) {
+        const err = error as Error;
+        res.status(400).json({ error: err.message });
+    };
+};
 
 // DELETE a movie
 export async function deleteMovie(){
