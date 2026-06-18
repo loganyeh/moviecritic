@@ -1,12 +1,15 @@
 import FilterType from "./FilterType";
+import type { MovieListsType } from "../../services/tmdb/movieLists";
 
 
 type WatchingStatusProps = {
     sectionName: string,
+    watchData: MovieListsType[],
 };
 
 
-function WatchingStatus({ sectionName }: WatchingStatusProps ){
+
+function WatchingStatusList({ sectionName, watchData }: WatchingStatusProps ){
 
     return(
         <>
@@ -32,11 +35,11 @@ function WatchingStatus({ sectionName }: WatchingStatusProps ){
                     </div>
 
                     <div className="flex flex-col gap-6">
-                        {Array.from({length: 3}).map((_, index) => {
+                        {watchData.map((movie, index) => {
                             return <div key={index} className="flex items-start md:justify-between md:items-center gap-4">
                                 <div className="flex items-center gap-4 max-w-[190px] md:w-full">
                                     <div className="w-12 aspect-square shrink-0 bg-blue-300 rounded"></div>
-                                    <p className="hidden md:block break-words min-w-0 font-medium text-gray-600">Blue Box</p>
+                                    <p className="hidden md:block break-words min-w-0 font-medium text-gray-600">{movie.title}</p>
                                 </div>
 
                                 <div className="md:hidden flex flex-col gap-3 w-full text-gray-500">
@@ -64,4 +67,4 @@ function WatchingStatus({ sectionName }: WatchingStatusProps ){
     );
 };
 
-export default WatchingStatus;
+export default WatchingStatusList;

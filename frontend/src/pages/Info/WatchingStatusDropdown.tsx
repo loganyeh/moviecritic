@@ -43,6 +43,19 @@ function WatchingStatusDropdown({ movieData }: WatchingStatusProps ){
         };
     };
 
+    async function addMovieToList(status: string){
+        await fetch('http://localhost:3000/list/status', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                ...movieData,
+                status: status,
+            }),
+        });
+    };
+
     return(
         <>
             <section className="md:max-w-[275px] md:w-fit">
@@ -59,7 +72,7 @@ function WatchingStatusDropdown({ movieData }: WatchingStatusProps ){
 
                             {/* Dropdown Status Options */}
                             {isStatusDropdown && <div className="border border-gray-300 absolute -bottom-30 right-0 flex gap-2 flex-col justify-start items-center p-2.5 w-5/6 md:w-full text-sm font-light bg-white text-gray-700 rounded shadow-2xl">
-                                <p>Set as Watching</p>
+                                <p onClick={() => addMovieToList("Watching")}>Set as Watching</p>
                                 <p>Set as Planning</p>
                                 <p className="border-t border-gray-300 pt-2">Open List Editor</p>
                             </div>}
