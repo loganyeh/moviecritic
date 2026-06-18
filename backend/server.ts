@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import favoriteMoviesRoutes from "./routes/favoriteMovies.routes.ts";
+import listRoutes from "./routes/list.routes.ts"
 
 dotenv.config();
 
@@ -17,6 +18,8 @@ app.use((req, res, next) => {
 });
 
 app.use('/favorites/movies', favoriteMoviesRoutes);
+
+app.use('/list/status', listRoutes);
 
 mongoose.connect(process.env.MONGO_URI!)
     .then(() => {

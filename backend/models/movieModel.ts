@@ -13,6 +13,9 @@ const movieSchema = new mongoose.Schema({
     poster_path: {
         type: String,
     },
+    status: {
+        type: String,
+    }
 });
 
 const Movie = mongoose.model("Movie", movieSchema);

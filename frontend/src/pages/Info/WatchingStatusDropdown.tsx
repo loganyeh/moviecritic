@@ -5,7 +5,6 @@ type WatchingStatusProps = {
     movieData: MovieListsType
 };
 
-
 function WatchingStatusDropdown({ movieData }: WatchingStatusProps ){
     const [checkMovies, setCheckMovies] = useState<MovieListsType[]>([]);
     const [isStatusDropdown, setIsStatusDropdown] = useState(false);
