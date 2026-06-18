@@ -1,12 +1,14 @@
+import type React from "react";
 import type { MovieListsType } from "../../services/tmdb/movieLists";
+import { Link } from "react-router-dom";
 
 type FavoritesCardProps = {
     sectionName: string,
     favoriteData: MovieListsType[];
+    setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
 };
 
-
-function FavoritesCard({ sectionName, favoriteData }: FavoritesCardProps ){
+function FavoritesCard({ sectionName, favoriteData, setCurrentMovieId }: FavoritesCardProps ){
     
     return(
         <>
@@ -19,9 +21,9 @@ function FavoritesCard({ sectionName, favoriteData }: FavoritesCardProps ){
                 <div className="bg-white rounded-md shadow">
                     <div className="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-9 2xl:grid-cols-11 gap-5 xl:gap-6 p-6">
                         {favoriteData.map((movie, _) => {
-                            return <div key={movie.id} className="mx-auto md:mx-0 w-24 md:w-[88px] aspect-[3/4]">
+                            return <Link to={'/info'} onClick={() => setCurrentMovieId(movie.id)} key={movie.id} className="mx-auto md:mx-0 w-24 md:w-[88px] aspect-[3/4]">
                                 <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="" className="h-full w-full object-cover rounded"/>
-                            </div>
+                            </Link>
                         })}
                         {/* {Array.from({length: 8}).map((_, index) => {
                             return <div key={index} className="mx-auto md:mx-0 w-24 md:w-[88px] aspect-[3/4] bg-blue-300 rounded">

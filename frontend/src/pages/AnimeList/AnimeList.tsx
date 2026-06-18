@@ -16,7 +16,11 @@ import ShuffleBtn from "./ShuffleBtn";
 import { useEffect, useState } from "react";
 import type { MovieListsType } from "../../services/tmdb/movieLists";
 
-function AnimeList(){
+type AnimeListProps = {
+    setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
+};
+
+function AnimeList({ setCurrentMovieId }: AnimeListProps ){
     const [watching, setWatching] = useState<MovieListsType[]>([])
 
     useEffect(() => {
@@ -57,7 +61,7 @@ function AnimeList(){
                                 <div className="hidden md:flex justify-end">
                                     <FilterType />
                                 </div>
-                                <WatchingStatusList sectionName="Watching" watchData={watching} />
+                                <WatchingStatusList sectionName="Watching" watchData={watching} setCurrentMovieId={setCurrentMovieId} />
                             </div>
 
                             {/* <WatchingStatusList sectionName="Completed" /> */}

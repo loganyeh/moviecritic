@@ -5,10 +5,11 @@ import type { MovieListsType } from "../../services/tmdb/movieLists";
 
 type MobileTopListProps = {
     movieData: MovieListsType[];
+    setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>;
 };
 
 
-function MobileTopList({ movieData }: MobileTopListProps ){
+function MobileTopList({ movieData, setCurrentMovieId }: MobileTopListProps ){
 
     return(
         <>

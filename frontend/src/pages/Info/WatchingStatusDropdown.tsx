@@ -64,10 +64,12 @@ function WatchingStatusDropdown({ movieData }: WatchingStatusProps ){
                     <img src={`https://image.tmdb.org/t/p/w500${movieData?.poster_path}`} alt="" className="md:absolute absolute -top-27 md:-top-32 left-0 h-36 md:h-auto w-25 md:w-52 md:aspect-[3/4] object-cover rounded"/>
 
                     <div className="flex gap-4 md:w-52">
-                        <div onClick={() => setIsStatusDropdown((prev) => !prev)} className="relative flex justify-center items-center md:flex-1 md:px-0 bg-blue-400 text-white rounded">
-                            <p className="flex flex-1 justify-center items-center px-[32px] md:p-0 h-full rounded-l">Watching</p>
-                            <div className="flex items-center h-full px-2 bg-blue-300 rounded-r">
-                                <i className='bx bx-chevron-down text-xl' ></i>
+                        <div className="relative flex justify-center items-center md:flex-1 md:px-0 bg-blue-400 text-white rounded">
+                            <div onClick={() => setIsStatusDropdown((prev) => !prev)} className="flex h-full w-full">
+                                <p className="flex flex-1 justify-center items-center px-[32px] md:p-0 h-full rounded-l">Watching</p>
+                                <div className="flex items-center h-full px-2 bg-blue-300 rounded-r">
+                                    <i className='bx bx-chevron-down text-xl' ></i>
+                                </div>
                             </div>
 
                             {/* Dropdown Status Options */}

@@ -70,8 +70,8 @@ function Browse({ setCurrentMovieId }: BrowseProps ){
                         {/* <CurrentMovies categoryName="ALL TIME POPULAR" movieData={trendingNow} setCurrentMovieId={setCurrentMovieId} /> */}
                     </div>}
 
-                    {!query && <MobileTopList movieData={topRated} />}
-                    {!query && <DesktopTopList movieData={topRated} />}
+                    {!query && <MobileTopList movieData={topRated} setCurrentMovieId={setCurrentMovieId} />}
+                    {!query && <DesktopTopList movieData={topRated} setCurrentMovieId={setCurrentMovieId} />}
 
                     {/* Movie Query Search */}
                     {query && <SearchQuery search={search} query={query} setCurrentMovieId={setCurrentMovieId} />}

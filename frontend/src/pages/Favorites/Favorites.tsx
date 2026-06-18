@@ -8,7 +8,11 @@ import FavoritesCard from "./FavoritesCard";
 import { useState, useEffect } from "react";
 import type { MovieListsType } from "../../services/tmdb/movieLists";
 
-function Favorites(){
+type FavoritesProps = {
+    setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
+};
+
+function Favorites({ setCurrentMovieId }: FavoritesProps ){
     const [movies, setMovies] = useState<MovieListsType[]>([]);
     // const [characters, setCharacters] = useState();
 
@@ -30,7 +34,7 @@ function Favorites(){
             <ProfileNav />
 
             <div className="flex flex-col items-center gap-10 px-6 py-10 pb-16 bg-gray-200">
-                <FavoritesCard sectionName="Anime" favoriteData={movies} />
+                <FavoritesCard sectionName="Anime" favoriteData={movies} setCurrentMovieId={setCurrentMovieId} />
                 {/* <FavoritesCard sectionName="Characters" /> */}
             </div>
 

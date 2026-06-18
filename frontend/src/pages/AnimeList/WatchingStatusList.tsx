@@ -1,15 +1,15 @@
 import FilterType from "./FilterType";
 import type { MovieListsType } from "../../services/tmdb/movieLists";
-
+import { Link } from "react-router-dom";
 
 type WatchingStatusProps = {
     sectionName: string,
     watchData: MovieListsType[],
+    setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
 };
 
 
-
-function WatchingStatusList({ sectionName, watchData }: WatchingStatusProps ){
+function WatchingStatusList({ sectionName, watchData, setCurrentMovieId }: WatchingStatusProps ){
 
     return(
         <>
@@ -37,10 +37,12 @@ function WatchingStatusList({ sectionName, watchData }: WatchingStatusProps ){
                     <div className="flex flex-col gap-6">
                         {watchData.map((movie, index) => {
                             return <div key={index} className="flex items-start md:justify-between md:items-center gap-4">
-                                <div className="flex items-center gap-4 max-w-[190px] md:w-full">
-                                    <div className="w-12 aspect-square shrink-0 bg-blue-300 rounded"></div>
-                                    <p className="hidden md:block break-words min-w-0 font-medium text-gray-600">{movie.title}</p>
-                                </div>
+                                <Link to={'/info'} onClick={() => setCurrentMovieId(movie.id)} className="flex items-center gap-4 max-w-[190px] md:w-full">
+                                    <div className="w-12 aspect-square shrink-0 bg-gray-300 rounded">
+                                        <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="h-full w-full text-xs object-cover rounded" />
+                                    </div>
+                                    <p className="hidden flex-1 md:block break-words min-w-0 font-medium text-gray-600">{movie.title}</p>
+                                </Link>
 
                                 <div className="md:hidden flex flex-col gap-3 w-full text-gray-500">
                                     <p className="font-medium text-gray-600">Blue Box</p>
