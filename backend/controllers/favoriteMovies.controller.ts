@@ -53,6 +53,18 @@ export async function createMovie(req: Request, res: Response){
 };
 
 // DELETE a movie
-export async function deleteMovie(){
+export async function deleteMovie(req: Request, res: Response){
+    const id  = Number(req.params.id);
 
-}
+    // if (!mongoose.Types.ObjectId.isValid(id)) {
+    //     return res.status(404).json({ error: "Movie does not exist"});
+    // };
+
+    const deletedMovie = await Movie.findOneAndDelete({ id });
+
+    if(!deletedMovie) {
+        return res.status(404).json({ error: "Movie does not exist" });
+    };
+
+    res.status(200).json(deletedMovie);
+};
