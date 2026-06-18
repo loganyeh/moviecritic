@@ -22,7 +22,7 @@ function DesktopTopList({ movieData }: DesktopTopListProps ){
                         return <div key={movie.id} className="flex">
                             <div className="flex justify-center items-center px-6 text-2xl shrink-0">#{index + 1}</div>
 
-                            <div className="p-2.5 bg-white w-full rounded shadow-xl">
+                            <div className="p-2.5 bg-white w-full rounded shadow">
                                 <div className="flex h-16">
                                     {/* <div className="h-full w-13 aspect-[3-4] bg-blue-300 rounded"></div> */}
                                     <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="" className="h-full w-13 aspect-[3-4] rounded"/>

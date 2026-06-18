@@ -31,7 +31,7 @@ function Activity({ page }: ActivityProps ){
 
                 <input type="text" className="px-4 py-2 text-sm bg-white rounded" placeholder="Write a status..." />
 
-                <div className={`${page === "Overview" ? "2xl:grid 2xl:grid-cols-2" : ""} flex flex-col gap-5`}>
+                <div className={`${page === "Overview" ? "2xl:grid 2xl:grid-cols-2" : ""} border flex flex-col gap-5`}>
                 {/* <div className="border border-red-600 flex flex-col gap-5"> */}
 
                     {Array.from({ length: 6 }).map((_, index) => {

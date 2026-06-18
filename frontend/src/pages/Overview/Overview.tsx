@@ -10,8 +10,21 @@ import GenreOverview from "./GenreOverview";
 import FavoritesCard from "./FavoritesCard";
 import WatchedStats from "./WatchedStats";
 
-function Overview(){
+import { useState, useEffect } from "react";
+import type { MovieListsType } from "../../services/tmdb/movieLists";
 
+function Overview(){
+    const [favMovies, setFavMovies] = useState<MovieListsType[]>([]);
+
+    useEffect(() => {
+        async function getFavMovies(){
+            const response = await fetch(`http://localhost:3000/favorites/movies`)
+            const data: MovieListsType[] = await response.json();
+            setFavMovies(data);
+        };
+
+        getFavMovies();
+    }, [])
 
     return(
         <>
@@ -25,8 +38,8 @@ function Overview(){
                     <div className="hidden xl:flex flex-col gap-5 max-w-sm 2xl:max-w-lg w-full">
                         <ActivityHistory />
                         <GenreOverview />
-                        <FavoritesCard title="Anime" />
-                        <FavoritesCard title="Characters" />
+                        <FavoritesCard title="Movies" favData={favMovies} />
+                        {/* <FavoritesCard title="Characters" favData={favMovies} /> */}
                     </div>
 
                     <div className="flex flex-col xl:flex-1 gap-6">

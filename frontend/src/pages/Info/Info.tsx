@@ -19,7 +19,7 @@ import Reviews from "./Reviews";
 import Trailer from "./Trailer";
 import MovieTitle from "./MovieTitle";
 import InfoNav from "./InfoNav";
-import WatchingStatus from "./WatchingStatus";
+import WatchingStatusDropdown from "./WatchingStatusDropdown";
 import AllTimeRankings from "./AllTimeRankings";
 import WriteAReview from "./WriteAReview";
 
@@ -46,11 +46,11 @@ function Info({ currentMovieId }: InfoProps ){
     return(
         <>
             <DesktopHeader />
-            <MovieBanner />
+            <MovieBanner backdrop_path={info?.backdrop_path} />
 
             <div className="flex justify-center">
                 <div className="flex flex-col md:flex-row gap-[32px] p-5 md:p-[32px] md:pb-0 pb-0 xl:px-0 max-w-5xl 2xl:max-w-7xl w-full">
-                    <WatchingStatus movieData={info} />
+                    <WatchingStatusDropdown movieData={info} />
 
                     <div className="md:flex md:flex-col md:justify-between flex-1 md:gap-5 min-w-0">
                         <div className="md:flex md:flex-col md:gap-3">

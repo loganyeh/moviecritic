@@ -1,5 +1,6 @@
  // SHARED TYPES
 export type MovieListsType = {
+    // _id: string,
     id: number,
     title: string,
     backdrop_path: string,

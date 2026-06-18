@@ -1,11 +1,12 @@
-
+import type { MovieListsType } from "../../services/tmdb/movieLists";
 
 type FavoritesCardProps = {
     title: string,
+    favData: MovieListsType[];
 };
 
 
-function FavoritesCard({ title }: FavoritesCardProps ){
+function FavoritesCard({ title, favData }: FavoritesCardProps ){
 
     return(
         <>
@@ -13,8 +14,10 @@ function FavoritesCard({ title }: FavoritesCardProps ){
                 <h1 className="px-4 text-sm font-medium">{title}</h1>
 
                 <div className="grid grid-cols-4 2xl:grid-cols-5 p-4 gap-4 bg-white">
-                    {Array.from({length: 8}).map((_, index) => {
-                        return <div key={index} className="w-[76px] aspect-[3/4] bg-blue-300 rounded"></div>
+                    {favData.map((fav, index) => {
+                        return <div key={index} className="w-[76px] aspect-[3/4] rounded">
+                            <img src={`https://image.tmdb.org/t/p/w500${fav.poster_path}`} alt="" className="rounded object-cover" />
+                        </div>
                     })}
                 </div>
                 
