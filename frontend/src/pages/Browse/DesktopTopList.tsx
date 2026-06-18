@@ -7,7 +7,6 @@ type DesktopTopListProps = {
     setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>;
 };
 
-
 function DesktopTopList({ movieData, setCurrentMovieId }: DesktopTopListProps ){
 
     return(

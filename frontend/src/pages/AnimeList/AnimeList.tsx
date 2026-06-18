@@ -64,7 +64,7 @@ function AnimeList({ setCurrentMovieId }: AnimeListProps ){
                                 <WatchingStatusList sectionName="Watching" watchData={watching} setCurrentMovieId={setCurrentMovieId} />
                             </div>
 
-                            {/* <WatchingStatusList sectionName="Completed" /> */}
+                            <WatchingStatusList sectionName="Completed" watchData={watching} setCurrentMovieId={setCurrentMovieId} />
                             {/* <WatchingStatusList sectionName="Paused" /> */}
                             {/* <WatchingStatusList sectionName="Dropped" /> */}
                             {/* <WatchingStatusList sectionName="Planning" /> */}
