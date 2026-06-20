@@ -6,6 +6,7 @@ type DesktopSearchProps = {
 function DesktopSearch({ setQuery }: DesktopSearchProps ){
     const inputs = ["Genres", "Year", "Season", "Format"];
 
+
     return(
         <>
             <section className="hidden xl:flex justify-between items-end">

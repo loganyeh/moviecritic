@@ -6,6 +6,7 @@ type MobileSearchProps = {
 
 function MobileSearch({ setQuery }: MobileSearchProps ){
 
+
     return(
         <>
             <section className="xl:hidden flex gap-4 items-center justify-between px-2">

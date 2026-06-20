@@ -45,7 +45,7 @@ function WatchingStatusList({ sectionName, watchData, setCurrentMovieId }: Watch
                                 </Link>
 
                                 <div className="md:hidden flex flex-col gap-3 w-full text-gray-500">
-                                    <p className="font-medium text-gray-600">Blue Box</p>
+                                    <p className="font-medium text-gray-600">{movie.title}</p>
                                     <div className="flex justify-between text-sm font-light">
                                         <p>Score: 10</p>
                                         <p>Progress: 25</p>

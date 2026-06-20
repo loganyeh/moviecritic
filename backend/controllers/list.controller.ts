@@ -34,7 +34,15 @@ export async function addToList(req: Request, res: Response){
 
 // DELETE from list
 export async function deleteFromList(req: Request, res: Response){
+    const id = Number(req.params.id);
 
+    const deletedMovie = await Movie.findOneAndDelete({ id });
+
+    if(!deletedMovie) {
+        return res.status(404).json({ error: "Movie does not exist" });
+    };
+
+    res.status(200).json(deletedMovie);
 };
 
 

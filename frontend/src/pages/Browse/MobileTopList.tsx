@@ -1,7 +1,7 @@
 
 
 import type { MovieListsType } from "../../services/tmdb/movieLists";
-
+import { Link } from "react-router-dom";
 
 type MobileTopListProps = {
     movieData: MovieListsType[];
@@ -23,7 +23,9 @@ function MobileTopList({ movieData, setCurrentMovieId }: MobileTopListProps ){
                     {movieData.slice(0, 10).map((movie, index) => {
                         return <div key={index} className="flex flex-col gap-2.5">
                             <div className="relative aspect-[3/4] rounded">
-                                <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+                                <Link to={'/info'} onClick={() => setCurrentMovieId(movie.id)}>
+                                    <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+                                </Link>
                                 <div className="absolute -top-2 -left-2 md:-top-3 md:-left-3 flex justify-center items-center h-8 w-8 md:h-10 md:w-10 text-sm bg-red-400 text-white rounded-full">#{index + 1}</div>
                             </div>
                             <p className="text-xs md:text-sm line-clamp-2">{movie.title}</p>
