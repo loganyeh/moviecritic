@@ -2,13 +2,17 @@ import type { MovieListsType } from "../../services/tmdb/movieLists";
 import { useEffect, useState } from "react";
 
 type WatchingStatusProps = {
-    movieData: MovieListsType
+    movieData: MovieListsType,
+    isStatusDropdown: boolean,
+    setIsStatusDropdown: React.Dispatch<React.SetStateAction<boolean>>,
+    isStatusForm: boolean,
+    setIsStatusForm: React.Dispatch<React.SetStateAction<boolean>>,
 };
 
-
-function WatchingStatusDropdown({ movieData }: WatchingStatusProps ){
+function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdown, isStatusForm, setIsStatusForm }: WatchingStatusProps ){
     const [checkMovies, setCheckMovies] = useState<MovieListsType[]>([]);
-    const [isStatusDropdown, setIsStatusDropdown] = useState(false);
+    // const [isStatusDropdown, setIsStatusDropdown] = useState(false);
+    // const [isMobileStatusDrodown, setIsMobileStatusDropdown] = useState(false);
 
     useEffect(() => {
         async function getMovies(){
@@ -44,6 +48,19 @@ function WatchingStatusDropdown({ movieData }: WatchingStatusProps ){
         };
     };
 
+    async function addMovieToList(status: string){
+        await fetch('http://localhost:3000/list/status', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                ...movieData,
+                status: status,
+            }),
+        });
+    };
+
     return(
         <>
             <section className="md:max-w-[275px] md:w-fit">
@@ -52,18 +69,25 @@ function WatchingStatusDropdown({ movieData }: WatchingStatusProps ){
                     <img src={`https://image.tmdb.org/t/p/w500${movieData?.poster_path}`} alt="" className="md:absolute absolute -top-27 md:-top-32 left-0 h-36 md:h-auto w-25 md:w-52 md:aspect-[3/4] object-cover rounded"/>
 
                     <div className="flex gap-4 md:w-52">
-                        <div onClick={() => setIsStatusDropdown((prev) => !prev)} className="relative flex justify-center items-center md:flex-1 md:px-0 bg-blue-400 text-white rounded">
-                            <p className="flex flex-1 justify-center items-center px-[32px] md:p-0 h-full rounded-l">Watching</p>
-                            <div className="flex items-center h-full px-2 bg-blue-300 rounded-r">
-                                <i className='bx bx-chevron-down text-xl' ></i>
+                        <div className="relative flex justify-center items-center md:flex-1 md:px-0 bg-blue-400 text-white rounded">
+                            <div className="flex h-full w-full">
+                                <p onClick={() => setIsStatusForm((prev) => !prev)} className="flex flex-1 justify-center items-center px-[32px] md:p-0 h-full rounded-l">Watching</p>
+                                <div onClick={() => setIsStatusForm((prev) => !prev)} className="flex items-center h-full px-2 bg-blue-300 rounded-r">
+                                    <i className='bx bx-chevron-down text-xl' ></i>
+                                </div>
                             </div>
 
                             {/* Dropdown Status Options */}
-                            {isStatusDropdown && <div className="border border-gray-300 absolute -bottom-30 right-0 flex gap-2 flex-col justify-start items-center p-2.5 w-5/6 md:w-full text-sm font-light bg-white text-gray-700 rounded shadow-2xl">
-                                <p>Set as Watching</p>
+                            {isStatusForm && <div className="hidden border border-gray-300 absolute -bottom-30 right-0 md:flex gap-2 flex-col justify-start items-center p-2.5 w-5/6 md:w-full text-sm font-light bg-white text-gray-700 rounded shadow-2xl">
+                                <p onClick={() => addMovieToList("Watching")}>Set as Watching</p>
                                 <p>Set as Planning</p>
                                 <p className="border-t border-gray-300 pt-2">Open List Editor</p>
                             </div>}
+                            {/* created comps for status dropdown and form  */}
+                            {/* and firgure out why at mobile and tablet the watching button 
+                            click opens different forms */}
+                            {/* clean up ref */}
+
                         </div>
                         {/* <div className="flex justify-center items-center md:flex-1 px-12 md:px-0 bg-blue-400 text-white rounded">Watching</div> */}
                         {/* <div className="flex justify-center items-center bg-red-600 rounded"> */}

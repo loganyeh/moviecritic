@@ -20,8 +20,8 @@ type BrowseProps = {
     setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
 };
 
-
 function Browse({ setCurrentMovieId }: BrowseProps ){
+    const currentMoviesTitles = ["TRENDING NOW", "POPULAR THIS SEASON", "UPCOMING NEXT SEASON", "ALL TIME POPULAR"];
     const [search, setSearch] = useState<MovieListsType[]>([]);
     const [query, setQuery] = useState("");
     const [trendingNow, setTrendingNow] = useState<MovieListsType[]>([]);
@@ -64,14 +64,13 @@ function Browse({ setCurrentMovieId }: BrowseProps ){
                     <DesktopSearch setQuery={setQuery} />
 
                     {!query && <div className="flex flex-col gap-12">
-                        <CurrentMovies categoryName="TRENDING NOW" movieData={trendingNow} setCurrentMovieId={setCurrentMovieId} />
-                        {/* <CurrentMovies categoryName="POPULAR THIS SEASON" movieData={trendingNow} setCurrentMovieId={setCurrentMovieId} /> */}
-                        {/* <CurrentMovies categoryName="UPCOMING NEXT SEASON" movieData={trendingNow} setCurrentMovieId={setCurrentMovieId} /> */}
-                        {/* <CurrentMovies categoryName="ALL TIME POPULAR" movieData={trendingNow} setCurrentMovieId={setCurrentMovieId} /> */}
+                        {currentMoviesTitles.slice(0, 1).map((title, index) => {
+                            return <CurrentMovies key={index} categoryName={title} movieData={trendingNow} setCurrentMovieId={setCurrentMovieId} />
+                        })}
                     </div>}
 
-                    {!query && <MobileTopList movieData={topRated} />}
-                    {!query && <DesktopTopList movieData={topRated} />}
+                    {!query && <MobileTopList movieData={topRated} setCurrentMovieId={setCurrentMovieId} />}
+                    {!query && <DesktopTopList movieData={topRated} setCurrentMovieId={setCurrentMovieId} />}
 
                     {/* Movie Query Search */}
                     {query && <SearchQuery search={search} query={query} setCurrentMovieId={setCurrentMovieId} />}

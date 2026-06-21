@@ -4,7 +4,7 @@ import ProfileNav from "../../components/ProfileNav";
 import Footer from "../../components/Footer";
 import FloatingNav from "../../components/FloatingNav";
 import MobileListSearch from "./MobileListSearch";
-import WatchingStatus from "./WatchingStatus";
+import WatchingStatusList from "./WatchingStatusList";
 import FilterType from "./FilterType";
 import TabletListSearch from "./TabletListSearch";
 import Lists from "./Lists";
@@ -13,8 +13,26 @@ import Year from "./Year";
 import Sort from "./Sort";
 import ShuffleBtn from "./ShuffleBtn";
 
+import { useEffect, useState } from "react";
+import type { MovieListsType } from "../../services/tmdb/movieLists";
 
-function AnimeList(){
+type AnimeListProps = {
+    setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
+};
+
+function AnimeList({ setCurrentMovieId }: AnimeListProps ){
+    const [watching, setWatching] = useState<MovieListsType[]>([])
+
+    useEffect(() => {
+        async function getWatching(){
+            const response = await fetch(`http://localhost:3000/list/status/`);
+            const data: MovieListsType[] = await response.json();
+
+            setWatching(data);
+        };
+
+        getWatching();
+    }, []);
 
     return(
         <>  
@@ -43,13 +61,13 @@ function AnimeList(){
                                 <div className="hidden md:flex justify-end">
                                     <FilterType />
                                 </div>
-                                <WatchingStatus sectionName="Watching" />
+                                <WatchingStatusList sectionName="Watching" watchData={watching} setCurrentMovieId={setCurrentMovieId} />
                             </div>
 
-                            <WatchingStatus sectionName="Completed" />
-                            <WatchingStatus sectionName="Paused" />
-                            <WatchingStatus sectionName="Dropped" />
-                            <WatchingStatus sectionName="Planning" />
+                            <WatchingStatusList sectionName="Completed" watchData={watching} setCurrentMovieId={setCurrentMovieId} />
+                            {/* <WatchingStatusList sectionName="Paused" /> */}
+                            {/* <WatchingStatusList sectionName="Dropped" /> */}
+                            {/* <WatchingStatusList sectionName="Planning" /> */}
                         </div>
                     </div>
                 </div>

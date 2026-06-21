@@ -4,6 +4,8 @@ type DesktopSearchProps = {
 };
 
 function DesktopSearch({ setQuery }: DesktopSearchProps ){
+    const inputs = ["Genres", "Year", "Season", "Format"];
+
 
     return(
         <>
@@ -16,9 +18,9 @@ function DesktopSearch({ setQuery }: DesktopSearchProps ){
                         </div>
                     </div>
 
-                    {Array.from({length: 4}).map((_, index) => {
+                    {inputs.map((input, index) => {
                         return <div key={index} className="flex flex-col gap-3">
-                            <p className="2xl:text-sm font-medium">Search</p>
+                            <p className="2xl:text-sm font-medium">{input}</p>
                             <div className="px-3 bg-white rounded shadow-md">
                                 <input type="text" placeholder="Any" className="h-10 w-36 2xl:text-sm outline-none"/>
                             </div>

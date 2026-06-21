@@ -1,10 +1,13 @@
  // SHARED TYPES
 export type MovieListsType = {
-    // _id: string,
+    _id?: string,
     id: number,
     title: string,
     backdrop_path: string,
     poster_path: string,
+    createdAt?: string,
+    updatedAt?: string,
+    status?: string,
 };
 
 export type MovieListsApi = {

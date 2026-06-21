@@ -4,7 +4,9 @@ import mongoose from "mongoose";
 
 // GET all movies
 export async function getMovies(req: Request, res: Response){
-    const movies = await Movie.find({}).sort({ createdAt: -1 });
+    const movies = await Movie.find({
+        status: {$exists: false}
+    }).sort({ createdAt: -1 });
     
     res.status(200).json(movies);
     // res.status(200).json({message: "message"});
