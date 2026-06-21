@@ -75,19 +75,28 @@ function Info({ currentMovieId }: InfoProps ){
     async function addToList(){
         if (!info) return "Info returned undefined";
 
-        const res = await fetch(`http://localhost:3000/list/status/`, {
-            method: "POST",
+        const res = await fetch(`http://localhost:3000/list/status/${info.id}`, {
+            method: "PATCH",
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                id: info.id,
-                title: info.title,
-                poster_path: info.poster_path,
-                backdrop_path: info.backdrop_path,
-                status: "Watching",
+                ...info,
+                isWatching: true,
             }),
+            // body: JSON.stringify({
+            //     id: info.id,
+            //     title: info.title,
+            //     poster_path: info.poster_path,
+            //     backdrop_path: info.backdrop_path,
+            //     status: "Watching",
+            // }),
         });
+
+        // favoriting and watch listing or vice verse works but unfav or unwatch listing 
+        // removes the entire doc from collection
+        // wip on clean up and refactor of the status dropdown and doc form
+        //  refactor some routes and controller names
 
         const newMovie = await res.json();
 
