@@ -83,6 +83,10 @@ function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdo
                                 <p>Set as Planning</p>
                                 <p className="border-t border-gray-300 pt-2">Open List Editor</p>
                             </div>}
+                            {/* created comps for status dropdown and form  */}
+                            {/* and firgure out why at mobile and tablet the watching button 
+                            click opens different forms */}
+                            {/* clean up ref */}
 
                         </div>
                         {/* <div className="flex justify-center items-center md:flex-1 px-12 md:px-0 bg-blue-400 text-white rounded">Watching</div> */}
