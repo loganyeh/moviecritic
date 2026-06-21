@@ -36,15 +36,21 @@ function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdo
                 return prev.filter((movie) => movie.id !== movieData.id);
             });
         } else {
-            await fetch('http://localhost:3000/favorites/movies', {
-                method: "POST",
+            const res = await fetch(`http://localhost:3000/favorites/movies/${movieData?.id}`, {
+                method: "PATCH",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(movieData)
+                body: JSON.stringify({
+                    ...movieData,
+                    isFavorite: !isFavorite,
+                }),
             });
             // console.log(`Added ${movieData.title} to your favorite movies`);
-            setCheckMovies((prev) => [...prev, movieData]);
+
+            const updatedMovie = await res.json();
+
+            setCheckMovies((prev) => [...prev, updatedMovie]);
         };
     };
 
@@ -92,7 +98,7 @@ function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdo
                         {/* <div className="flex justify-center items-center md:flex-1 px-12 md:px-0 bg-blue-400 text-white rounded">Watching</div> */}
                         {/* <div className="flex justify-center items-center bg-red-600 rounded"> */}
                         <div onClick={() => favoriteToggle(movieData)} className="flex justify-center items-center bg-red-600 rounded">
-                            <i className={`bx bxs-heart p-2 aspect-square text-xl ${isFavorite ? "text-red-300" : "text-white"}`} ></i>
+                            <i className={`bx bxs-heart p-2 aspect-square text-xl ${isFavorite ? "text-red-300" : "text-white"} cursor-pointer`} ></i>
                         </div>
                     </div>
                 </div>

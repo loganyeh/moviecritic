@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 // GET all movies
 export async function getMovies(req: Request, res: Response){
     const movies = await Movie.find({
-        status: {$exists: false}
+        isFavorite: true
     }).sort({ createdAt: -1 });
     
     res.status(200).json(movies);
@@ -35,7 +35,7 @@ export async function getMovie(req: Request, res:Response){
 
 // CREATE a movie
 export async function createMovie(req: Request, res: Response){
-    const { id, title, backdrop_path, poster_path } = req.body;
+    const { id, title, backdrop_path, poster_path, isFavorite } = req.body;
 
     const existingMovie = await Movie.findOne({ id });
     
@@ -46,7 +46,7 @@ export async function createMovie(req: Request, res: Response){
     };
 
     try {
-        const movie = await Movie.create({ id, title, backdrop_path, poster_path });
+        const movie = await Movie.create({ id, title, backdrop_path, poster_path, isFavorite });
         res.status(200).json(movie);
     } catch (error) {
         const err = error as Error;
@@ -69,4 +69,26 @@ export async function deleteMovie(req: Request, res: Response){
     };
 
     res.status(200).json(deletedMovie);
+};
+
+// UPDATE a movie
+export async function updateMovie(req: Request, res: Response){
+    const id = Number(req.params.id);
+
+    if(isNaN(id)) {
+        return res.status(400).json({ error: "Invalid movie id" });
+    };
+
+    try {
+        const updatedMovie = await Movie.findOneAndUpdate(
+            { id }, 
+            { $set: req.body },
+            { new: true, upsert: true},
+        );
+    
+        res.status(200).json(updatedMovie);
+    } catch (error) {
+        const err = error as Error;
+        res.status(500).json({ error: err.message });
+    };
 };

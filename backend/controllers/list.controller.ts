@@ -12,6 +12,7 @@ export async function getList(req: Request, res: Response){
 // ADD to list
 export async function addToList(req: Request, res: Response){
     const { id, title, backdrop_path, poster_path, status } = req.body;
+    // const { id, title, backdrop_path, poster_path, isFavorite, isWatching } = req.body;
 
     const existingMovie = await Movie.findOne({
         id, status: "Watching"

@@ -7,7 +7,6 @@ export type MovieListsType = {
     poster_path: string,
     createdAt?: string,
     updatedAt?: string,
-    status?: string,
 };
 
 export type MovieListsApi = {
