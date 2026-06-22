@@ -9,34 +9,17 @@ import CustomLists from "./CustomLists";
 import PrivateCheckbox from "./PrivateCheckbox";
 import DeleteBtn from "./DeleteBtn";
 import ExitBtn from "./ExitBtn";
+import Poster from "./Poster";
+import FavSaveBtn from "./FavSaveBtn";
 
 type StatusFormProps = {
     info: MovieListsType,
     setIsStatusForm: React.Dispatch<React.SetStateAction<boolean>>,
-    setWatchingList: React.Dispatch<React.SetStateAction<MovieListsType[]>>,
     currentStatus: string,
     setCurrentStatus: React.Dispatch<React.SetStateAction<string>>,
 };
 
-function StatusForm({ info, setIsStatusForm, setWatchingList, currentStatus, setCurrentStatus }: StatusFormProps ){
-
-    async function toggleWatching(){
-        if (!info) return "Info returned undefined";
-
-        const res = await fetch(`http://localhost:3000/list/status/${info.id}`, {
-            method: "PATCH",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                ...info,
-                isWatching: !info.isWatching
-            })
-        });
-
-        const newMovie = await res.json();
-        setWatchingList((prev) => [...prev, newMovie]);
-    };
+function StatusForm({ info, setIsStatusForm, currentStatus, setCurrentStatus }: StatusFormProps ){
 
     return(
         <>
@@ -49,26 +32,8 @@ function StatusForm({ info, setIsStatusForm, setWatchingList, currentStatus, set
                         {/* Movie Backdrop */}
                         <div className="relative flex gap-4 justify-between items-end px-[32px] md:px-12 pb-4 aspect-[2/1] md:aspect-[4/1] lg:aspect-[16/3] bg-red-300 lg:rounded-t-md">
                             <ExitBtn setIsStatusForm={setIsStatusForm} />
-
-                            {/* Poster */}
-                            <div className="relative flex justify-center items-end w-26">
-                                <div className="absolute bottom-0 left-0 h-28 w-full bg-gray-300 rounded">
-                                    <img src={`https://image.tmdb.org/t/p/w500${info.poster_path}`} alt={info.title} className="rounded" />
-                                </div>
-                                {/* <div className="w-24 aspect-[3/4] bg-blue-300"></div> */}
-                            </div>
-                            
-                            {/* Title and Fav/Save Btn */}
-                            <div className="flex flex-1 justify-between items-center text-white">
-                                <p className="">{info.title}</p>
-
-                                <div className="flex gap-4">
-                                    <div className="flex items-center">
-                                        <i className='bx bxs-heart text-xl'></i>
-                                    </div>
-                                    <button className="px-4 py-2 text-xs bg-blue-400 rounded">Save</button>
-                                </div>
-                            </div>
+                            <Poster poster_path={info?.poster_path} title={info?.title} />
+                            <FavSaveBtn title={info?.title} />
                         </div>
 
                         {/* Form */}

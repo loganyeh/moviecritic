@@ -23,20 +23,19 @@ import WatchingStatusDropdown from "./WatchingStatusDropdown";
 import AllTimeRankings from "./AllTimeRankings";
 import WriteAReview from "./WriteAReview";
 
-type InfoProps = {
-    currentMovieId: number, 
-};
-
 import type { MovieListsType } from "../../services/tmdb/movieLists";
 import { fetchDetails } from "../../services/tmdb/movies";
 import { useState, useEffect } from "react";
 import StatusForm from "./Status/StatusForm";
 
+type InfoProps = {
+    currentMovieId: number, 
+};
+
 function Info({ currentMovieId }: InfoProps ){
     const [info, setInfo] = useState<MovieListsType>();
     const [isStatusDropdown, setIsStatusDropdown] = useState(false);
     const [isStatusForm, setIsStatusForm] = useState(false);
-    const [watchingList, setWatchingList] = useState<MovieListsType[]>([]);
     const [currentStatus, setCurrentStatus] = useState("Add to list");
 
     useEffect(() => {
@@ -56,49 +55,9 @@ function Info({ currentMovieId }: InfoProps ){
             const data = await fetchDetails(currentMovieId);
             setInfo(data);
         };
-        // maybe move this function if has different dependency array 
 
         getDetails(currentMovieId);
     }, [currentMovieId]);
-    
-    useEffect(() => {
-        async function getWatchListMovies(){
-            const response = await fetch(`http://localhost:3000/list/status/`);
-            const data: MovieListsType[] = await response.json();
-            
-            setWatchingList(data);
-        };
-        
-        getWatchListMovies();
-    }, []);
-
-    async function toggleWatching(){
-        if (!info) return "Info returned undefined";
-
-        const res = await fetch(`http://localhost:3000/list/status/${info.id}`, {
-            method: "PATCH",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                ...info,
-                isWatching: !info.isWatching
-            })
-        });
-
-        const newMovie = await res.json();
-        setWatchingList((prev) => [...prev, newMovie]);
-    };
-
-    async function deleteMovieFromList(id: Number){
-        await fetch(`http://localhost:3000/favorites/movies/${id}`, {
-            method: "DELETE",
-        });
-
-        setWatchingList(prev =>
-            prev.filter(movie => movie.id !== id)
-        );
-    };
 
     return(
         <>
@@ -109,7 +68,7 @@ function Info({ currentMovieId }: InfoProps ){
 
                 <div className="flex justify-center">
                     <div className="flex flex-col md:flex-row gap-[32px] p-5 md:p-[32px] md:pb-0 pb-0 xl:px-0 max-w-5xl 2xl:max-w-7xl w-full">
-                        <WatchingStatusDropdown movieData={info} isStatusDropdown={isStatusDropdown} setIsStatusDropdown={setIsStatusDropdown} isStatusForm={isStatusForm} setIsStatusForm={setIsStatusForm} setCurrentStatus={setCurrentStatus} currentStatus={currentStatus} />
+                        <WatchingStatusDropdown movieData={info} isStatusDropdown={isStatusDropdown} setIsStatusDropdown={setIsStatusDropdown} setIsStatusForm={setIsStatusForm} setCurrentStatus={setCurrentStatus} currentStatus={currentStatus} />
 
                         <div className="md:flex md:flex-col md:justify-between flex-1 md:gap-5 min-w-0">
                             <div className="md:flex md:flex-col md:gap-3">
@@ -184,7 +143,7 @@ function Info({ currentMovieId }: InfoProps ){
                     </div>
                 </div>
 
-                {isStatusForm && <StatusForm info={info} setIsStatusForm={setIsStatusForm} setWatchingList={setWatchingList} currentStatus={currentStatus} setCurrentStatus={setCurrentStatus} />}
+                {isStatusForm && <StatusForm info={info} setIsStatusForm={setIsStatusForm} currentStatus={currentStatus} setCurrentStatus={setCurrentStatus} />}
             </div>
 
             <FloatingNav />

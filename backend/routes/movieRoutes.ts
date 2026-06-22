@@ -2,10 +2,8 @@ import express from "express";
 import { 
     getMovies, 
     getMovie, 
-    createMovie, 
-    deleteMovie, 
     updateMovie
-} from "../controllers/favoriteMovies.controller.ts";
+} from "../controllers/movieControllers.ts";
 
 const router = express.Router();
 
@@ -14,12 +12,6 @@ router.get("/", getMovies);
 
 // GET a single Movie
 router.get("/:id", getMovie);
-
-// POST a movie
-router.post("/", createMovie);
-
-// DELETE a movie
-router.delete("/:id", deleteMovie);
 
 // UPDATE a movie
 router.patch("/:id", updateMovie);

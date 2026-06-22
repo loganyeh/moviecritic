@@ -6,14 +6,14 @@ type WatchingStatusProps = {
     movieData: MovieListsType,
     isStatusDropdown: boolean,
     setIsStatusDropdown: React.Dispatch<React.SetStateAction<boolean>>,
-    isStatusForm: boolean,
     setIsStatusForm: React.Dispatch<React.SetStateAction<boolean>>,
     setCurrentStatus: React.Dispatch<React.SetStateAction<string>>,
     currentStatus: string,
 };
 
-function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdown, isStatusForm, setIsStatusForm, setCurrentStatus, currentStatus }: WatchingStatusProps ){
+function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdown, setIsStatusForm, setCurrentStatus, currentStatus }: WatchingStatusProps ){
     const [checkMovies, setCheckMovies] = useState<MovieListsType[]>([]);
+    const [isFavorite, setIsFavorite] = useState(false);
 
     useEffect(() => {
         async function getMovies(){
@@ -24,70 +24,6 @@ function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdo
 
         getMovies();
     }, []);
-
-    const isFavorite = checkMovies.some((movie) => movie?.id === movieData?.id);
-    
-    async function favoriteToggle(movieData: MovieListsType){
-        const res = await fetch(`http://localhost:3000/favorites/movies/${movieData?.id}`, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    // ...movieData,
-                    isFavorite: !movieData.isFavorite,
-                }),
-            });
-            // console.log(`Added ${movieData.title} to your favorite movies`);
-
-            const updatedMovie = await res.json();
-
-            // setCheckMovies((prev) => [...prev, updatedMovie]);
-            setCheckMovies((prev) => 
-                prev.map((movie) => 
-                    movie.id === updatedMovie.id ? updatedMovie : movie
-                )
-            )
-        
-        // if(isFavorite) {
-        //     await fetch(`http://localhost:3000/favorites/movies/${movieData.id}`, {
-        //         method: "DELETE", 
-        //     });
-
-        //     setCheckMovies((prev) => {
-        //         return prev.filter((movie) => movie.id !== movieData.id);
-        //     });
-        // } else {
-        //     const res = await fetch(`http://localhost:3000/favorites/movies/${movieData?.id}`, {
-        //         method: "PATCH",
-        //         headers: {
-        //             "Content-Type": "application/json"
-        //         },
-        //         body: JSON.stringify({
-        //             ...movieData,
-        //             isFavorite: !isFavorite,
-        //         }),
-        //     });
-        //     // console.log(`Added ${movieData.title} to your favorite movies`);
-
-        //     const updatedMovie = await res.json();
-
-        //     setCheckMovies((prev) => [...prev, updatedMovie]);
-        // };
-    };
-
-    async function addMovieToList(status: string){
-        await fetch('http://localhost:3000/list/status', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                ...movieData,
-                status: status,
-            }),
-        });
-    };
 
     return(
         <>
@@ -108,7 +44,8 @@ function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdo
                             {isStatusDropdown && <StatusDropdown setCurrentStatus={setCurrentStatus} setIsStatusDropdown={setIsStatusDropdown} setIsStatusForm={setIsStatusForm} />}
 
                         </div>
-                        <div onClick={() => {favoriteToggle(movieData), console.log("favorite toggled")}} className="flex justify-center items-center bg-red-600 rounded">
+
+                        <div onClick={() => setIsFavorite(prev => !prev)} className="flex justify-center items-center bg-red-600 rounded">
                             <i className={`bx bxs-heart p-2 aspect-square text-xl ${isFavorite ? "text-red-300" : "text-white"} cursor-pointer`} ></i>
                         </div>
                     </div>
