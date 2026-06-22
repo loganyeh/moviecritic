@@ -13,7 +13,7 @@ type WatchingStatusProps = {
 
 function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdown, setIsStatusForm, setCurrentStatus, currentStatus }: WatchingStatusProps ){
     const [checkMovies, setCheckMovies] = useState<MovieListsType[]>([]);
-    const [isFavorite, setIsFavorite] = useState(false);
+    // const [isFavorite, setIsFavorite] = useState(false);
 
     useEffect(() => {
         async function getMovies(){
@@ -24,6 +24,25 @@ function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdo
 
         getMovies();
     }, []);
+
+    const isFavorite = checkMovies.some((movie) => movie.id === movieData?.id);
+    // console.log(isFavorite);
+
+    async function updateMovie(){
+        await fetch(`http://localhost:3000/favorites/movies/${movieData?.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                ...movieData,
+                isFavorite: !movieData?.isFavorite
+                // how does this work when the type is just a boolean ? 
+                // how does it flip is it bc i set the schema to false already ??
+            }),
+        });
+        // wip toggling true to false not working ???? 
+    };
 
     return(
         <>
@@ -45,7 +64,7 @@ function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdo
 
                         </div>
 
-                        <div onClick={() => setIsFavorite(prev => !prev)} className="flex justify-center items-center bg-red-600 rounded">
+                        <div onClick={() => updateMovie()} className="border-4 border-yellow-400 flex justify-center items-center bg-red-600 rounded">
                             <i className={`bx bxs-heart p-2 aspect-square text-xl ${isFavorite ? "text-red-300" : "text-white"} cursor-pointer`} ></i>
                         </div>
                     </div>
