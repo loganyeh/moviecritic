@@ -54,12 +54,16 @@ export async function updateList(req: Request, res: Response){
         return res.status(400).json({ error: "Invalid movie id" });
     };
 
+
     try {
         const updatedMovie = await Movie.findOneAndUpdate(
             { id }, 
             { $set: req.body },
             { new: true, upsert: true }
         );
+
+        
+
 
         res.status(200).json(updatedMovie)
     } catch (error) {

@@ -85,6 +85,11 @@ export async function updateMovie(req: Request, res: Response){
             { $set: req.body },
             { new: true, upsert: true},
         );
+
+        if (!updatedMovie.isWatching) {
+            await Movie.findOneAndDelete({ id });
+            return res.status(200).json({ message: "Movie removed" });
+        };
     
         res.status(200).json(updatedMovie);
     } catch (error) {

@@ -7,6 +7,8 @@ export type MovieListsType = {
     poster_path: string,
     createdAt?: string,
     updatedAt?: string,
+    isFavorite?: boolean,
+    isWatching?: boolean,
 };
 
 export type MovieListsApi = {
