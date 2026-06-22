@@ -37,6 +37,7 @@ function Info({ currentMovieId }: InfoProps ){
     const [isStatusDropdown, setIsStatusDropdown] = useState(false);
     const [isStatusForm, setIsStatusForm] = useState(false);
     const [watchingList, setWatchingList] = useState<MovieListsType[]>([]);
+    const [currentStatus, setCurrentStatus] = useState("Add to list");
 
     useEffect(() => {
         if (isStatusDropdown) {
@@ -66,7 +67,6 @@ function Info({ currentMovieId }: InfoProps ){
             const data: MovieListsType[] = await response.json();
             
             setWatchingList(data);
-            console.log(data);
         };
         
         getWatchListMovies();
@@ -109,7 +109,7 @@ function Info({ currentMovieId }: InfoProps ){
 
                 <div className="flex justify-center">
                     <div className="flex flex-col md:flex-row gap-[32px] p-5 md:p-[32px] md:pb-0 pb-0 xl:px-0 max-w-5xl 2xl:max-w-7xl w-full">
-                        <WatchingStatusDropdown movieData={info} isStatusDropdown={isStatusDropdown} setIsStatusDropdown={setIsStatusDropdown} isStatusForm={isStatusForm} setIsStatusForm={setIsStatusForm} />
+                        <WatchingStatusDropdown movieData={info} isStatusDropdown={isStatusDropdown} setIsStatusDropdown={setIsStatusDropdown} isStatusForm={isStatusForm} setIsStatusForm={setIsStatusForm} setCurrentStatus={setCurrentStatus} currentStatus={currentStatus} />
 
                         <div className="md:flex md:flex-col md:justify-between flex-1 md:gap-5 min-w-0">
                             <div className="md:flex md:flex-col md:gap-3">
@@ -184,8 +184,7 @@ function Info({ currentMovieId }: InfoProps ){
                     </div>
                 </div>
 
-                {isStatusForm && <StatusForm info={info} setIsStatusForm={setIsStatusForm} setWatchingList={setWatchingList} />}
-
+                {isStatusForm && <StatusForm info={info} setIsStatusForm={setIsStatusForm} setWatchingList={setWatchingList} currentStatus={currentStatus} setCurrentStatus={setCurrentStatus} />}
             </div>
 
             <FloatingNav />

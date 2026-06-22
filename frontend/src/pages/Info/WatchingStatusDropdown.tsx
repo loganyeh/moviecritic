@@ -1,6 +1,6 @@
 import type { MovieListsType } from "../../services/tmdb/movieLists";
 import { useEffect, useState } from "react";
-import StatusDropdown from "./Status/StatusDropdown";
+import StatusDropdown from "./StatusDropdown";
 
 type WatchingStatusProps = {
     movieData: MovieListsType,
@@ -8,12 +8,12 @@ type WatchingStatusProps = {
     setIsStatusDropdown: React.Dispatch<React.SetStateAction<boolean>>,
     isStatusForm: boolean,
     setIsStatusForm: React.Dispatch<React.SetStateAction<boolean>>,
+    setCurrentStatus: React.Dispatch<React.SetStateAction<string>>,
+    currentStatus: string,
 };
 
-function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdown, isStatusForm, setIsStatusForm }: WatchingStatusProps ){
+function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdown, isStatusForm, setIsStatusForm, setCurrentStatus, currentStatus }: WatchingStatusProps ){
     const [checkMovies, setCheckMovies] = useState<MovieListsType[]>([]);
-    // const [isStatusDropdown, setIsStatusDropdown] = useState(false);
-    // const [isMobileStatusDrodown, setIsMobileStatusDropdown] = useState(false);
 
     useEffect(() => {
         async function getMovies(){
@@ -99,13 +99,13 @@ function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdo
                     <div className="flex gap-4 md:w-52">
                         <div className="relative flex justify-center items-center md:flex-1 px-4 md:px-0 bg-blue-400 text-white rounded">
                             <div className="flex h-full w-full">
-                                <p onClick={() => setIsStatusForm((prev) => !prev)} className="flex flex-1 justify-center items-center px-[32px] md:p-0 h-full rounded-l">Watching</p>
+                                <p onClick={() => setIsStatusForm((prev) => !prev)} className="flex flex-1 justify-center items-center px-[32px] md:p-0 h-full rounded-l">{currentStatus}</p>
                                 <div onClick={() => setIsStatusDropdown((prev) => !prev)} className="hidden md:flex items-center h-full px-2 bg-blue-300 rounded-r">
                                     <i className='bx bx-chevron-down text-xl' ></i>
                                 </div>
                             </div>
 
-                            {isStatusDropdown && <StatusDropdown />}
+                            {isStatusDropdown && <StatusDropdown setCurrentStatus={setCurrentStatus} setIsStatusDropdown={setIsStatusDropdown} setIsStatusForm={setIsStatusForm} />}
 
                         </div>
                         <div onClick={() => {favoriteToggle(movieData), console.log("favorite toggled")}} className="flex justify-center items-center bg-red-600 rounded">
