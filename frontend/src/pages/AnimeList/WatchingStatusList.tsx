@@ -8,7 +8,6 @@ type WatchingStatusProps = {
     setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
 };
 
-
 function WatchingStatusList({ sectionName, watchData, setCurrentMovieId }: WatchingStatusProps ){
 
     return(

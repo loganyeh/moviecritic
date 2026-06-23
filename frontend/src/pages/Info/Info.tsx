@@ -63,7 +63,7 @@ function Info({ currentMovieId }: InfoProps ){
         <>
             <DesktopHeader />
 
-            <div className="">
+            <div>
                 <MovieBanner backdrop_path={info?.backdrop_path} />
 
                 <div className="flex justify-center">

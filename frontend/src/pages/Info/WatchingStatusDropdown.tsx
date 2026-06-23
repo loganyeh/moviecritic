@@ -30,7 +30,8 @@ function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdo
 
     const isFavorite = currentMovie?.isFavorite ?? false;
 
-    async function updateMovie(){
+    // PATCH REQUEST for isFavorite
+    async function toggleFavorite(){
         const res = await fetch(`http://localhost:3000/movies/${movieData?.id}`, {
             method: "PATCH",
             headers: {
@@ -81,7 +82,7 @@ function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdo
 
                         </div>
 
-                        <div onClick={() => updateMovie()} className="flex justify-center items-center bg-red-600 rounded">
+                        <div onClick={() => toggleFavorite()} className="flex justify-center items-center bg-red-600 rounded">
                             <i className={`bx bxs-heart p-2 aspect-square text-xl ${isFavorite ? "text-red-300" : "text-white"} cursor-pointer`} ></i>
                         </div>
                     </div>

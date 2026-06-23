@@ -23,7 +23,7 @@ export async function getWatchingList(req: Request, res: Response){
     res.status(200).json(watchingListMovies);
 }
 
-// UPDATE a movie
+// UPDATE isFavorite movie
 export async function updateMovie(req: Request, res: Response){
     const id = Number(req.params.id);
 

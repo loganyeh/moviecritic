@@ -41,7 +41,7 @@ function StatusForm({ info, setIsStatusForm, currentStatus, setCurrentStatus }: 
                             {/* Left Side */}
                             <div className="flex md:flex-1 flex-col gap-6">
                                 <div className="flex flex-col gap-6 xl:grid xl:grid-cols-3 xl:gap-x-10 xl:gap-y-6">
-                                    <Status currentStatus={currentStatus} setCurrentStatus={setCurrentStatus} />
+                                    <Status currentStatus={currentStatus} setCurrentStatus={setCurrentStatus} info={info} />
                                     <Score />
                                     <EpisodeProgress />
                                     <Date title="Start Date" />

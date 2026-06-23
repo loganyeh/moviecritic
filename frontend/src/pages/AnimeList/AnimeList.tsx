@@ -23,9 +23,10 @@ type AnimeListProps = {
 function AnimeList({ setCurrentMovieId }: AnimeListProps ){
     const [watching, setWatching] = useState<MovieListsType[]>([])
 
+    // GET all WATCHING movies
     useEffect(() => {
         async function getWatching(){
-            const response = await fetch(`http://localhost:3000/list/status/`);
+            const response = await fetch(`http://localhost:3000/movies/watching`);
             const data: MovieListsType[] = await response.json();
 
             setWatching(data);
@@ -64,7 +65,7 @@ function AnimeList({ setCurrentMovieId }: AnimeListProps ){
                                 <WatchingStatusList sectionName="Watching" watchData={watching} setCurrentMovieId={setCurrentMovieId} />
                             </div>
 
-                            <WatchingStatusList sectionName="Completed" watchData={watching} setCurrentMovieId={setCurrentMovieId} />
+                            {/* <WatchingStatusList sectionName="Completed" watchData={watching} setCurrentMovieId={setCurrentMovieId} /> */}
                             {/* <WatchingStatusList sectionName="Paused" /> */}
                             {/* <WatchingStatusList sectionName="Dropped" /> */}
                             {/* <WatchingStatusList sectionName="Planning" /> */}
