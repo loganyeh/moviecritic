@@ -17,7 +17,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/favorites/movies', movieRoutes);
+app.use('/movies', movieRoutes);
 
 app.use('/list/status', listRoutes);
 

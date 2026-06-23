@@ -18,7 +18,7 @@ function Favorites({ setCurrentMovieId }: FavoritesProps ){
 
     useEffect(() => {
         async function getMovies(){
-            const response = await fetch('http://localhost:3000/favorites/movies');
+            const response = await fetch('http://localhost:3000/movies/favorites');
             const data: MovieListsType[] = await response.json();
 
             setMovies(data);

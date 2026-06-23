@@ -9,6 +9,20 @@ export async function getMovies(req: Request, res: Response){
     res.status(200).json(movies);
 };
 
+// GET all FAV movies
+export async function getFavMovies(req: Request, res: Response){
+    const favoriteMovies = await Movie.find({ isFavorite: true }).sort({ createdAt: -1 });
+
+    res.status(200).json(favoriteMovies)
+};
+
+// GET all WATCHING movies
+export async function getWatchingList(req: Request, res: Response){
+    const watchingListMovies = await Movie.find({ isWatching: true }).sort({ createdAt: -1 });
+
+    res.status(200).json(watchingListMovies);
+}
+
 // UPDATE a movie
 export async function updateMovie(req: Request, res: Response){
     const id = Number(req.params.id);

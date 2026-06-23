@@ -13,35 +13,52 @@ type WatchingStatusProps = {
 
 function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdown, setIsStatusForm, setCurrentStatus, currentStatus }: WatchingStatusProps ){
     const [checkMovies, setCheckMovies] = useState<MovieListsType[]>([]);
-    // const [isFavorite, setIsFavorite] = useState(false);
 
     useEffect(() => {
         async function getMovies(){
-            const response = await fetch('http://localhost:3000/favorites/movies');
+            const response = await fetch('http://localhost:3000/movies/favorites');
             const data: MovieListsType[] = await response.json();
             setCheckMovies(data);
         };
-
+        
         getMovies();
     }, []);
+    
+    const currentMovie = checkMovies.find(
+        (movie) => movie.id === movieData?.id,
+    );
 
-    const isFavorite = checkMovies.some((movie) => movie.id === movieData?.id);
-    // console.log(isFavorite);
+    const isFavorite = currentMovie?.isFavorite ?? false;
 
     async function updateMovie(){
-        await fetch(`http://localhost:3000/favorites/movies/${movieData?.id}`, {
+        const res = await fetch(`http://localhost:3000/movies/${movieData?.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 ...movieData,
-                isFavorite: !movieData?.isFavorite
-                // how does this work when the type is just a boolean ? 
-                // how does it flip is it bc i set the schema to false already ??
+                isFavorite: !isFavorite
             }),
         });
-        // wip toggling true to false not working ???? 
+
+        const updatedMovie = await res.json();
+
+        setCheckMovies((prev) => {
+            const exists = prev.some(
+                (movie) => movie.id === updatedMovie.data.id
+            );
+        
+            if (exists) {
+                return prev.map((movie) =>
+                    movie.id === updatedMovie.data.id
+                        ? updatedMovie.data
+                        : movie
+                );
+            }
+        
+            return [...prev, updatedMovie.data];
+        });
     };
 
     return(
@@ -64,7 +81,7 @@ function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdo
 
                         </div>
 
-                        <div onClick={() => updateMovie()} className="border-4 border-yellow-400 flex justify-center items-center bg-red-600 rounded">
+                        <div onClick={() => updateMovie()} className="flex justify-center items-center bg-red-600 rounded">
                             <i className={`bx bxs-heart p-2 aspect-square text-xl ${isFavorite ? "text-red-300" : "text-white"} cursor-pointer`} ></i>
                         </div>
                     </div>

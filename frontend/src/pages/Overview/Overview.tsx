@@ -16,16 +16,6 @@ import type { MovieListsType } from "../../services/tmdb/movieLists";
 function Overview(){
     const [favMovies, setFavMovies] = useState<MovieListsType[]>([]);
 
-    useEffect(() => {
-        async function getFavMovies(){
-            const response = await fetch(`http://localhost:3000/favorites/movies`);
-            const data: MovieListsType[] = await response.json();
-            setFavMovies(data);
-        };
-
-        getFavMovies();
-    }, [])
-
     return(
         <>
             <DesktopHeader />
