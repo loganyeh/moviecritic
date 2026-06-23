@@ -8,7 +8,7 @@ export type MovieListsType = {
     createdAt?: string,
     updatedAt?: string,
     isFavorite?: boolean,
-    isWatching?: boolean,
+    watchStatus?: string,
 };
 
 export type MovieListsApi = {

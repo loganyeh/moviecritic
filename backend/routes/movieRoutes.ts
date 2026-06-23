@@ -3,6 +3,7 @@ import {
     getMovies, 
     getFavMovies,
     getWatchingList,
+    getCompletedList,
     getMovie, 
     updateMovie
 } from "../controllers/movieControllers.ts";
@@ -17,6 +18,9 @@ router.get("/favorites", getFavMovies);
 
 // GET all WATCHING LIST movies
 router.get("/watching", getWatchingList);
+
+// GET all COMPLETED LIST movies
+router.get("/completed", getCompletedList);
 
 // GET a single Movie
 router.get("/:id", getMovie);

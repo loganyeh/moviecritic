@@ -21,7 +21,8 @@ type AnimeListProps = {
 };
 
 function AnimeList({ setCurrentMovieId }: AnimeListProps ){
-    const [watching, setWatching] = useState<MovieListsType[]>([])
+    const [watching, setWatching] = useState<MovieListsType[]>([]);
+    const [completed, setCompleted] = useState<MovieListsType[]>([]);
 
     // GET all WATCHING movies
     useEffect(() => {
@@ -33,6 +34,18 @@ function AnimeList({ setCurrentMovieId }: AnimeListProps ){
         };
 
         getWatching();
+    }, []);
+
+    // GET all COMPLETED movies
+    useEffect(() => {
+        async function getCompleted(){
+            const res = await fetch(`http://localhost:3000/movies/completed`);
+            const data: MovieListsType[] = await res.json();
+
+            setCompleted(data);
+        };
+
+        getCompleted();
     }, []);
 
     return(
@@ -65,7 +78,7 @@ function AnimeList({ setCurrentMovieId }: AnimeListProps ){
                                 <WatchingStatusList sectionName="Watching" watchData={watching} setCurrentMovieId={setCurrentMovieId} />
                             </div>
 
-                            {/* <WatchingStatusList sectionName="Completed" watchData={watching} setCurrentMovieId={setCurrentMovieId} /> */}
+                            <WatchingStatusList sectionName="Completed" watchData={completed} setCurrentMovieId={setCurrentMovieId} />
                             {/* <WatchingStatusList sectionName="Paused" /> */}
                             {/* <WatchingStatusList sectionName="Dropped" /> */}
                             {/* <WatchingStatusList sectionName="Planning" /> */}

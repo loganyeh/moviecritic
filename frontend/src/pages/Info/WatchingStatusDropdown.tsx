@@ -71,9 +71,9 @@ function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdo
 
                     <div className="flex gap-4 md:w-52">
                         <div className="relative flex justify-center items-center md:flex-1 px-4 md:px-0 bg-blue-400 text-white rounded">
-                            <div className="flex h-full w-full">
-                                <p onClick={() => setIsStatusForm((prev) => !prev)} className="flex flex-1 justify-center items-center px-[32px] md:p-0 h-full rounded-l">{currentStatus}</p>
-                                <div onClick={() => setIsStatusDropdown((prev) => !prev)} className="hidden md:flex items-center h-full px-2 bg-blue-300 rounded-r">
+                            <div onClick={() => setIsStatusForm((prev) => !prev)} className="flex h-full w-full">
+                                <p className="flex flex-1 justify-center items-center px-[32px] md:p-0 h-full rounded-l">{currentStatus}</p>
+                                <div onClick={() => setIsStatusDropdown(false)} className="hidden md:flex items-center h-full px-2 bg-blue-300 rounded-r">
                                     <i className='bx bx-chevron-down text-xl' ></i>
                                 </div>
                             </div>

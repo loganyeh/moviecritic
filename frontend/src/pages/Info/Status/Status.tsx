@@ -29,10 +29,11 @@ function Status({ currentStatus, setCurrentStatus, info }: StatusProps ){
     }, []);
 
     const currentMovie = checkMovies.find((movie) => movie.id === info?.id);
-    const isWatching = currentMovie?.isWatching ?? false;
 
+
+    // wip toggle watch status request not working
     // toggle watching 
-    async function toggleWatching(id: number){
+    async function toggleWatching(id: number, status: string){
         const res = await fetch(`http://localhost:3000/movies/${id}`, {
             method: "PATCH",
             headers: {
@@ -40,7 +41,7 @@ function Status({ currentStatus, setCurrentStatus, info }: StatusProps ){
             },
             body: JSON.stringify({
                 ...info,
-                isWatching: !currentMovie?.isWatching,
+                status: status,
             })
         });
 
@@ -67,7 +68,7 @@ function Status({ currentStatus, setCurrentStatus, info }: StatusProps ){
     function toggleStatus(status: string){ 
         // console.log(status);
         if (status === "Watching") {
-            toggleWatching(info?.id);
+            toggleWatching(info?.id, status);
         }
         else {
             console.log("working");
@@ -80,15 +81,18 @@ function Status({ currentStatus, setCurrentStatus, info }: StatusProps ){
                 <h2 className="text-sm text-gray-500">Status</h2>
                 
                 <button onClick={() => setStatusBtn(prev => !prev)}  className="flex justify-between px-3 py-2 bg-gray-200 rounded">
-                    <div className="flex font-light text-gray-600">{currentStatus}</div>
+                    <div className="flex font-light text-gray-600">
+                        <p>{currentStatus}</p>
+                    </div>
                     <div className="flex items-center">
-                        <i className={`bx bx-chevron-${statusBtn ? 'down' : 'up'} text-xl text-gray-400`} ></i>
+                        <i className={`bx bx-chevron-${statusBtn ? 'up' : 'down'} text-xl text-gray-400`} ></i>
                     </div>
                 </button>
 
+                {/* create toggle for watching and is not watching */}
                 {statusBtn && <div className="border border-gray-300 absolute top-full left-0 flex gap-3 flex-col mt-3 px-5 py-4 h-auto w-11/12 text-sm font-light bg-white text-gray-600 rounded shadow-xl z-20">
                     {statusOptions.map((option, index) => {
-                        return <button onClick={() => {toggleStatus(option), setCurrentStatus(option); setStatusBtn(false)}} key={index} className="w-fit">
+                        return <button onClick={() => {toggleStatus(option), setCurrentStatus(option); setStatusBtn(false)}} key={index} className={`w-fit`}>
                             {option}
                         </button>
                     })}

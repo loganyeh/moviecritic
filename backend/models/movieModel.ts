@@ -17,26 +17,10 @@ const movieSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
      },
-    isWatching: { 
-        type: Boolean,
-        default: false,
+    watchStatus: { 
+        type: String,
+        default: '',
      },
-    isCompleted: { 
-        type: Boolean,
-        // default: false,
-     },
-    isPaused: { 
-        type: Boolean,
-        // default: false,
-     },
-    isDropped: { 
-        type: Boolean,
-        // default: false,
-     },
-    isPlanning: { 
-        type: Boolean,
-        // default: false, 
-    }
 }, { timestamps: true });
 
 const Movie = mongoose.model("Movie", movieSchema);

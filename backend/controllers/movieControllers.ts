@@ -18,10 +18,17 @@ export async function getFavMovies(req: Request, res: Response){
 
 // GET all WATCHING movies
 export async function getWatchingList(req: Request, res: Response){
-    const watchingListMovies = await Movie.find({ isWatching: true }).sort({ createdAt: -1 });
+    const watchingListMovies = await Movie.find({ status: "Watching" }).sort({ createdAt: -1 });
 
     res.status(200).json(watchingListMovies);
-}
+};
+
+// GET all COMPLETED movies
+export async function getCompletedList(req: Request, res: Response){
+    const completedMovies = await Movie.find({ status: "Completed" }).sort({ createdAt: -1 });
+
+    res.status(200).json(completedMovies);
+};
 
 // UPDATE isFavorite movie
 export async function updateMovie(req: Request, res: Response){
