@@ -24,7 +24,8 @@ import AllTimeRankings from "./AllTimeRankings";
 import WriteAReview from "./WriteAReview";
 
 import type { MovieListsType } from "../../services/tmdb/movieLists";
-import { fetchDetails } from "../../services/tmdb/movies";
+import type { CreditsApiType, CreditsType } from "../../services/tmdb/movies";
+import { fetchCredits, fetchDetails } from "../../services/tmdb/movies";
 import { useState, useEffect } from "react";
 import StatusForm from "./Status/StatusForm";
 
@@ -37,7 +38,10 @@ function Info({ currentMovieId }: InfoProps ){
     const [isStatusDropdown, setIsStatusDropdown] = useState(false);
     const [isStatusForm, setIsStatusForm] = useState(false);
     const [currentStatus, setCurrentStatus] = useState("Add to list");
+    const [characters, setCharacters] = useState<CreditsType[]>([]);
+    const [crew, setCrew] = useState<CreditsType[]>([]);
 
+    // handles freezing background when popup is active
     useEffect(() => {
         if (isStatusDropdown) {
             document.body.style.overflow = "hidden";
@@ -52,12 +56,27 @@ function Info({ currentMovieId }: InfoProps ){
 
     useEffect(() => {
         async function getDetails(currentMovieId: number){
-            const data = await fetchDetails(currentMovieId);
+            const data: MovieListsType = await fetchDetails(currentMovieId);
             setInfo(data);
         };
 
+        async function getCreditsCast(currentMovieId: number){
+            const data: CreditsApiType = await fetchCredits(currentMovieId);
+            setCharacters(data.cast.slice(0, 6));
+        };
+
+        async function getCreditsCrew(currentMovieId: number){
+            const data: CreditsApiType = await fetchCredits(currentMovieId);
+            setCrew(data.crew.slice(0, 4));
+        };
+
         getDetails(currentMovieId);
+        getCreditsCast(currentMovieId);
+        getCreditsCrew(currentMovieId);
     }, [currentMovieId]);
+
+
+    console.log(crew);
 
     return(
         <>
@@ -75,8 +94,7 @@ function Info({ currentMovieId }: InfoProps ){
                                 <MovieTitle title={info?.title || ""} />
                                 {/* Description */}
                                 <p className="hidden md:block text-sm bg-white text-gray-500 break-words">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                    Pariatur nisi dicta modi, nihil nemo optio id, praesentium ex tempora animi 
+                                    {info?.overview}
                                 </p>
                             </div>
                             <InfoNav />
@@ -100,12 +118,12 @@ function Info({ currentMovieId }: InfoProps ){
                         <div className="flex flex-col gap-10 md:gap-[32px] lg:flex-1">
 
                             <div className="md:hidden">
-                                <Description />
+                                <Description overview={info?.overview} />
                             </div>
 
                             <Relations />
-                            <Characters />
-                            <Staff />
+                            <Characters characters={characters} />
+                            <Staff crew={crew} />
 
                             <div className="flex flex-col xl:grid xl:grid-cols-2 gap-10 md:gap-[32px]">
                                 <StatusDistribution />

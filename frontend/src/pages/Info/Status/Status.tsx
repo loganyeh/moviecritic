@@ -30,7 +30,6 @@ function Status({ currentStatus, setCurrentStatus, info }: StatusProps ){
 
     const currentMovie = checkMovies.find((movie) => movie.id === info?.id);
 
-
     // wip toggle watch status request not working
     // toggle watching 
     async function toggleWatching(id: number, status: string){

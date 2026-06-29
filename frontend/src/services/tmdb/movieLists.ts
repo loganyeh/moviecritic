@@ -9,6 +9,8 @@ export type MovieListsType = {
     updatedAt?: string,
     isFavorite?: boolean,
     watchStatus?: string,
+
+    overview: string,
 };
 
 export type MovieListsApi = {
@@ -31,5 +33,3 @@ export async function fetchTopRated(){
 
     return data.results;
 };
-
-fetchTopRated();
