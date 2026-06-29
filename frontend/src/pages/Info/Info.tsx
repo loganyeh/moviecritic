@@ -24,8 +24,9 @@ import AllTimeRankings from "./AllTimeRankings";
 import WriteAReview from "./WriteAReview";
 
 import type { MovieListsType } from "../../services/tmdb/movieLists";
-import type { CreditsApiType, CreditsType } from "../../services/tmdb/movies";
+import type { CreditsApiType, CreditsType, RecommendationsType } from "../../services/tmdb/movies";
 import { fetchCredits, fetchDetails } from "../../services/tmdb/movies";
+import { fetchRecommendations } from "../../services/tmdb/movies";
 import { useState, useEffect } from "react";
 import StatusForm from "./Status/StatusForm";
 
@@ -40,6 +41,7 @@ function Info({ currentMovieId }: InfoProps ){
     const [currentStatus, setCurrentStatus] = useState("Add to list");
     const [characters, setCharacters] = useState<CreditsType[]>([]);
     const [crew, setCrew] = useState<CreditsType[]>([]);
+    const [recommendations, setRecommendations] = useState<RecommendationsType[]>([]);
 
     // handles freezing background when popup is active
     useEffect(() => {
@@ -70,13 +72,18 @@ function Info({ currentMovieId }: InfoProps ){
             setCrew(data.crew.slice(0, 4));
         };
 
+        async function getRecommendations(currentMovieId: number){
+            const data: RecommendationsType[] = await fetchRecommendations(currentMovieId);
+            setRecommendations(data);
+        }
+
         getDetails(currentMovieId);
         getCreditsCast(currentMovieId);
         getCreditsCrew(currentMovieId);
+        getRecommendations(currentMovieId);
     }, [currentMovieId]);
 
-
-    console.log(crew);
+    // console.log(recommendations);
 
     return(
         <>
@@ -121,7 +128,7 @@ function Info({ currentMovieId }: InfoProps ){
                                 <Description overview={info?.overview} />
                             </div>
 
-                            <Relations />
+                            <Relations recommendations={recommendations} status={info?.status} />
                             <Characters characters={characters} />
                             <Staff crew={crew} />
 
@@ -141,11 +148,11 @@ function Info({ currentMovieId }: InfoProps ){
 
                             <Watch />
 
-                            <div className="border xl:hidden flex flex-col gap-10 md:gap-[32px]">
+                            <div className="xl:hidden flex flex-col gap-10 md:gap-[32px]">
                                 <Following />
                             </div>
 
-                            <Recommendations />
+                            <Recommendations recommendations={recommendations} />
 
                             <div className="flex flex-col xl:grid xl:grid-cols-2 gap-10 md:gap-[32px]">
                                 <Threads />

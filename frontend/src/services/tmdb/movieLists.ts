@@ -11,6 +11,7 @@ export type MovieListsType = {
     watchStatus?: string,
 
     overview: string,
+    status: string,
 };
 
 export type MovieListsApi = {

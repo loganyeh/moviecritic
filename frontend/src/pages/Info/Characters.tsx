@@ -22,7 +22,9 @@ function Characters({ characters }: CharactersProps ){
                 <div className="flex flex-col xl:grid xl:grid-cols-2 2xl:grid-cols-3 gap-4 xl:gap-x-[32px]">
                     {characters.map((character, index) => {
                         return <div key={index} className="flex justify-between shadow">
-                            <div className="h-20 w-16 aspect-[3/4] bg-blue-300 rounded-l"></div>
+                            {false && <div className="h-20 w-16 aspect-[3/4] bg-gray-300 rounded-l">
+                                <img src="no-character-url-route" alt={character.name} className="text-xs" />
+                            </div>}
 
                             <div className="flex flex-col justify-between flex-1 p-2.5 font-light bg-white">
                                 <div className="flex justify-between text-xs">
@@ -37,8 +39,8 @@ function Characters({ characters }: CharactersProps ){
                                 
                             </div>
 
-                            <div className="h-20 w-16 aspect-[3/4] bg-red-300 rounded-r">
-                                <img src={`https://image.tmdb.org/t/p/w500${character.profile_path}`} alt={character.name} className="w-full h-full object-cover rounded-r" />
+                            <div className="h-20 w-16 aspect-[3/4] bg-gray-300 rounded-r">
+                                <img src={`https://image.tmdb.org/t/p/w500${character.profile_path}`} alt={character.name} className="w-full h-full text-xs object-cover rounded-r" />
                             </div>
                         </div>
                     })}
