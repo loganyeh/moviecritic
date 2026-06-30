@@ -12,6 +12,17 @@ export type MovieListsType = {
 
     overview: string,
     status: string,
+    release_date: string,
+    runtime: number,
+    genres: {
+        name: string,
+    }[],
+    popularity: number,
+    vote_average: number,
+    production_companies: {
+        name: string,
+    }[],
+    tagline: string,
 };
 
 export type MovieListsApi = {

@@ -25,8 +25,10 @@ import WriteAReview from "./WriteAReview";
 
 import type { MovieListsType } from "../../services/tmdb/movieLists";
 import type { CreditsApiType, CreditsType, RecommendationsType } from "../../services/tmdb/movies";
+import type { VideoType } from "../../services/tmdb/movies";
 import { fetchCredits, fetchDetails } from "../../services/tmdb/movies";
 import { fetchRecommendations } from "../../services/tmdb/movies";
+import { fetchVideos } from "../../services/tmdb/movies";
 import { useState, useEffect } from "react";
 import StatusForm from "./Status/StatusForm";
 
@@ -42,8 +44,8 @@ function Info({ currentMovieId }: InfoProps ){
     const [characters, setCharacters] = useState<CreditsType[]>([]);
     const [crew, setCrew] = useState<CreditsType[]>([]);
     const [recommendations, setRecommendations] = useState<RecommendationsType[]>([]);
+    const [videos, setVideos] = useState<VideoType[]>([]);
 
-    // handles freezing background when popup is active
     useEffect(() => {
         if (isStatusDropdown) {
             document.body.style.overflow = "hidden";
@@ -77,20 +79,25 @@ function Info({ currentMovieId }: InfoProps ){
             setRecommendations(data);
         }
 
+        async function getVideos(currentMovieId: number){
+            const data: VideoType[] = await fetchVideos(currentMovieId);
+
+            setVideos(data);
+        };
+
         getDetails(currentMovieId);
         getCreditsCast(currentMovieId);
         getCreditsCrew(currentMovieId);
         getRecommendations(currentMovieId);
+        getVideos(currentMovieId);
     }, [currentMovieId]);
-
-    // console.log(recommendations);
 
     return(
         <>
             <DesktopHeader />
 
             <div>
-                <MovieBanner backdrop_path={info?.backdrop_path} />
+                <MovieBanner title={info?.title} backdrop_path={info?.backdrop_path} />
 
                 <div className="flex justify-center">
                     <div className="flex flex-col md:flex-row gap-[32px] p-5 md:p-[32px] md:pb-0 pb-0 xl:px-0 max-w-5xl 2xl:max-w-7xl w-full">
@@ -114,9 +121,9 @@ function Info({ currentMovieId }: InfoProps ){
                     <div className="flex flex-col md:flex-row gap-10 p-5 md:px-[32px] xl:px-0 py-10 pb-24 max-w-5xl 2xl:max-w-7xl w-full">
                         <div className="flex flex-col gap-10 md:gap-5 shrink-0">
                             <AllTimeRankings />
-                            <Details />
+                            <Details info={info} />
                             <div className="hidden md:flex flex-col gap-10 md:gap-5">
-                                <Tags />
+                                <Tags info={info} />
                                 <WriteAReview />
                                 <Streaming />
                             </div>
@@ -138,15 +145,15 @@ function Info({ currentMovieId }: InfoProps ){
                             </div>
 
                             <div className="xl:hidden">
-                                <Trailer />
+                                <Trailer title={info?.title} backdrop_path={info?.backdrop_path} />
                             </div>
 
                             <div className="hidden xl:grid grid-cols-2 gap-10 md:gap-[32px]">
-                                <Trailer />
+                                <Trailer title={info?.title} backdrop_path={info?.backdrop_path} />
                                 <Following />
                             </div>
 
-                            <Watch />
+                            <Watch videos={videos} />
 
                             <div className="xl:hidden flex flex-col gap-10 md:gap-[32px]">
                                 <Following />
@@ -155,13 +162,13 @@ function Info({ currentMovieId }: InfoProps ){
                             <Recommendations recommendations={recommendations} />
 
                             <div className="flex flex-col xl:grid xl:grid-cols-2 gap-10 md:gap-[32px]">
-                                <Threads />
-                                <Reviews />
+                                <Threads info={info} />
+                                <Reviews info={info} />
                             </div>
 
                             <div className="md:hidden flex flex-col gap-10">
                                 <Streaming />
-                                <Tags />
+                                <Tags info={info} />
                             </div>
                         </div>
 

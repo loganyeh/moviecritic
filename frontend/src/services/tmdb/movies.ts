@@ -47,3 +47,18 @@ export async function fetchRecommendations(currentMovieId: number){
     return data.results;
 };
 
+export type VideoType = {
+    key: string,
+    name: string,
+};
+
+type VideosApiType = {
+    results: VideoType[],
+};
+
+export async function fetchVideos(currentMovieId: number){
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${currentMovieId}/videos?language=en-US&page=1&api_key=e780da3000fb7047435f589c967c29d6`);
+    const data: VideosApiType = await response.json();
+
+    return data.results;
+};

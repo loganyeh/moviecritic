@@ -1,9 +1,13 @@
+import type { MovieListsType } from "../../services/tmdb/movieLists";
 
+type ReviewsProps = {
+    info: MovieListsType,
+};
 
-function Reviews(){
+function Reviews({ info }: ReviewsProps ){
     const reviews = [
         {
-            review: 'One Piece is a great adventure series, with a lovable cast of characters.',
+            review: `${info?.title} is a great adventure series, with a lovable cast of characters.`,
             likes: '563',
         },
         {
@@ -20,7 +24,9 @@ function Reviews(){
                 <div className="flex flex-col gap-4">
                     {reviews.map((review, index) => {
                         return <div key={index} className="flex items-start gap-6">
-                            <div className="w-12 aspect-square bg-blue-300 rounded shrink-0"></div>
+                            <div className="w-12 aspect-square bg-gray-300 rounded shrink-0">
+                                <img src={`https://i.pinimg.com/736x/ec/7a/da/ec7adabcdea9e66ce6dcade3be1853c1.jpg`} className="rounded"/>
+                            </div>
 
                             <div className="relative p-4 md:w-full bg-white rounded shadow">
                                 <p className="text-sm text-center text-gray-600">{review.review}</p>

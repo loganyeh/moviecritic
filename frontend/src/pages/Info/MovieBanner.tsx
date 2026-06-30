@@ -1,11 +1,12 @@
 
 
 type MovieBannerProps = {
+    title: string,
     backdrop_path: string;
 };
 
 
-function MovieBanner({ backdrop_path }: MovieBannerProps ){
+function MovieBanner({ title, backdrop_path }: MovieBannerProps ){
 
     return(
         <> 
@@ -14,7 +15,7 @@ function MovieBanner({ backdrop_path }: MovieBannerProps ){
                 </div>
 
                 <section className="relative aspect-video md:aspect-[16/7] lg:aspect-[16/5] xl:aspect-[16/4] 2xl:aspect-[16/3] max-w-5xl 2xl:max-w-7xl w-full">
-                    <img src={`https://image.tmdb.org/t/p/w1280${backdrop_path}`} alt="" className="h-full w-full object-cover" />
+                    <img src={`https://image.tmdb.org/t/p/w1280${backdrop_path}`} alt={title} className="h-full w-full object-cover" />
                 </section>
             </div>
         </>
