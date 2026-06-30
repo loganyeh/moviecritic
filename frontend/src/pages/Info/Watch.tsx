@@ -15,7 +15,7 @@ function Watch({ videos }: WatchProps ){
             <section className="flex flex-col gap-3">
                 <h2 className="text-sm font-medium text-gray-600">Watch</h2>
 
-                <div className="flex gap-[32px] overflow-x-scroll">
+                <div className="border flex gap-[32px] overflow-x-scroll">
                     {videos?.slice(0, 4).map((video, index) => {
                         return <div key={index} className="relative flex justify-between items-end w-44 md:w-24 lg:w-44 xl:w-44 aspect-video md:aspect-square lg:aspect-video shrink-0 bg-red-300 rounded shadow">
                             <img src={`https://img.youtube.com/vi/${video.key}/hqdefault.jpg`} alt={video.name} className="h-full w-full object-cover rounded" />

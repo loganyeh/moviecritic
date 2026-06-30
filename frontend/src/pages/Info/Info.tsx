@@ -129,7 +129,7 @@ function Info({ currentMovieId }: InfoProps ){
                             </div>
                         </div>
 
-                        <div className="flex flex-col gap-10 md:gap-[32px] lg:flex-1">
+                        <div className="border flex flex-col gap-10 md:gap-[32px] lg:flex-1">
 
                             <div className="md:hidden">
                                 <Description overview={info?.overview} />
@@ -153,7 +153,9 @@ function Info({ currentMovieId }: InfoProps ){
                                 <Following />
                             </div>
 
-                            <Watch videos={videos} />
+                            {/* fix watch, horizontal scroll not working and exceeding 
+                            page width */}
+                            {/* <Watch videos={videos} /> */}
 
                             <div className="xl:hidden flex flex-col gap-10 md:gap-[32px]">
                                 <Following />

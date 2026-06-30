@@ -15,7 +15,6 @@ function Details({ info }: DetailsProps ){
         {category: "Popularity", detail: `${ info?.popularity.toLocaleString("de-DE") ?? "250637"}`},
         {category: "Favorites", detail: "27075"},
         {category: "Studios", detail: `${ info?.production_companies?.[0].name}`},
-        {category: "Tagline", detail: `${ info?.tagline.split(" ").slice(0, 6).join(" ") + "..." }`},
         {category: "Genres", detail: [`${ info?.genres?.[0].name }`]},
     ];
     

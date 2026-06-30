@@ -64,7 +64,7 @@ function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdo
 
     return(
         <>
-            <section className="md:max-w-[275px] md:w-fit">
+            <section className="md:max-w-[275px] md:w-fit min-w-0">
                 <div className="relative flex justify-end md:items-end md:gap-5 md:h-52 lg:mb-5">
                     {/* <div className="md:absolute absolute -top-27 md:-top-32 left-0 h-36 md:h-auto w-25 md:w-52 md:aspect-[3/4] bg-red-300 rounded"></div> */}
                     <img src={`https://image.tmdb.org/t/p/w500${movieData?.poster_path}`} alt="" className="md:absolute absolute -top-27 md:-top-32 left-0 h-36 md:h-auto w-25 md:w-52 md:aspect-[3/4] object-cover rounded"/>
