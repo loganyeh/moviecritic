@@ -30,10 +30,11 @@ function StatusForm({ info, setIsStatusForm, currentStatus, setCurrentStatus }: 
 
                     <div className="xl:max-w-[1000px] xl:w-full">
                         {/* Movie Backdrop */}
-                        <div className="relative flex gap-4 justify-between items-end px-[32px] md:px-12 pb-4 aspect-[2/1] md:aspect-[4/1] lg:aspect-[16/3] bg-red-300 lg:rounded-t-md">
+                        <div className="relative flex gap-4 justify-between items-end px-[32px] md:px-12 pb-4 aspect-[2/1] md:aspect-[4/1] lg:aspect-[16/3] bg-gray-300 bg-cover lg:rounded-t-md" style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w1280${info?.backdrop_path})` }}>
+                            <div className="absolute inset-0 bg-black/80 rounded-t-md"></div>
                             <ExitBtn setIsStatusForm={setIsStatusForm} />
                             <Poster poster_path={info?.poster_path} title={info?.title} />
-                            <FavSaveBtn title={info?.title} />
+                            <FavSaveBtn title={info?.title} setIsStatusForm={setIsStatusForm} />
                         </div>
 
                         {/* Form */}

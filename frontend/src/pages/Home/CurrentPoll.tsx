@@ -6,7 +6,9 @@ function CurrentPoll(){
     return(
         <>
             <section className="flex gap-2 p-3.5 rounded bg-gray-900 text-white">            
-                <div className="h-16 w-14 aspect-square bg-blue-300 shrink-0"></div>
+                <div className="h-16 w-14 aspect-square bg-blue-300 shrink-0">
+                    <img src="https://i.pinimg.com/736x/f0/f9/51/f0f951d6b399ae6b27d92cbe1a568335.jpg" className="h-full w-full object-cover" />
+                </div>
 
                 <div className="flex flex-col flex-1 justify-center h-16">
                     <p>Guess the Anime: Winter 2026</p>

@@ -23,28 +23,27 @@ type AnimeListProps = {
 function AnimeList({ setCurrentMovieId }: AnimeListProps ){
     const [watching, setWatching] = useState<MovieListsType[]>([]);
     const [completed, setCompleted] = useState<MovieListsType[]>([]);
+    // const [paused, setPaused] = useState<MovieListsType[]>([]);
+    // const [dropped, setDropped] = useState<MovieListsType[]>([]);
+    // const [planning, setPlanning] = useState<MovieListsType[]>([]);
 
     // GET all WATCHING movies
     useEffect(() => {
         async function getWatching(){
-            const response = await fetch(`http://localhost:3000/movies/watching`);
+            const response = await fetch(`http://localhost:3000/list/status/watching`);
             const data: MovieListsType[] = await response.json();
 
             setWatching(data);
         };
 
-        getWatching();
-    }, []);
-
-    // GET all COMPLETED movies
-    useEffect(() => {
         async function getCompleted(){
-            const res = await fetch(`http://localhost:3000/movies/completed`);
+            const res = await fetch(`http://localhost:3000/list/status/completed`);
             const data: MovieListsType[] = await res.json();
-
+    
             setCompleted(data);
         };
-
+    
+        getWatching();
         getCompleted();
     }, []);
 
@@ -78,7 +77,7 @@ function AnimeList({ setCurrentMovieId }: AnimeListProps ){
                                 <WatchingStatusList sectionName="Watching" watchData={watching} setCurrentMovieId={setCurrentMovieId} />
                             </div>
 
-                            <WatchingStatusList sectionName="Completed" watchData={completed} setCurrentMovieId={setCurrentMovieId} />
+                            {completed.length !== 0 && <WatchingStatusList sectionName="Completed" watchData={completed} setCurrentMovieId={setCurrentMovieId} />}
                             {/* <WatchingStatusList sectionName="Paused" /> */}
                             {/* <WatchingStatusList sectionName="Dropped" /> */}
                             {/* <WatchingStatusList sectionName="Planning" /> */}

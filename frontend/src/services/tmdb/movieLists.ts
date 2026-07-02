@@ -38,9 +38,26 @@ export async function fetchNowPlaying(){
     return data.results;
 };
 
+// POPULAR
+export async function fetchPopular(){
+    const response = await fetch(`https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=e780da3000fb7047435f589c967c29d6`);
+    const data: MovieListsApi = await response.json();
+    // console.log(data.results);
+
+    return data.results;
+};
+
 // TOP RATED
 export async function fetchTopRated(){
     const response = await fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1&api_key=e780da3000fb7047435f589c967c29d6');
+    const data: MovieListsApi = await response.json();
+
+    return data.results;
+};
+
+// POPULAR
+export async function fetchUpcoming(){
+    const response = await fetch(`https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1&api_key=e780da3000fb7047435f589c967c29d6`);
     const data: MovieListsApi = await response.json();
 
     return data.results;

@@ -79,7 +79,6 @@ function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdo
                             </div>
 
                             {isStatusDropdown && <StatusDropdown setCurrentStatus={setCurrentStatus} setIsStatusDropdown={setIsStatusDropdown} setIsStatusForm={setIsStatusForm} />}
-
                         </div>
 
                         <div onClick={() => toggleFavorite()} className="flex justify-center items-center bg-red-600 rounded">

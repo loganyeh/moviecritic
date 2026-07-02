@@ -11,7 +11,7 @@ import CurrentMovies from "./CurrentMovies";
 
 import { useState, useEffect } from "react";
 
-import { fetchNowPlaying, fetchTopRated } from "../../services/tmdb/movieLists";
+import { fetchNowPlaying, fetchPopular, fetchTopRated, fetchUpcoming } from "../../services/tmdb/movieLists";
 import { fetchMovie } from "../../services/tmdb/search";
 import type { MovieListsType } from "../../services/tmdb/movieLists";
 import SearchQuery from "./SearchQuery";
@@ -26,6 +26,8 @@ function Browse({ setCurrentMovieId }: BrowseProps ){
     const [query, setQuery] = useState("");
     const [trendingNow, setTrendingNow] = useState<MovieListsType[]>([]);
     const [topRated, setTopRated] = useState<MovieListsType[]>([]);
+    const [popular, setPopular] = useState<MovieListsType[]>([]);
+    const [upcoming, setUpcoming] = useState<MovieListsType[]>([]);
 
     useEffect(() => {
         async function getNowPlaying(){
@@ -33,13 +35,25 @@ function Browse({ setCurrentMovieId }: BrowseProps ){
             setTrendingNow(data);
         };
 
+        async function getPopular(){
+            const data = await fetchPopular();
+            setPopular(data);
+        };
+        
         async function getTopRated(){
             const data = await fetchTopRated();
             setTopRated(data);
         };
 
+        async function getUpcoming(){
+            const data = await fetchPopular();
+            setUpcoming(data);
+        };
+
         getNowPlaying();
+        getPopular();
         getTopRated();
+        getUpcoming();
     }, []);
 
     useEffect(() => {
@@ -64,9 +78,10 @@ function Browse({ setCurrentMovieId }: BrowseProps ){
                     <DesktopSearch setQuery={setQuery} />
 
                     {!query && <div className="flex flex-col gap-12">
-                        {currentMoviesTitles.slice(0, 1).map((title, index) => {
-                            return <CurrentMovies key={index} categoryName={title} movieData={trendingNow} setCurrentMovieId={setCurrentMovieId} />
-                        })}
+                        <CurrentMovies categoryName={"TRENDING NOW"} movieData={trendingNow} setCurrentMovieId={setCurrentMovieId} />
+                        {/* <CurrentMovies categoryName={"POPULAR THIS SEASON"} movieData={popular.slice(5, 14)} setCurrentMovieId={setCurrentMovieId} /> */}
+                        {/* <CurrentMovies categoryName={"UPCOMING NEXT SEASON"} movieData={upcoming.slice(15, 22)} setCurrentMovieId={setCurrentMovieId} /> */}
+                        {/* <CurrentMovies categoryName={"ALL TIME POPULAR"} movieData={topRated} setCurrentMovieId={setCurrentMovieId} /> */}
                     </div>}
 
                     {!query && <MobileTopList movieData={topRated} setCurrentMovieId={setCurrentMovieId} />}

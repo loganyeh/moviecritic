@@ -7,19 +7,22 @@ type StatusProps = {
     info: MovieListsType
 };
 
-
 function Status({ currentStatus, setCurrentStatus, info }: StatusProps ){
     const [checkMovies, setCheckMovies] = useState<MovieListsType[]>([]);
     const [statusBtn, setStatusBtn] = useState(false);
     const statusOptions =  [
-        "Watching", "Plan to watch", "Completed", 
-        "Rewatching", "Paused", "Dropped"
+        "Watching", 
+        // "Plan to watch", 
+        "Completed", 
+        // "Rewatching", 
+        // "Paused", 
+        // "Dropped"
     ];
     
     // GET all WATCHING movies
     useEffect(() => {
         async function getIsWatching(){
-            const res = await fetch(`http://localhost:3000/movies/watching`);
+            const res = await fetch(`http://localhost:3000/list/status/watching`);
             const data: MovieListsType[] = await res.json();
 
             setCheckMovies(data);
@@ -28,19 +31,19 @@ function Status({ currentStatus, setCurrentStatus, info }: StatusProps ){
         getIsWatching();
     }, []);
 
-    const currentMovie = checkMovies.find((movie) => movie.id === info?.id);
+    const currentMovie = checkMovies.find((movie) => movie?.id === info?.id);
 
     // wip toggle watch status request not working
     // toggle watching 
     async function toggleWatching(id: number, status: string){
-        const res = await fetch(`http://localhost:3000/movies/${id}`, {
+        const res = await fetch(`http://localhost:3000/list/status/${id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 ...info,
-                status: status,
+                watchStatus: status,
             })
         });
 
@@ -48,18 +51,18 @@ function Status({ currentStatus, setCurrentStatus, info }: StatusProps ){
 
         setCheckMovies((prev) => {
             const exists = prev.some(
-                (movie) => movie.id === updatedMovie.data.id
+                (movie) => movie.id === updatedMovie.id
             );
         
             if (exists) {
                 return prev.map((movie) =>
-                    movie.id === updatedMovie.data.id
-                        ? updatedMovie.data
+                    movie.id === updatedMovie.id
+                        ? updatedMovie
                         : movie
                 );
             }
         
-            return [...prev, updatedMovie.data];
+            return [...prev, updatedMovie];
         });
     };
 
@@ -68,6 +71,11 @@ function Status({ currentStatus, setCurrentStatus, info }: StatusProps ){
         // console.log(status);
         if (status === "Watching") {
             toggleWatching(info?.id, status);
+            console.log(status);
+        }
+        else if (status === "Completed") {
+            toggleWatching(info?.id, status);
+            console.log(status);
         }
         else {
             console.log("working");
@@ -91,7 +99,7 @@ function Status({ currentStatus, setCurrentStatus, info }: StatusProps ){
                 {/* create toggle for watching and is not watching */}
                 {statusBtn && <div className="border border-gray-300 absolute top-full left-0 flex gap-3 flex-col mt-3 px-5 py-4 h-auto w-11/12 text-sm font-light bg-white text-gray-600 rounded shadow-xl z-20">
                     {statusOptions.map((option, index) => {
-                        return <button onClick={() => {toggleStatus(option), setCurrentStatus(option); setStatusBtn(false)}} key={index} className={`w-fit`}>
+                        return <button onClick={() => {toggleStatus(option); setCurrentStatus(option); setStatusBtn(false)}} key={index} className={`w-fit`}>
                             {option}
                         </button>
                     })}

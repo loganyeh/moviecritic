@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 // components
 import PosterSectionCard from "./PosterSectionCard";
 import RecentReviews from "./RecentReviews";
@@ -9,8 +10,39 @@ import FloatingNav from "../../components/FloatingNav";
 import Footer from "../../components/Footer";
 import DesktopHeader from "../../components/DesktopHeader";
 
-function Home(){
+import type { MovieListsType } from "../../services/tmdb/movieLists";
+import { fetchNowPlaying, fetchPopular, fetchTopRated, fetchUpcoming } from "../../services/tmdb/movieLists";
+
+type HomeProps = {
+    setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
+};
+
+function Home({ setCurrentMovieId }: HomeProps ){
+    const [trending, setTrending] = useState<MovieListsType[]>([]);
+    const [movie, setMovie] = useState<MovieListsType[]>([]);
+    const [tv, setTV] = useState<MovieListsType[]>([]);
     
+    useEffect(() => {
+        async function getTrending(){
+            const response = await fetchNowPlaying();
+            setTrending(response);
+        };
+
+        async function getMovie(){
+            const response = await fetchPopular();
+            setMovie(response.slice(5, 10));
+        };
+
+        async function getTV(){
+            const response = await fetchTopRated();
+            setTV(response.slice(10, 15));
+        };
+        
+        getTrending();
+        getMovie();
+        getTV();
+    }, []);
+
     return(
         <>
             <DesktopHeader />
@@ -19,21 +51,21 @@ function Home(){
             <div className="flex justify-center px-5 pt-10 py-14 bg-gray-200">
                 <div className="flex flex-col xl:flex-row gap-5 xl:gap-10 max-w-5xl 2xl:max-w-7xl w-full">
                     <div className="hidden xl:flex xl:flex-1">
-                        <Activity page="Home" />
+                        <Activity page="Home" setCurrentMovieId={setCurrentMovieId} />
                     </div>
 
                     <div className="flex flex-col gap-5 xl:max-w-md w-full">
                         <CurrentPoll />
-                        <InProgress />
+                        <InProgress setCurrentMovieId={setCurrentMovieId} />
                         <ForumActivity />
                         <RecentReviews />
-                        <PosterSectionCard sectionHeader="Trending Anime & Manga" />
-                        <PosterSectionCard sectionHeader="Newly Added Anime" />
-                        <PosterSectionCard sectionHeader="Newly Added Manga" />
+                        <PosterSectionCard sectionHeader="Trending Anime & Manga" data={trending} setCurrentMovieId={setCurrentMovieId} />
+                        <PosterSectionCard sectionHeader="Newly Added Anime" data={movie} setCurrentMovieId={setCurrentMovieId} />
+                        <PosterSectionCard sectionHeader="Newly Added Manga" data={tv} setCurrentMovieId={setCurrentMovieId} />
                     </div>
 
                     <div className="xl:hidden">
-                        <Activity page="Home" />
+                        <Activity page="Home" setCurrentMovieId={setCurrentMovieId} />
                     </div>
                 </div>
             </div>

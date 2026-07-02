@@ -120,7 +120,7 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
                 {/* page container */}
                 <div className="flex justify-center bg-gray-200">
                     <div className="flex flex-col md:flex-row gap-10 p-5 md:px-[32px] xl:px-0 py-10 pb-24 max-w-5xl 2xl:max-w-7xl w-full">
-                        <div className="flex flex-col gap-10 md:gap-5 md:max-w-[220px] shrink-0">
+                        <div className="flex flex-col gap-10 md:gap-5 w-full md:max-w-[220px] shrink-0">
                             <AllTimeRankings />
                             <Details info={info} />
                             <div className="hidden md:flex flex-col gap-10 md:gap-5">
@@ -154,8 +154,6 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
                                 <Following />
                             </div>
 
-                            {/* fix watch, horizontal scroll not working and exceeding 
-                            page width */}
                             <Watch videos={videos} />
 
                             <div className="xl:hidden flex flex-col gap-10 md:gap-[32px]">

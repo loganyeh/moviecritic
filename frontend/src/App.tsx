@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home setCurrentMovieId={setCurrentMovieId} />} />
         <Route path="/browse" element={<Browse setCurrentMovieId={setCurrentMovieId} />} />
         <Route path="/overview" element={<Overview />} />
         <Route path="/favorites" element={<Favorites setCurrentMovieId={setCurrentMovieId} />} />

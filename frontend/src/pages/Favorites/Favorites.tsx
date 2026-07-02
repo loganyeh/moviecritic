@@ -34,7 +34,7 @@ function Favorites({ setCurrentMovieId }: FavoritesProps ){
             <ProfileNav />
 
             <div className="flex flex-col items-center gap-10 px-6 py-10 pb-16 bg-gray-200">
-                <FavoritesCard sectionName="Anime" favoriteData={movies} setCurrentMovieId={setCurrentMovieId} />
+                <FavoritesCard sectionName="Movies" favoriteData={movies} setCurrentMovieId={setCurrentMovieId} />
                 {/* <FavoritesCard sectionName="Characters" /> */}
             </div>
 
