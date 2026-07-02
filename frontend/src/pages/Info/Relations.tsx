@@ -1,16 +1,16 @@
+import { Link } from "react-router-dom";
 import type { RecommendationsType } from "../../services/tmdb/movies";
 
 type RelationsProps = {
     recommendations: RecommendationsType[];
     status: string,
+    setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
 };
 
-
-
-function Relations({ recommendations, status }: RelationsProps ){
+function Relations({ recommendations, status, setCurrentMovieId }: RelationsProps ){
     function capitalize(str: string) {
         return str.charAt(0).toUpperCase() + str.slice(1);
-      }
+    };
 
     return(
         <>
@@ -18,8 +18,8 @@ function Relations({ recommendations, status }: RelationsProps ){
                 <p className="text-sm font-medium text-gray-600">Relations</p>
 
                 <div className="flex md:flex-col xl:grid xl:grid-cols-7 2xl:grid-cols-10 gap-6 xl:gap-0 xl:gap-y-4 overflow-x-scroll md:overflow-x-hidden">
-                    {recommendations.slice(0, 6).map((movie, index) => {
-                        return <div key={index} className="flex max-w-72 md:max-w-none xl:w-fit shrink-0">
+                    {recommendations.slice(0, 10).map((movie, index) => {
+                        return <Link to={"/info"} onClick={() => setCurrentMovieId(movie.id)} key={index} className="flex max-w-72 md:max-w-none xl:w-fit shrink-0">
                             <div className="xl:relative w-20 xl:w-24 2xl:w-20 aspect-[3/4] bg-red-300 shrink-0 rounded-l xl:rounded">
                                 <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="h-full w-full object-cover rounded-l" />    
                                 <div className="hidden absolute bottom-0 left-0 xl:flex justify-center items-center h-4/12 w-full text-xs font-light bg-black/50 text-white rounded-b">Summary</div>
@@ -33,7 +33,7 @@ function Relations({ recommendations, status }: RelationsProps ){
                                 <p>{capitalize(movie.media_type)} * {status}</p>
                             </div>
 
-                        </div>
+                        </Link>
                     })}
                 </div>
             </section>

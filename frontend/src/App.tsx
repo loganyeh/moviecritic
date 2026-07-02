@@ -21,7 +21,7 @@ function App() {
         <Route path="/overview" element={<Overview />} />
         <Route path="/favorites" element={<Favorites setCurrentMovieId={setCurrentMovieId} />} />
         <Route path="/animelist" element={<AnimeList setCurrentMovieId={setCurrentMovieId} />} />
-        <Route path="/info" element={<Info currentMovieId={currentMovieId} />} />
+        <Route path="/info" element={<Info currentMovieId={currentMovieId} setCurrentMovieId={setCurrentMovieId} />} />
       </Routes>
     </>
   )

@@ -29,14 +29,15 @@ import type { VideoType } from "../../services/tmdb/movies";
 import { fetchCredits, fetchDetails } from "../../services/tmdb/movies";
 import { fetchRecommendations } from "../../services/tmdb/movies";
 import { fetchVideos } from "../../services/tmdb/movies";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import StatusForm from "./Status/StatusForm";
 
 type InfoProps = {
     currentMovieId: number, 
+    setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
 };
 
-function Info({ currentMovieId }: InfoProps ){
+function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
     const [info, setInfo] = useState<MovieListsType>();
     const [isStatusDropdown, setIsStatusDropdown] = useState(false);
     const [isStatusForm, setIsStatusForm] = useState(false);
@@ -119,7 +120,7 @@ function Info({ currentMovieId }: InfoProps ){
                 {/* page container */}
                 <div className="flex justify-center bg-gray-200">
                     <div className="flex flex-col md:flex-row gap-10 p-5 md:px-[32px] xl:px-0 py-10 pb-24 max-w-5xl 2xl:max-w-7xl w-full">
-                        <div className="flex flex-col gap-10 md:gap-5 shrink-0">
+                        <div className="flex flex-col gap-10 md:gap-5 md:max-w-[220px] shrink-0">
                             <AllTimeRankings />
                             <Details info={info} />
                             <div className="hidden md:flex flex-col gap-10 md:gap-5">
@@ -135,7 +136,7 @@ function Info({ currentMovieId }: InfoProps ){
                                 <Description overview={info?.overview} />
                             </div>
 
-                            <Relations recommendations={recommendations} status={info?.status} />
+                            <Relations recommendations={recommendations} status={info?.status} setCurrentMovieId={setCurrentMovieId} />
                             <Characters characters={characters} />
                             <Staff crew={crew} />
 
@@ -161,7 +162,7 @@ function Info({ currentMovieId }: InfoProps ){
                                 <Following />
                             </div>
 
-                            <Recommendations recommendations={recommendations} />
+                            <Recommendations recommendations={recommendations} setCurrentMovieId={setCurrentMovieId} />
 
                             <div className="flex flex-col xl:grid xl:grid-cols-2 gap-10 md:gap-[32px]">
                                 <Threads info={info} />
