@@ -79,9 +79,9 @@ function Browse({ setCurrentMovieId }: BrowseProps ){
 
                     {!query && <div className="flex flex-col gap-12">
                         <CurrentMovies categoryName={"TRENDING NOW"} movieData={trendingNow} setCurrentMovieId={setCurrentMovieId} />
-                        {/* <CurrentMovies categoryName={"POPULAR THIS SEASON"} movieData={popular.slice(5, 14)} setCurrentMovieId={setCurrentMovieId} /> */}
-                        {/* <CurrentMovies categoryName={"UPCOMING NEXT SEASON"} movieData={upcoming.slice(15, 22)} setCurrentMovieId={setCurrentMovieId} /> */}
-                        {/* <CurrentMovies categoryName={"ALL TIME POPULAR"} movieData={topRated} setCurrentMovieId={setCurrentMovieId} /> */}
+                        <CurrentMovies categoryName={"POPULAR THIS SEASON"} movieData={popular.slice(5, 14)} setCurrentMovieId={setCurrentMovieId} />
+                        <CurrentMovies categoryName={"UPCOMING NEXT SEASON"} movieData={upcoming.slice(15, 22)} setCurrentMovieId={setCurrentMovieId} />
+                        <CurrentMovies categoryName={"ALL TIME POPULAR"} movieData={topRated} setCurrentMovieId={setCurrentMovieId} />
                     </div>}
 
                     {!query && <MobileTopList movieData={topRated} setCurrentMovieId={setCurrentMovieId} />}

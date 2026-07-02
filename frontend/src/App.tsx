@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home setCurrentMovieId={setCurrentMovieId} />} />
         <Route path="/browse" element={<Browse setCurrentMovieId={setCurrentMovieId} />} />
-        <Route path="/overview" element={<Overview />} />
+        <Route path="/overview" element={<Overview setCurrentMovieId={setCurrentMovieId} />} />
         <Route path="/favorites" element={<Favorites setCurrentMovieId={setCurrentMovieId} />} />
         <Route path="/animelist" element={<AnimeList setCurrentMovieId={setCurrentMovieId} />} />
         <Route path="/info" element={<Info currentMovieId={currentMovieId} setCurrentMovieId={setCurrentMovieId} />} />

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import DesktopHeader from "../../components/DesktopHeader";
 import FloatingNav from "../../components/FloatingNav";
 import Footer from "../../components/Footer";
@@ -13,8 +14,23 @@ import WatchedStats from "./WatchedStats";
 import { useState, useEffect } from "react";
 import type { MovieListsType } from "../../services/tmdb/movieLists";
 
-function Overview(){
+type OverviewProps = {
+    setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
+};
+
+function Overview({ setCurrentMovieId }: OverviewProps ){
     const [favMovies, setFavMovies] = useState<MovieListsType[]>([]);
+
+    useEffect(() => {
+        async function getFavorites(){
+            const response = await fetch(`http://localhost:3000/movies/favorites`);
+            const data: MovieListsType[] = await response.json();
+
+            setFavMovies(data);
+        };
+
+        getFavorites();
+    }, []);
 
     return(
         <>
@@ -28,8 +44,8 @@ function Overview(){
                     <div className="hidden xl:flex flex-col gap-5 max-w-sm 2xl:max-w-lg w-full">
                         <ActivityHistory />
                         <GenreOverview />
-                        <FavoritesCard title="Movies" favData={favMovies} />
-                        {/* <FavoritesCard title="Characters" favData={favMovies} /> */}
+                        <FavoritesCard title="Movies" favData={favMovies} setCurrentMovieId={setCurrentMovieId} />
+                        {/* <FavoritesCard title="Characters" favData={favMovies} setCurrentMovieId={setCurrentMovieId} /> */}
                     </div>
 
                     <div className="flex flex-col xl:flex-1 gap-6">
@@ -37,7 +53,7 @@ function Overview(){
                             <WatchedStats />
                             <WatchedStats />
                         </div>
-                        <Activity page="Overview" />
+                        <Activity page="Overview" setCurrentMovieId={setCurrentMovieId}  />
                     </div>
                 </div>
             </div>
