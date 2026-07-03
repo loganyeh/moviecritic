@@ -62,6 +62,9 @@ function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdo
         });
     };
 
+    console.log(checkMovies.find((movie) => movie.id === movieData.id));
+    // fix current status in status button bar with find method
+
     return(
         <>
             <section className="md:max-w-[275px] md:w-fit min-w-0">
@@ -82,7 +85,7 @@ function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdo
                         </div>
 
                         <div onClick={() => toggleFavorite()} className="flex justify-center items-center bg-red-600 rounded">
-                            <i className={`bx bxs-heart p-2 aspect-square text-xl ${isFavorite ? "text-red-300" : "text-white"} cursor-pointer`} ></i>
+                            <i className={`bx bxs-heart p-2 aspect-square text-xl ${isFavorite ? "text-red-300" : "text-white"} cursor-pointer hover:text-red-300 active:text-red-700`} ></i>
                         </div>
                     </div>
                 </div>
