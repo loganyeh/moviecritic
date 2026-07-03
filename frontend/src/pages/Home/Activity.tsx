@@ -42,8 +42,10 @@ function Activity({ page, setCurrentMovieId }: ActivityProps ){
                         <i className='bx bx-chevron-down text-xl' ></i>
                     </div>}
                 </div>
-
-                <input type="text" className="px-4 py-2 text-sm bg-white rounded" placeholder="Write a status..." />
+                
+                <div className="px-4 py-2 text-sm bg-white text-gray-400 rounded">
+                    Write a status...
+                </div>
 
                 <div className={`${page === "Overview" ? "2xl:grid 2xl:grid-cols-2" : ""} flex flex-col gap-5`}>
                 {/* <div className="border border-red-600 flex flex-col gap-5"> */}

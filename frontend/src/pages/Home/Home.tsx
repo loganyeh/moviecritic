@@ -59,9 +59,9 @@ function Home({ setCurrentMovieId }: HomeProps ){
                         <InProgress setCurrentMovieId={setCurrentMovieId} />
                         <ForumActivity />
                         <RecentReviews />
-                        <PosterSectionCard sectionHeader="Trending Anime & Manga" data={trending} setCurrentMovieId={setCurrentMovieId} />
-                        <PosterSectionCard sectionHeader="Newly Added Anime" data={movie} setCurrentMovieId={setCurrentMovieId} />
-                        <PosterSectionCard sectionHeader="Newly Added Manga" data={tv} setCurrentMovieId={setCurrentMovieId} />
+                        <PosterSectionCard sectionHeader="Trending Movies & Shows" data={trending} setCurrentMovieId={setCurrentMovieId} />
+                        <PosterSectionCard sectionHeader="Newly Added Movies" data={movie} setCurrentMovieId={setCurrentMovieId} />
+                        <PosterSectionCard sectionHeader="Newly Added Shows" data={tv} setCurrentMovieId={setCurrentMovieId} />
                     </div>
 
                     <div className="xl:hidden">

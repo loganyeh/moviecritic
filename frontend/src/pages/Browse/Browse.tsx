@@ -68,7 +68,7 @@ function Browse({ setCurrentMovieId }: BrowseProps ){
     return(
         <>
             <DesktopHeader />
-
+            
             {/* Page Container */}
             <div className="flex justify-center bg-gray-200">
                 <div className="flex flex-col gap-6 xl:gap-14 2xl:gap-10 p-3 pt-4 pb-10 lg:px-5 xl:p-0 xl:py-12 max-w-5xl 2xl:max-w-7xl w-full">

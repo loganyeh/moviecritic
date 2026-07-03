@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import DesktopHeader from "../../components/DesktopHeader";
 import FloatingNav from "../../components/FloatingNav";
 import Footer from "../../components/Footer";
@@ -45,13 +44,14 @@ function Overview({ setCurrentMovieId }: OverviewProps ){
                         <ActivityHistory />
                         <GenreOverview />
                         <FavoritesCard title="Movies" favData={favMovies} setCurrentMovieId={setCurrentMovieId} />
-                        {/* <FavoritesCard title="Characters" favData={favMovies} setCurrentMovieId={setCurrentMovieId} /> */}
+                        <FavoritesCard title="Shows" favData={favMovies} setCurrentMovieId={setCurrentMovieId} />
+                        {/* or Characters */}
                     </div>
 
                     <div className="flex flex-col xl:flex-1 gap-6">
                         <div className="flex flex-col 2xl:grid 2xl:grid-cols-2 gap-6">
-                            <WatchedStats />
-                            <WatchedStats />
+                            <WatchedStats title="Total Movies" total="75" days="28.6" mean="78.2" />
+                            <WatchedStats title="Total Shows" total="14" days="45" mean="85.0" />
                         </div>
                         <Activity page="Overview" setCurrentMovieId={setCurrentMovieId}  />
                     </div>

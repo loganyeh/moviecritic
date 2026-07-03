@@ -27,11 +27,11 @@ function RecentReviews(){
                             </div>
 
                             <div className="flex flex-col justify-center gap-2 p-3">
-                                <p className="text-sm">Reviews of Days with {movie.title}</p>
+                                <p className="text-sm">Reviews of {movie.title}</p>
                                 <p className="text-xs line-clamp-5">{movie.overview}</p>
-                                <div className="flex justify-end items-center gap-1 text-xs">
+                                <div className="flex justify-end items-center gap-1 h-full text-xs">
                                     <i className='bx bxs-like' ></i>
-                                    <p>5</p>
+                                    <p>{Math.floor(Math.random() * 1000) + 250}</p>
                                 </div>
                             </div>
                         </div>

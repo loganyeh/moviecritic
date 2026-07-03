@@ -18,7 +18,7 @@ function CurrentMovies({ categoryName, movieData, setCurrentMovieId }: CurrentMo
                     <p className="text-xs font-medium">View All</p>
                 </div>
                 
-                <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-5 2xl:grid-cols-6 gap-4 gap-y-5 xl:gap-10 2xl:gap-12">
+                <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-5 2xl:grid-cols-5 gap-4 gap-y-5 xl:gap-10 2xl:gap-12">
                     {movieData.slice(0, 5).map((movie, _) => {
                         return <div key={movie.id} className="flex flex-col gap-2.5">
                             <Link to={'/info'} onClick={() => setCurrentMovieId(movie.id) } className="aspect-[3/4]">
