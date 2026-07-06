@@ -1,5 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 
 function ProfileNav(){
     const profileNav = [
@@ -7,7 +6,7 @@ function ProfileNav(){
         { text: 'Movies List', route: '/animelist'},
         { text: 'Shows List', route: '/mangalist'},
         { text: 'Favorites', route: '/favorites'},
-        { text: 'Stats', route: '/overview'},
+        { text: 'Stats', route: '/stats'},
         { text: 'Social', route: '/overview'},
         { text: 'Reviews', route: '/overview'},
         { text: 'Submissions', route: '/overview'},

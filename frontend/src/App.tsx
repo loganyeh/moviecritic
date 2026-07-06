@@ -6,6 +6,7 @@ import Favorites from "./pages/Favorites/Favorites";
 import AnimeList from "./pages/AnimeList/AnimeList";
 import MangaList from "./pages/MangaList/MangaList";
 import Info from "./pages/Info/Info";
+import Stats from "./pages/Stats/Stats";
 
 import { useState } from "react";
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/favorites" element={<Favorites setCurrentMovieId={setCurrentMovieId} />} />
         <Route path="/animelist" element={<AnimeList setCurrentMovieId={setCurrentMovieId} />} />
         <Route path="/mangalist" element={<MangaList setCurrentMovieId={setCurrentMovieId} />} />
+        <Route path="/stats" element={<Stats />} />
         <Route path="/info" element={<Info currentMovieId={currentMovieId} setCurrentMovieId={setCurrentMovieId} />} />
       </Routes>
     </>
