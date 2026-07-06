@@ -5,7 +5,7 @@ function DesktopHeader(){
         { text: "Home", route: "/" },
         { text: "Profile", route: "/overview" },
         { text: "Anime List", route: "/animelist" },
-        { text: "Manga List", route: "/animelist" },
+        { text: "Manga List", route: "/mangalist" },
         { text: "Browse", route: "/browse" },
         { text: "Forum", route: "/" },
     ];
