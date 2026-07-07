@@ -6,7 +6,7 @@ function FloatingNav(){
     const navIcons = [
         { icon: 'bx bxs-home', text: 'home', route: '/' },
         { icon: 'bx bx-play', text: 'anime list', route: '/animelist' },
-        { icon: 'bx bxs-book-alt', text: 'manga list', route: '/animelist' },
+        { icon: 'bx bxs-book-alt', text: 'manga list', route: '/mangalist' },
         { icon: 'bx bxs-chat', text: 'forum', route: '/' },
         { icon: 'bx bxs-user', text: 'profile', route: '/overview' },
         { icon: 'bx bxs-envelope', text: 'notifications', route: '/' },

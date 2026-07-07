@@ -14,6 +14,7 @@ import { Routes, Route } from "react-router-dom";
 import Social from "./pages/Social/Social";
 import Reviews from "./pages/Reviews/Reviews";
 import Submissions from "./pages/Submissions/Submissions";
+import Forum from "./pages/Forum/Forum";
 
 function App() {
   const [currentMovieId, setCurrentMovieId] = useState(374205);
@@ -32,6 +33,7 @@ function App() {
         <Route path="/social" element={<Social />} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/submissions" element={<Submissions />} />
+        <Route path="/forum" element={<Forum />} />
       </Routes>
     </>
   )
