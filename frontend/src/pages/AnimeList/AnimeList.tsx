@@ -21,17 +21,31 @@ type AnimeListProps = {
 };
 
 function AnimeList({ setCurrentMovieId }: AnimeListProps ){
-    const [watching, setWatching] = useState<MovieListsType[]>([])
+    const animeLists = ["All", "Watching", "Completed", "Paused", "Dropped", "Planning"];
+    const [watching, setWatching] = useState<MovieListsType[]>([]);
+    const [completed, setCompleted] = useState<MovieListsType[]>([]);
+    // const [paused, setPaused] = useState<MovieListsType[]>([]);
+    // const [dropped, setDropped] = useState<MovieListsType[]>([]);
+    // const [planning, setPlanning] = useState<MovieListsType[]>([]);
 
+    // GET all WATCHING movies
     useEffect(() => {
         async function getWatching(){
-            const response = await fetch(`http://localhost:3000/list/status/`);
+            const response = await fetch(`http://localhost:3000/list/status/watching`);
             const data: MovieListsType[] = await response.json();
 
             setWatching(data);
         };
 
+        async function getCompleted(){
+            const res = await fetch(`http://localhost:3000/list/status/completed`);
+            const data: MovieListsType[] = await res.json();
+    
+            setCompleted(data);
+        };
+    
         getWatching();
+        getCompleted();
     }, []);
 
     return(
@@ -44,7 +58,7 @@ function AnimeList({ setCurrentMovieId }: AnimeListProps ){
                 <div className="flex justify-between gap-10 p-5 pb-16 md:p-[32px] md:pb-16 xl:px-0 max-w-5xl 2xl:max-w-7xl w-full bg-gray-200">
                     <div className="hidden md:flex flex-1 flex-col items-start gap-6">
                         <TabletListSearch />
-                        <Lists />
+                        <Lists title="Lists" categories={animeLists} />
                         <Filters />
                         <Year />
                         <Sort />
@@ -64,7 +78,7 @@ function AnimeList({ setCurrentMovieId }: AnimeListProps ){
                                 <WatchingStatusList sectionName="Watching" watchData={watching} setCurrentMovieId={setCurrentMovieId} />
                             </div>
 
-                            <WatchingStatusList sectionName="Completed" watchData={watching} setCurrentMovieId={setCurrentMovieId} />
+                            {completed.length !== 0 && <WatchingStatusList sectionName="Completed" watchData={completed} setCurrentMovieId={setCurrentMovieId} />}
                             {/* <WatchingStatusList sectionName="Paused" /> */}
                             {/* <WatchingStatusList sectionName="Dropped" /> */}
                             {/* <WatchingStatusList sectionName="Planning" /> */}

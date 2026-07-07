@@ -8,7 +8,6 @@ type WatchingStatusProps = {
     setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
 };
 
-
 function WatchingStatusList({ sectionName, watchData, setCurrentMovieId }: WatchingStatusProps ){
 
     return(
@@ -57,9 +56,12 @@ function WatchingStatusList({ sectionName, watchData, setCurrentMovieId }: Watch
                                     <p>25</p>
                                     <p>ONA</p>
                                 </div>
-
                             </div>
                         })}
+
+                        {watchData.length === 0 && <div className="flex justify-center items-center">
+                            <p className="text-lg font-medium text-gray-700">Currently not watching any movies :(</p>
+                        </div>}
                     </div>
 
                 </div>

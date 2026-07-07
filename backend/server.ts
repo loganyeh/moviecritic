@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import favoriteMoviesRoutes from "./routes/favoriteMovies.routes.ts";
+import movieRoutes from "./routes/movieRoutes.ts"
 import listRoutes from "./routes/list.routes.ts"
 
 dotenv.config();
@@ -17,7 +17,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/favorites/movies', favoriteMoviesRoutes);
+app.use('/movies', movieRoutes);
 
 app.use('/list/status', listRoutes);
 

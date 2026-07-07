@@ -1,15 +1,18 @@
 import express from "express";
-import { getList, addToList, deleteFromList } from "../controllers/list.controller.ts";
+import { getList, getWatchingList, getCompletedList, updateList } from "../controllers/list.controller.ts";
 
 const listRouter = express.Router();
 
 // GET List
 listRouter.get("/", getList);
 
-// POST to list
-listRouter.post("/", addToList);
+// GET WATCHING LIST
+listRouter.get("/watching", getWatchingList);
 
-// DELETE from list
-listRouter.delete("/:id", deleteFromList);
+// GET COMPLETED LIST
+listRouter.get("/completed", getCompletedList);
+
+// UPDATE movie
+listRouter.patch("/:id", updateList);
 
 export default listRouter;

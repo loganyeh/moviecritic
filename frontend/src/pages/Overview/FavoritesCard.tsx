@@ -1,12 +1,14 @@
+import { Link } from "react-router-dom";
 import type { MovieListsType } from "../../services/tmdb/movieLists";
 
 type FavoritesCardProps = {
     title: string,
     favData: MovieListsType[];
+    setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
 };
 
 
-function FavoritesCard({ title, favData }: FavoritesCardProps ){
+function FavoritesCard({ title, favData, setCurrentMovieId }: FavoritesCardProps ){
 
     return(
         <>
@@ -15,9 +17,9 @@ function FavoritesCard({ title, favData }: FavoritesCardProps ){
 
                 <div className="grid grid-cols-4 2xl:grid-cols-5 p-4 gap-4 bg-white">
                     {favData.map((fav, index) => {
-                        return <div key={index} className="w-[76px] aspect-[3/4] rounded">
+                        return <Link to={'/info'} onClick={() => setCurrentMovieId(fav.id)} key={index} className="w-[76px] aspect-[3/4] rounded">
                             <img src={`https://image.tmdb.org/t/p/w500${fav.poster_path}`} alt="" className="rounded object-cover" />
-                        </div>
+                        </Link>
                     })}
                 </div>
                 

@@ -1,6 +1,18 @@
-
+import { useState, useEffect } from "react";
+import type { MovieListsType } from "../../services/tmdb/movieLists";
+import { fetchTopRated } from "../../services/tmdb/movieLists";
 
 function RecentReviews(){
+    const [reviews, setReviews] = useState<MovieListsType[]>([]);
+
+    useEffect(() => {
+        async function getReviews(){
+            const response = await fetchTopRated();
+            setReviews(response);
+        };
+
+        getReviews();
+    }, []);
 
     return (
         <>
@@ -8,16 +20,18 @@ function RecentReviews(){
                 <h1 className="px-4 py-2 text-sm">Recent Reveiws</h1>
 
                 <div className="grid grid-cols-2 gap-6">
-                    {Array.from({length: 4}).map((_, index) => {
+                    {reviews.slice(0, 4).map((movie, index) => {
                         return <div key={index} className="bg-white rounded shadow">
-                            <div className="h-[88px] w-full aspect-video bg-blue-300 rounded-t"></div>
+                            <div className="h-[88px] w-full aspect-video bg-blue-300 rounded-t">
+                                <img src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} alt="" className="h-full w-full object-cover rounded-t" />
+                            </div>
 
                             <div className="flex flex-col justify-center gap-2 p-3">
-                                <p className="text-sm">Reviews of Days with My Stepsister by Rukia</p>
-                                <p className="text-xs line-clamp-5"> a grounded, entirely different, and surprising tone. However, the show's determination to avoid clichés unfortunately fails to deliver the same success when it comes to processing the plot in an engaging and satisfying manner.</p>
-                                <div className="flex justify-end items-center gap-1 text-xs">
+                                <p className="text-sm">Reviews of {movie.title}</p>
+                                <p className="text-xs line-clamp-5">{movie.overview}</p>
+                                <div className="flex justify-end items-center gap-1 h-full text-xs">
                                     <i className='bx bxs-like' ></i>
-                                    <p>5</p>
+                                    <p>{Math.floor(Math.random() * 1000) + 250}</p>
                                 </div>
                             </div>
                         </div>
