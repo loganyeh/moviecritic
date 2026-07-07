@@ -1,4 +1,5 @@
 // Comp Imports
+import DesktopHeader from "../../components/DesktopHeader";
 import ProfileBanner from "../Overview/ProfileBanner";
 import ProfileNav from "../../components/ProfileNav";
 import Footer from "../../components/Footer";
@@ -97,6 +98,7 @@ function Stats(){
 
     return(
         <>
+            <DesktopHeader />
             <ProfileBanner />
             <ProfileNav />
 

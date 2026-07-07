@@ -7,9 +7,9 @@ function ProfileNav(){
         { text: 'Shows List', route: '/mangalist'},
         { text: 'Favorites', route: '/favorites'},
         { text: 'Stats', route: '/stats'},
-        { text: 'Social', route: '/overview'},
-        { text: 'Reviews', route: '/overview'},
-        { text: 'Submissions', route: '/overview'},
+        { text: 'Social', route: '/social'},
+        { text: 'Reviews', route: '/reviews'},
+        { text: 'Submissions', route: '/submissions'},
     ];
 
     return(
