@@ -1,9 +1,28 @@
  // SHARED TYPES
 export type MovieListsType = {
+    _id?: string,
     id: number,
     title: string,
     backdrop_path: string,
     poster_path: string,
+    createdAt?: string,
+    updatedAt?: string,
+    isFavorite?: boolean,
+    watchStatus?: string,
+
+    overview: string,
+    status: string,
+    release_date: string,
+    runtime: number,
+    genres: {
+        name: string,
+    }[],
+    popularity: number,
+    vote_average: number,
+    production_companies: {
+        name: string,
+    }[],
+    tagline: string,
 };
 
 export type MovieListsApi = {
@@ -14,6 +33,16 @@ export type MovieListsApi = {
 export async function fetchNowPlaying(){
     const response = await fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&api_key=e780da3000fb7047435f589c967c29d6');
     const data: MovieListsApi = await response.json();
+    // console.log(data.results);
+
+    return data.results;
+};
+
+// POPULAR
+export async function fetchPopular(){
+    const response = await fetch(`https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=e780da3000fb7047435f589c967c29d6`);
+    const data: MovieListsApi = await response.json();
+    // console.log(data.results);
 
     return data.results;
 };
@@ -26,4 +55,10 @@ export async function fetchTopRated(){
     return data.results;
 };
 
-fetchTopRated();
+// POPULAR
+export async function fetchUpcoming(){
+    const response = await fetch(`https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1&api_key=e780da3000fb7047435f589c967c29d6`);
+    const data: MovieListsApi = await response.json();
+
+    return data.results;
+};

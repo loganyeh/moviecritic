@@ -4,7 +4,7 @@ import ProfileNav from "../../components/ProfileNav";
 import Footer from "../../components/Footer";
 import FloatingNav from "../../components/FloatingNav";
 import MobileListSearch from "./MobileListSearch";
-import WatchingStatus from "./WatchingStatus";
+import WatchingStatusList from "./WatchingStatusList";
 import FilterType from "./FilterType";
 import TabletListSearch from "./TabletListSearch";
 import Lists from "./Lists";
@@ -13,8 +13,40 @@ import Year from "./Year";
 import Sort from "./Sort";
 import ShuffleBtn from "./ShuffleBtn";
 
+import { useEffect, useState } from "react";
+import type { MovieListsType } from "../../services/tmdb/movieLists";
 
-function AnimeList(){
+type AnimeListProps = {
+    setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
+};
+
+function AnimeList({ setCurrentMovieId }: AnimeListProps ){
+    const animeLists = ["All", "Watching", "Completed", "Paused", "Dropped", "Planning"];
+    const [watching, setWatching] = useState<MovieListsType[]>([]);
+    const [completed, setCompleted] = useState<MovieListsType[]>([]);
+    // const [paused, setPaused] = useState<MovieListsType[]>([]);
+    // const [dropped, setDropped] = useState<MovieListsType[]>([]);
+    // const [planning, setPlanning] = useState<MovieListsType[]>([]);
+
+    // GET all WATCHING movies
+    useEffect(() => {
+        async function getWatching(){
+            const response = await fetch(`http://localhost:3000/list/status/watching`);
+            const data: MovieListsType[] = await response.json();
+
+            setWatching(data);
+        };
+
+        async function getCompleted(){
+            const res = await fetch(`http://localhost:3000/list/status/completed`);
+            const data: MovieListsType[] = await res.json();
+    
+            setCompleted(data);
+        };
+    
+        getWatching();
+        getCompleted();
+    }, []);
 
     return(
         <>  
@@ -26,7 +58,7 @@ function AnimeList(){
                 <div className="flex justify-between gap-10 p-5 pb-16 md:p-[32px] md:pb-16 xl:px-0 max-w-5xl 2xl:max-w-7xl w-full bg-gray-200">
                     <div className="hidden md:flex flex-1 flex-col items-start gap-6">
                         <TabletListSearch />
-                        <Lists />
+                        <Lists title="Lists" categories={animeLists} />
                         <Filters />
                         <Year />
                         <Sort />
@@ -43,13 +75,13 @@ function AnimeList(){
                                 <div className="hidden md:flex justify-end">
                                     <FilterType />
                                 </div>
-                                <WatchingStatus sectionName="Watching" />
+                                <WatchingStatusList sectionName="Watching" watchData={watching} setCurrentMovieId={setCurrentMovieId} />
                             </div>
 
-                            <WatchingStatus sectionName="Completed" />
-                            <WatchingStatus sectionName="Paused" />
-                            <WatchingStatus sectionName="Dropped" />
-                            <WatchingStatus sectionName="Planning" />
+                            {completed.length !== 0 && <WatchingStatusList sectionName="Completed" watchData={completed} setCurrentMovieId={setCurrentMovieId} />}
+                            {/* <WatchingStatusList sectionName="Paused" /> */}
+                            {/* <WatchingStatusList sectionName="Dropped" /> */}
+                            {/* <WatchingStatusList sectionName="Planning" /> */}
                         </div>
                     </div>
                 </div>

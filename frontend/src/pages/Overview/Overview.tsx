@@ -10,8 +10,26 @@ import GenreOverview from "./GenreOverview";
 import FavoritesCard from "./FavoritesCard";
 import WatchedStats from "./WatchedStats";
 
-function Overview(){
+import { useState, useEffect } from "react";
+import type { MovieListsType } from "../../services/tmdb/movieLists";
 
+type OverviewProps = {
+    setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
+};
+
+function Overview({ setCurrentMovieId }: OverviewProps ){
+    const [favMovies, setFavMovies] = useState<MovieListsType[]>([]);
+
+    useEffect(() => {
+        async function getFavorites(){
+            const response = await fetch(`http://localhost:3000/movies/favorites`);
+            const data: MovieListsType[] = await response.json();
+
+            setFavMovies(data);
+        };
+
+        getFavorites();
+    }, []);
 
     return(
         <>
@@ -25,16 +43,17 @@ function Overview(){
                     <div className="hidden xl:flex flex-col gap-5 max-w-sm 2xl:max-w-lg w-full">
                         <ActivityHistory />
                         <GenreOverview />
-                        <FavoritesCard title="Anime" />
-                        <FavoritesCard title="Characters" />
+                        <FavoritesCard title="Movies" favData={favMovies} setCurrentMovieId={setCurrentMovieId} />
+                        <FavoritesCard title="Shows" favData={favMovies} setCurrentMovieId={setCurrentMovieId} />
+                        {/* or Characters */}
                     </div>
 
                     <div className="flex flex-col xl:flex-1 gap-6">
                         <div className="flex flex-col 2xl:grid 2xl:grid-cols-2 gap-6">
-                            <WatchedStats />
-                            <WatchedStats />
+                            <WatchedStats title="Total Movies" total="75" days="28.6" mean="78.2" />
+                            <WatchedStats title="Total Shows" total="14" days="45" mean="85.0" />
                         </div>
-                        <Activity page="Overview" />
+                        <Activity page="Overview" setCurrentMovieId={setCurrentMovieId}  />
                     </div>
                 </div>
             </div>

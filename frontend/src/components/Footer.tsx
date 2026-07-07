@@ -17,8 +17,8 @@ function Footer(){
 
                         <div className="flex gap-4">
                             {Array.from({ length: 4}).map((_, index) => {
-                                return <div key={index} className="border w-6 aspect-square rounded">
-                                    
+                                return <div key={index} className="border flex justify-center items-center w-6 text-xl aspect-square rounded">
+                                    <i className={index % 2 ? 'bx bxs-moon' : 'bx bx-moon'} ></i>
                                 </div>
                             })}
                         </div>

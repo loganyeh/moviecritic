@@ -1,13 +1,21 @@
 
 
-function MovieBanner(){
+type MovieBannerProps = {
+    title: string,
+    backdrop_path: string;
+};
+
+
+function MovieBanner({ title, backdrop_path }: MovieBannerProps ){
 
     return(
-        <>
-            <div className="flex justify-center bg-blue-300">
-                <section className="flex gap-4 lg:gap-5 items-end px-6 xl:px-0 aspect-video md:aspect-[16/7] lg:aspect-[16/5] xl:aspect-[16/4] 2xl:aspect-[16/3] max-w-5xl 2xl:max-w-7xl w-full">
-                    {/* <img src="https://i.pinimg.com/736x/0c/8a/1f/0c8a1f42df3622a03adeded0e08c08a6.jpg" className="w-28 md:w-36 aspect-square bg-blue-300 rounded-t" /> */}
-                    {/* <p className="py-3 text-lg font-bold">Hanni</p> */}
+        <> 
+            <div className="relative flex justify-center">
+                <div className="absolute inset-0 bg-gray-300 bg-contain blur-xs" style={{ backgroundImage: `url("https://image.tmdb.org/t/p/w500${backdrop_path}")` }}>
+                </div>
+
+                <section className="relative aspect-video md:aspect-[16/7] lg:aspect-[16/5] xl:aspect-[16/4] 2xl:aspect-[16/3] max-w-5xl 2xl:max-w-7xl w-full">
+                    <img src={`https://image.tmdb.org/t/p/w1280${backdrop_path}`} alt={title} className="h-full w-full object-cover" />
                 </section>
             </div>
         </>

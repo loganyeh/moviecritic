@@ -4,6 +4,7 @@ type DesktopSearchProps = {
 };
 
 function DesktopSearch({ setQuery }: DesktopSearchProps ){
+    const inputs = ["Genres", "Year", "Season", "Format"];
 
     return(
         <>
@@ -11,16 +12,20 @@ function DesktopSearch({ setQuery }: DesktopSearchProps ){
                 <div className="flex gap-6">
                     <div className="flex flex-col gap-3">
                         <p className="2xl:text-sm font-medium">Search</p>
-                        <div className="px-3 bg-white rounded shadow-md">
-                            <input onChange={(e) => setQuery(e.target.value)} type="text" placeholder="Any" className="h-10 w-36 2xl:text-sm outline-none"/>
+                        <div className="flex gap-2 px-3 bg-white rounded shadow-md">
+                            <div className="flex justify-center items-center"><i className='bx bx-search text-gray-500' ></i></div>
+                            <input onChange={(e) => setQuery(e.target.value)} type="text" className="h-10 w-32 2xl:text-sm outline-none"/>
                         </div>
                     </div>
 
-                    {Array.from({length: 4}).map((_, index) => {
+                    {inputs.map((input, index) => {
                         return <div key={index} className="flex flex-col gap-3">
-                            <p className="2xl:text-sm font-medium">Search</p>
+                            <p className="2xl:text-sm font-medium">{input}</p>
                             <div className="px-3 bg-white rounded shadow-md">
-                                <input type="text" placeholder="Any" className="h-10 w-36 2xl:text-sm outline-none"/>
+                                <div className="flex justify-between items-center h-10 w-36 text-gray-400 2xl:text-sm outline-none">
+                                    <p>Any</p>
+                                    <div className="flex justify-center items-center"><i className='bx bx-chevron-down text-2xl'></i></div>
+                                </div>
                             </div>
                         </div>
                     })}

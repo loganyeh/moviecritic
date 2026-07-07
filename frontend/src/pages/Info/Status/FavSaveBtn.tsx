@@ -1,0 +1,27 @@
+
+
+type FavSaveBtnProps = {
+    title: string,
+    setIsStatusForm: React.Dispatch<React.SetStateAction<boolean>>,
+};
+
+
+function FavSaveBtn({ title, setIsStatusForm }: FavSaveBtnProps ){
+
+    return(
+        <>
+            <div className="relative flex flex-1 justify-between items-center text-white">
+                <p className="">{title}</p>
+
+                <div className="flex gap-4">
+                    <div className="flex items-center">
+                        <i className='bx bxs-heart text-xl'></i>
+                    </div>
+                    <button onClick={() => setIsStatusForm(false)} className="px-4 py-2 text-xs bg-blue-400 rounded">Save</button>
+                </div>
+            </div>
+        </>
+    );
+};
+
+export default FavSaveBtn;
