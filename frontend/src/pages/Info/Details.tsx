@@ -6,16 +6,16 @@ type DetailsProps = {
 
 function Details({ info }: DetailsProps ){
     const movieDetails = [
-        {category: "Title", detail: `${ info?.title ?? "TBA" }`},
+        {category: "Title", detail: `${ info.title ?? "TBA" }`},
         {category: "Format", detail: "Movie"},
-        {category: "Movie Duration", detail: `${info?.runtime || 60} mins`},
+        {category: "Movie Duration", detail: `${info.runtime || 60} mins`},
         {category: "Status", detail: "Released"},
-        {category: "Release Date", detail: `${ info?.release_date || "TBA"}`},
-        {category: "Average Score", detail: `${ `${Math.floor(info?.vote_average * 10)}%` ?? "%"}`},
-        {category: "Popularity", detail: `${ info?.popularity.toLocaleString("de-DE") ?? "250637"}`},
+        {category: "Release Date", detail: `${ info.release_date || "TBA"}`},
+        {category: "Average Score", detail: `${ `${Math.floor(info.vote_average * 10)}%`}`},
+        {category: "Popularity", detail: `${ info.popularity.toLocaleString("de-DE") ?? "250637"}`},
         {category: "Favorites", detail: "27075"},
-        {category: "Studios", detail: `${ info?.production_companies?.[0].name}`},
-        {category: "Genres", detail: [`${ info?.genres?.[0].name }`]},
+        {category: "Studios", detail: `${ info.production_companies?.[0].name}`},
+        {category: "Genres", detail: [`${ info.genres?.[0].name }`]},
     ];
     
     return(

@@ -7,7 +7,7 @@ import CurrentMovies from "./CurrentMovies";
 
 import { useState, useEffect } from "react";
 
-import { fetchNowPlaying, fetchPopular, fetchTopRated, fetchUpcoming } from "../../services/tmdb/movieLists";
+import { fetchNowPlaying, fetchPopular, fetchTopRated } from "../../services/tmdb/movieLists";
 import { fetchMovie } from "../../services/tmdb/search";
 import type { MovieListsType } from "../../services/tmdb/movieLists";
 import SearchQuery from "./SearchQuery";
@@ -17,7 +17,6 @@ type BrowseProps = {
 };
 
 function Browse({ setCurrentMovieId }: BrowseProps ){
-    const currentMoviesTitles = ["TRENDING NOW", "POPULAR THIS SEASON", "UPCOMING NEXT SEASON", "ALL TIME POPULAR"];
     const [search, setSearch] = useState<MovieListsType[]>([]);
     const [query, setQuery] = useState("");
     const [trendingNow, setTrendingNow] = useState<MovieListsType[]>([]);

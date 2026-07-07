@@ -5,13 +5,6 @@ type TagsProps = {
 };
 
 function Tags({ info }: TagsProps ){
-    const tags = [
-        { tag: 'Pirates', percentage: '98' },
-        { tag: 'Travel', percentage: '94' },
-        { tag: 'Shounen', percentage: '93' },
-        { tag: 'Ensemble Cast', percentage: '93' },
-        { tag: 'Super Power', percentage: '90' },
-    ];
     
     return(
         <>

@@ -1,6 +1,6 @@
 
 type DeleteBtnProps = {
-    id: number
+    id: number,
     setIsStatusForm: React.Dispatch<React.SetStateAction<boolean>>,
 };
 

@@ -35,7 +35,7 @@ type InfoProps = {
 };
 
 function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
-    const [info, setInfo] = useState<MovieListsType>();
+    const [info, setInfo] = useState<MovieListsType | null>(null);
     const [isStatusDropdown, setIsStatusDropdown] = useState(false);
     const [isStatusForm, setIsStatusForm] = useState(false);
     const [currentStatus, setCurrentStatus] = useState("Add to list");
@@ -43,6 +43,12 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
     const [crew, setCrew] = useState<CreditsType[]>([]);
     const [recommendations, setRecommendations] = useState<RecommendationsType[]>([]);
     const [videos, setVideos] = useState<VideoType[]>([]);
+
+    if(!info) {
+        return <div>
+
+        </div>
+    };
 
     useEffect(() => {
         if (isStatusDropdown) {
@@ -93,7 +99,7 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
     return(
         <>
             <div>
-                <MovieBanner title={info?.title} backdrop_path={info?.backdrop_path} />
+                <MovieBanner title={info.title} backdrop_path={info.backdrop_path} />
 
                 <div className="flex justify-center">
                     <div className="flex flex-col md:flex-row gap-[32px] p-5 md:p-[32px] md:pb-0 pb-0 xl:px-0 max-w-5xl 2xl:max-w-7xl w-full">
@@ -101,10 +107,10 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
 
                         <div className="md:flex md:flex-col md:justify-between flex-1 md:gap-5 min-w-0">
                             <div className="md:flex md:flex-col md:gap-3">
-                                <MovieTitle title={info?.title || ""} />
+                                <MovieTitle title={info.title || ""} />
                                 {/* Description */}
                                 <p className="hidden md:block text-sm bg-white text-gray-500 break-words">
-                                    {info?.overview}
+                                    {info.overview}
                                 </p>
                             </div>
                             <InfoNav />
@@ -128,10 +134,10 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
                         <div className="flex flex-col gap-10 md:gap-[32px] lg:flex-1 min-w-0">
 
                             <div className="md:hidden">
-                                <Description overview={info?.overview} />
+                                <Description overview={info.overview} />
                             </div>
 
-                            <Relations recommendations={recommendations} status={info?.status} setCurrentMovieId={setCurrentMovieId} />
+                            <Relations recommendations={recommendations} status={info.status} setCurrentMovieId={setCurrentMovieId} />
                             <Characters characters={characters} />
                             <Staff crew={crew} />
 
@@ -141,11 +147,11 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
                             </div>
 
                             <div className="xl:hidden">
-                                <Trailer title={info?.title} backdrop_path={info?.backdrop_path} />
+                                <Trailer title={info.title} backdrop_path={info.backdrop_path} />
                             </div>
 
                             <div className="hidden xl:grid grid-cols-2 gap-10 md:gap-[32px]">
-                                <Trailer title={info?.title} backdrop_path={info?.backdrop_path} />
+                                <Trailer title={info.title} backdrop_path={info.backdrop_path} />
                                 <Following />
                             </div>
 

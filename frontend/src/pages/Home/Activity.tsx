@@ -66,7 +66,7 @@ function Activity({ page, setCurrentMovieId }: ActivityProps ){
                                 </div>
 
                                 <div className="flex flex-col justify-between items-end text-[11px] shrink-0">
-                                    <time className="font-semibold">{formatDistanceToNow(new Date(movie.updatedAt), { addSuffix: true })}</time>
+                                    {movie.updatedAt && <time className="font-semibold">{formatDistanceToNow(new Date(movie.updatedAt), { addSuffix: true })}</time>}
 
                                     <div className="flex gap-2 text-sm">
                                         <i className='bx bxs-chat' ></i>

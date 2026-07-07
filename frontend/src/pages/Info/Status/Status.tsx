@@ -31,8 +31,6 @@ function Status({ currentStatus, setCurrentStatus, info }: StatusProps ){
         getIsWatching();
     }, []);
 
-    const currentMovie = checkMovies.find((movie) => movie?.id === info?.id);
-
     // toggle watching 
     async function toggleWatching(id: number, status: string){
         const res = await fetch(`http://localhost:3000/list/status/${id}`, {
@@ -100,6 +98,15 @@ function Status({ currentStatus, setCurrentStatus, info }: StatusProps ){
                         </button>
                     })}
                 </div>}
+            </div>
+
+            {/* ** */}
+            <div className="hidden">
+                {checkMovies.map(() => {
+                    return <div>
+
+                    </div>
+                })}
             </div>
         </>
     );

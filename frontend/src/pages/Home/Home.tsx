@@ -6,12 +6,9 @@ import ForumActivity from "./ForumActivity";
 import InProgress from "./InProgress";
 import CurrentPoll from "./CurrentPoll";
 import Activity from "./Activity";
-import FloatingNav from "../../components/FloatingNav";
-import Footer from "../../components/Footer";
-import DesktopHeader from "../../components/DesktopHeader";
 
 import type { MovieListsType } from "../../services/tmdb/movieLists";
-import { fetchNowPlaying, fetchPopular, fetchTopRated, fetchUpcoming } from "../../services/tmdb/movieLists";
+import { fetchNowPlaying, fetchPopular, fetchTopRated } from "../../services/tmdb/movieLists";
 
 type HomeProps = {
     setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,

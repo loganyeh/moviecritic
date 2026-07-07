@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+
 // pages 
 import Home from "./pages/Home/Home";
 import Browse from "./pages/Browse/Browse";
@@ -8,9 +11,6 @@ import MangaList from "./pages/MangaList/MangaList";
 import Info from "./pages/Info/Info";
 import Stats from "./pages/Stats/Stats";
 
-import { useState } from "react";
-
-import { Routes, Route } from "react-router-dom";
 import Social from "./pages/Social/Social";
 import Reviews from "./pages/Reviews/Reviews";
 import Submissions from "./pages/Submissions/Submissions";
