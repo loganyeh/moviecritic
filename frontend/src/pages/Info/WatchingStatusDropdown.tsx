@@ -62,8 +62,9 @@ function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdo
         });
     };
 
-    console.log(checkMovies.find((movie) => movie.id === movieData.id));
-    // fix current status in status button bar with find method
+    // console.log(checkMovies.find((movie) => movie.id === movieData.id));
+    // fix current status in status button bar with find method 
+    // log causes error
 
     return(
         <>

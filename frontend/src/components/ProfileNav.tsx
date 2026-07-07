@@ -1,5 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 
 function ProfileNav(){
     const profileNav = [
@@ -7,15 +6,15 @@ function ProfileNav(){
         { text: 'Movies List', route: '/animelist'},
         { text: 'Shows List', route: '/mangalist'},
         { text: 'Favorites', route: '/favorites'},
-        { text: 'Stats', route: '/overview'},
-        { text: 'Social', route: '/overview'},
-        { text: 'Reviews', route: '/overview'},
-        { text: 'Submissions', route: '/overview'},
+        { text: 'Stats', route: '/stats'},
+        { text: 'Social', route: '/social'},
+        { text: 'Reviews', route: '/reviews'},
+        { text: 'Submissions', route: '/submissions'},
     ];
 
     return(
         <>
-            <section className="bg-white">
+            <section className="border-y border-gray-200 bg-white">
                 <div className="flex md:justify-center gap-x-10 md:gap-x-12 md:gap-y-5 px-12 py-4 lg:py-3 overflow-x-scroll md:flex-wrap">
                     {profileNav.map((nav, index) => {
                         return <NavLink to={`${nav.route}`} key={index} className={({ isActive }) => `${ isActive ? "text-blue-400" : "text-gray-500"} text-sm font-semibold shrink-0 hover:text-blue-400`}>
