@@ -21,6 +21,7 @@ type AnimeListProps = {
 };
 
 function AnimeList({ setCurrentMovieId }: AnimeListProps ){
+    const animeLists = ["All", "Watching", "Completed", "Paused", "Dropped", "Planning"];
     const [watching, setWatching] = useState<MovieListsType[]>([]);
     const [completed, setCompleted] = useState<MovieListsType[]>([]);
     // const [paused, setPaused] = useState<MovieListsType[]>([]);
@@ -57,7 +58,7 @@ function AnimeList({ setCurrentMovieId }: AnimeListProps ){
                 <div className="flex justify-between gap-10 p-5 pb-16 md:p-[32px] md:pb-16 xl:px-0 max-w-5xl 2xl:max-w-7xl w-full bg-gray-200">
                     <div className="hidden md:flex flex-1 flex-col items-start gap-6">
                         <TabletListSearch />
-                        <Lists />
+                        <Lists title="Lists" categories={animeLists} />
                         <Filters />
                         <Year />
                         <Sort />
