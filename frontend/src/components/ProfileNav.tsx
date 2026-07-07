@@ -14,7 +14,7 @@ function ProfileNav(){
 
     return(
         <>
-            <section className="bg-white">
+            <section className="border-y border-gray-200 bg-white">
                 <div className="flex md:justify-center gap-x-10 md:gap-x-12 md:gap-y-5 px-12 py-4 lg:py-3 overflow-x-scroll md:flex-wrap">
                     {profileNav.map((nav, index) => {
                         return <NavLink to={`${nav.route}`} key={index} className={({ isActive }) => `${ isActive ? "text-blue-400" : "text-gray-500"} text-sm font-semibold shrink-0 hover:text-blue-400`}>
