@@ -1,6 +1,3 @@
-import DesktopHeader from "../../components/DesktopHeader";
-import Footer from "../../components/Footer";
-import FloatingNav from "../../components/FloatingNav";
 import MovieBanner from "./MovieBanner";
 import Details from "./Details";
 import Description from "./Description";
@@ -95,8 +92,6 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
 
     return(
         <>
-            <DesktopHeader />
-
             <div>
                 <MovieBanner title={info?.title} backdrop_path={info?.backdrop_path} />
 
@@ -178,9 +173,6 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
 
                 {isStatusForm && <StatusForm info={info} setIsStatusForm={setIsStatusForm} currentStatus={currentStatus} setCurrentStatus={setCurrentStatus} />}
             </div>
-
-            <FloatingNav />
-            <Footer />
         </>
     );
 };

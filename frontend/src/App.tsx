@@ -16,23 +16,32 @@ import Reviews from "./pages/Reviews/Reviews";
 import Submissions from "./pages/Submissions/Submissions";
 import Forum from "./pages/Forum/Forum";
 
+import MainLayout from "./layouts/MainLayout";
+import ProfileLayout from "./layouts/ProfileLayout";
+
 function App() {
   const [currentMovieId, setCurrentMovieId] = useState(374205);
 
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home setCurrentMovieId={setCurrentMovieId} />} />
-        <Route path="/browse" element={<Browse setCurrentMovieId={setCurrentMovieId} />} />
-        <Route path="/overview" element={<Overview setCurrentMovieId={setCurrentMovieId} />} />
-        <Route path="/favorites" element={<Favorites setCurrentMovieId={setCurrentMovieId} />} />
-        <Route path="/animelist" element={<AnimeList setCurrentMovieId={setCurrentMovieId} />} />
-        <Route path="/mangalist" element={<MangaList setCurrentMovieId={setCurrentMovieId} />} />
-        <Route path="/stats" element={<Stats />} />
-        <Route path="/info" element={<Info currentMovieId={currentMovieId} setCurrentMovieId={setCurrentMovieId} />} />
-        <Route path="/social" element={<Social />} />
-        <Route path="/reviews" element={<Reviews />} />
-        <Route path="/submissions" element={<Submissions />} />
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Home setCurrentMovieId={setCurrentMovieId} />} />
+          <Route path="/browse" element={<Browse setCurrentMovieId={setCurrentMovieId} />} />
+          <Route path="/info" element={<Info currentMovieId={currentMovieId} setCurrentMovieId={setCurrentMovieId} />} />
+        </Route>
+
+        <Route element={<ProfileLayout />}>
+          <Route path="/overview" element={<Overview setCurrentMovieId={setCurrentMovieId} />} />
+          <Route path="/animelist" element={<AnimeList setCurrentMovieId={setCurrentMovieId} />} />
+          <Route path="/mangalist" element={<MangaList setCurrentMovieId={setCurrentMovieId} />} />
+          <Route path="/favorites" element={<Favorites setCurrentMovieId={setCurrentMovieId} />} />
+          <Route path="/stats" element={<Stats />} />
+          <Route path="/social" element={<Social />} />
+          <Route path="/reviews" element={<Reviews />} />
+          <Route path="/submissions" element={<Submissions />} />
+        </Route>
+
         <Route path="/forum" element={<Forum />} />
       </Routes>
     </>

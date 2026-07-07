@@ -1,8 +1,3 @@
-import DesktopHeader from "../../components/DesktopHeader";
-import ProfileBanner from "../Overview/ProfileBanner";
-import ProfileNav from "../../components/ProfileNav";
-import Footer from "../../components/Footer";
-import FloatingNav from "../../components/FloatingNav";
 import MobileListSearch from "../AnimeList/MobileListSearch";
 import WatchingStatusList from "../AnimeList/WatchingStatusList";
 import FilterType from "../AnimeList/FilterType";
@@ -47,10 +42,6 @@ function MangaList({ setCurrentMovieId }: MangaListProps ){
 
     return(
         <>  
-            <DesktopHeader />
-            <ProfileBanner />
-            <ProfileNav />
-
             <div className="flex justify-center bg-gray-200">
                 <div className="flex justify-between gap-10 p-5 pb-16 md:p-[32px] md:pb-16 xl:px-0 max-w-5xl 2xl:max-w-7xl w-full bg-gray-200">
                     <div className="hidden md:flex flex-1 flex-col items-start gap-6">
@@ -83,9 +74,6 @@ function MangaList({ setCurrentMovieId }: MangaListProps ){
                     </div>
                 </div>
             </div>
-
-            <FloatingNav />
-            <Footer />
         </>
     );
 };

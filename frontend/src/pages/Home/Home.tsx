@@ -45,8 +45,6 @@ function Home({ setCurrentMovieId }: HomeProps ){
 
     return(
         <>
-            <DesktopHeader />
-
             {/* page container */}
             <div className="flex justify-center px-5 pt-10 py-14 bg-gray-200">
                 <div className="flex flex-col xl:flex-row gap-5 xl:gap-10 max-w-5xl 2xl:max-w-7xl w-full">
@@ -70,9 +68,6 @@ function Home({ setCurrentMovieId }: HomeProps ){
                 </div>
             </div>
 
-            <FloatingNav />
-
-            <Footer />
         </>
     );
 };

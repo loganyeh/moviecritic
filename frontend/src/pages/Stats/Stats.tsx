@@ -1,9 +1,3 @@
-// Comp Imports
-import DesktopHeader from "../../components/DesktopHeader";
-import ProfileBanner from "../Overview/ProfileBanner";
-import ProfileNav from "../../components/ProfileNav";
-import Footer from "../../components/Footer";
-import FloatingNav from "../../components/FloatingNav";
 import Lists from "../AnimeList/Lists";
 import StatsOverview from "./StatsOverview";
 import BarGraph from "./BarGraph";
@@ -98,10 +92,6 @@ function Stats(){
 
     return(
         <>
-            <DesktopHeader />
-            <ProfileBanner />
-            <ProfileNav />
-
             {/* page body */}
             <div className="flex justify-center bg-gray-200">
                 <div className="flex gap-[32px] md:px-[32px] xl:px-0 md:pt-10 md:pb-28 w-full max-w-5xl 2xl:max-w-7xl">
@@ -128,10 +118,7 @@ function Stats(){
                         <BarGraph title="Watch Year" data={score} />
                     </div>
                 </div>
-            </div>
-
-            <FloatingNav />
-            <Footer />        
+            </div>      
         </>
     );
 };
