@@ -62,10 +62,6 @@ function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdo
         });
     };
 
-    // console.log(checkMovies.find((movie) => movie.id === movieData.id));
-    // fix current status in status button bar with find method 
-    // log causes error
-
     return(
         <>
             <section className="md:max-w-[275px] md:w-fit min-w-0">

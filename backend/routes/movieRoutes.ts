@@ -4,8 +4,8 @@ import {
     getFavMovies,
     getWatchingList,
     getCompletedList,
-    getMovie, 
-    updateMovie
+    updateMovie,
+    deleteMovie
 } from "../controllers/movieControllers.ts";
 
 const router = express.Router();
@@ -23,9 +23,12 @@ router.get("/watching", getWatchingList);
 router.get("/completed", getCompletedList);
 
 // GET a single Movie
-router.get("/:id", getMovie);
+// router.get("/:id", getMovie);
 
 // UPDATE a movie
 router.patch("/:id", updateMovie);
+
+// DELETE a movie
+router.delete("/:id", deleteMovie);
 
 export default router;

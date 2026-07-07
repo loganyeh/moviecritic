@@ -61,7 +61,19 @@ export async function updateMovie(req: Request, res: Response){
     };
 };
 
-// GET a movie
-export async function getMovie(req: Request, res:Response){
+// DELETE a movie
+export async function deleteMovie(req: Request, res:Response){
+    const id = Number(req.params.id);
 
+    try {
+        const movie = await Movie.findOneAndDelete({ id: Number(id) });
+
+        if(!movie){
+            return res.status(404).json({ error: "Movie not found" });
+        };
+
+        res.status(200).json(movie);
+    } catch (error) {
+        res.status(500).json({ error: "Server error" });
+    };
 };

@@ -33,7 +33,6 @@ function Status({ currentStatus, setCurrentStatus, info }: StatusProps ){
 
     const currentMovie = checkMovies.find((movie) => movie?.id === info?.id);
 
-    // wip toggle watch status request not working
     // toggle watching 
     async function toggleWatching(id: number, status: string){
         const res = await fetch(`http://localhost:3000/list/status/${id}`, {
@@ -68,14 +67,11 @@ function Status({ currentStatus, setCurrentStatus, info }: StatusProps ){
 
     // toggle button
     function toggleStatus(status: string){ 
-        // console.log(status);
         if (status === "Watching") {
             toggleWatching(info?.id, status);
-            console.log(status);
         }
         else if (status === "Completed") {
             toggleWatching(info?.id, status);
-            console.log(status);
         }
         else {
             console.log("working");
