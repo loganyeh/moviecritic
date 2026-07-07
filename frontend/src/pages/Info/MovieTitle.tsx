@@ -1,17 +1,21 @@
 
 
 type MovieTitleProps = {
+    loading: boolean
     title: string,
 };
 
 
-function MovieTitle({ title }: MovieTitleProps ){
+function MovieTitle({ loading, title }: MovieTitleProps ){
 
     return(
         <>
-            <section className="">
-                <h1 className="text-lg font-semibold md:font-normal text-gray-600">{title}</h1>
-                {/* <h1 className="text-lg font-semibold md:font-normal text-gray-600">ONE PIECE</h1> */}
+            <section>
+                {loading ?
+                    <div className="h-5 w-1/2 bg-black"></div>
+                    :
+                    <h1 className="text-lg font-semibold md:font-normal text-gray-600">{title}</h1>
+                }
             </section>
         </>
     );

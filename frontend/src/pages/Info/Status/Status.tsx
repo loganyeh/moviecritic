@@ -81,7 +81,7 @@ function Status({ currentStatus, setCurrentStatus, info }: StatusProps ){
             <div className="relative flex gap-1 flex-col">
                 <h2 className="text-sm text-gray-500">Status</h2>
                 
-                <button onClick={() => setStatusBtn(prev => !prev)}  className="flex justify-between px-3 py-2 bg-gray-200 rounded">
+                <button onClick={() => setStatusBtn(prev => !prev)}  className="flex justify-between px-3 py-2 bg-gray-200 rounded hover:cursor-pointer">
                     <div className="flex font-light text-gray-600">
                         <p>{currentStatus}</p>
                     </div>
@@ -90,10 +90,9 @@ function Status({ currentStatus, setCurrentStatus, info }: StatusProps ){
                     </div>
                 </button>
 
-                {/* create toggle for watching and is not watching */}
                 {statusBtn && <div className="border border-gray-300 absolute top-full left-0 flex gap-3 flex-col mt-3 px-5 py-4 h-auto w-11/12 text-sm font-light bg-white text-gray-600 rounded shadow-xl z-20">
                     {statusOptions.map((option, index) => {
-                        return <button onClick={() => {toggleStatus(option); setCurrentStatus(option); setStatusBtn(false)}} key={index} className={`w-fit`}>
+                        return <button onClick={() => {toggleStatus(option); setCurrentStatus(option); setStatusBtn(false)}} key={index} className={`w-fit hover:text-blue-400 hover:cursor-pointer`}>
                             {option}
                         </button>
                     })}
@@ -102,8 +101,8 @@ function Status({ currentStatus, setCurrentStatus, info }: StatusProps ){
 
             {/* ** */}
             <div className="hidden">
-                {checkMovies.map(() => {
-                    return <div>
+                {checkMovies.map((_, index) => {
+                    return <div key={index}>
 
                     </div>
                 })}

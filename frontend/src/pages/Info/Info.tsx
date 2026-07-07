@@ -35,6 +35,7 @@ type InfoProps = {
 };
 
 function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
+    const [loading, setLoading] = useState(true);
     const [info, setInfo] = useState<MovieListsType | null>(null);
     const [isStatusDropdown, setIsStatusDropdown] = useState(false);
     const [isStatusForm, setIsStatusForm] = useState(false);
@@ -43,12 +44,6 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
     const [crew, setCrew] = useState<CreditsType[]>([]);
     const [recommendations, setRecommendations] = useState<RecommendationsType[]>([]);
     const [videos, setVideos] = useState<VideoType[]>([]);
-
-    if(!info) {
-        return <div>
-
-        </div>
-    };
 
     useEffect(() => {
         if (isStatusDropdown) {
@@ -63,55 +58,60 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
     }, [isStatusDropdown]);
 
     useEffect(() => {
-        async function getDetails(currentMovieId: number){
-            const data: MovieListsType = await fetchDetails(currentMovieId);
-            setInfo(data);
+        async function getData(){
+            setLoading(true);
+
+            try {
+                const [ 
+                    details, credits, recommendations, videos 
+                ] = await Promise.all([
+                    fetchDetails(currentMovieId), 
+                    fetchCredits(currentMovieId),
+                    fetchRecommendations(currentMovieId),
+                    fetchVideos(currentMovieId),
+                ]);
+
+                setInfo(details);
+                setCharacters(credits.cast);
+                setCrew(credits.crew);
+                setRecommendations(recommendations);
+                setVideos(videos);
+            } catch (error) {
+                
+            } finally {
+                setLoading(false);
+            }
         };
 
-        async function getCreditsCast(currentMovieId: number){
-            const data: CreditsApiType = await fetchCredits(currentMovieId);
-            setCharacters(data.cast.slice(0, 6));
-        };
-
-        async function getCreditsCrew(currentMovieId: number){
-            const data: CreditsApiType = await fetchCredits(currentMovieId);
-            setCrew(data.crew.slice(0, 4));
-        };
-
-        async function getRecommendations(currentMovieId: number){
-            const data: RecommendationsType[] = await fetchRecommendations(currentMovieId);
-            setRecommendations(data);
-        }
-
-        async function getVideos(currentMovieId: number){
-            const data: VideoType[] = await fetchVideos(currentMovieId);
-
-            setVideos(data);
-        };
-
-        getDetails(currentMovieId);
-        getCreditsCast(currentMovieId);
-        getCreditsCrew(currentMovieId);
-        getRecommendations(currentMovieId);
-        getVideos(currentMovieId);
+        getData();
     }, [currentMovieId]);
+
+    if(!info) {
+        return <div>
+
+        </div>
+    };
 
     return(
         <>
             <div>
-                <MovieBanner title={info.title} backdrop_path={info.backdrop_path} />
+                <MovieBanner loading={loading} title={info.title} backdrop_path={info.backdrop_path} />
 
                 <div className="flex justify-center">
                     <div className="flex flex-col md:flex-row gap-[32px] p-5 md:p-[32px] md:pb-0 pb-0 xl:px-0 max-w-5xl 2xl:max-w-7xl w-full">
-                        <WatchingStatusDropdown movieData={info} isStatusDropdown={isStatusDropdown} setIsStatusDropdown={setIsStatusDropdown} setIsStatusForm={setIsStatusForm} setCurrentStatus={setCurrentStatus} currentStatus={currentStatus} />
+                        <WatchingStatusDropdown loading={loading} movieData={info} isStatusDropdown={isStatusDropdown} setIsStatusDropdown={setIsStatusDropdown} setIsStatusForm={setIsStatusForm} setCurrentStatus={setCurrentStatus} currentStatus={currentStatus} />
 
                         <div className="md:flex md:flex-col md:justify-between flex-1 md:gap-5 min-w-0">
                             <div className="md:flex md:flex-col md:gap-3">
-                                <MovieTitle title={info.title || ""} />
+                                <MovieTitle loading={loading} title={info.title || ""} />
                                 {/* Description */}
-                                <p className="hidden md:block text-sm bg-white text-gray-500 break-words">
-                                    {info.overview}
-                                </p>
+                                {loading ? 
+                                    <div className="border h-15 w-full bg-black"></div>
+                                    :
+                                    <p className="hidden md:block text-sm bg-white text-gray-500 break-words">
+                                        {info.overview}
+                                    </p>
+                                }
                             </div>
                             <InfoNav />
                         </div>

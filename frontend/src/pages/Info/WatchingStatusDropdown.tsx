@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import StatusDropdown from "./StatusDropdown";
 
 type WatchingStatusProps = {
+    loading: boolean
     movieData: MovieListsType,
     isStatusDropdown: boolean,
     setIsStatusDropdown: React.Dispatch<React.SetStateAction<boolean>>,
@@ -11,7 +12,7 @@ type WatchingStatusProps = {
     currentStatus: string,
 };
 
-function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdown, setIsStatusForm, setCurrentStatus, currentStatus }: WatchingStatusProps ){
+function WatchingStatusDropdown({ loading, movieData, isStatusDropdown, setIsStatusDropdown, setIsStatusForm, setCurrentStatus, currentStatus }: WatchingStatusProps ){
     const [checkMovies, setCheckMovies] = useState<MovieListsType[]>([]);
 
     useEffect(() => {
@@ -67,10 +68,17 @@ function WatchingStatusDropdown({ movieData, isStatusDropdown, setIsStatusDropdo
             <section className="md:max-w-[275px] md:w-fit min-w-0">
                 <div className="relative flex justify-end md:items-end md:gap-5 md:h-52 lg:mb-5">
                     {/* <div className="md:absolute absolute -top-27 md:-top-32 left-0 h-36 md:h-auto w-25 md:w-52 md:aspect-[3/4] bg-red-300 rounded"></div> */}
-                    <img src={`https://image.tmdb.org/t/p/w500${movieData?.poster_path}`} alt="" className="md:absolute absolute -top-27 md:-top-32 left-0 h-36 md:h-auto w-25 md:w-52 md:aspect-[3/4] object-cover rounded"/>
+                    {loading ? 
+                        <div className="flex justify-center items-center md:absolute absolute -top-27 md:-top-32 left-0 h-36 md:h-auto w-25 md:w-52 md:aspect-[3/4] bg-gray-200 object-cover rounded">
+                            <i className='bx bx-loader-circle text-3xl animate-spin'></i>
+                        </div>
+                        : 
+                        <img src={`https://image.tmdb.org/t/p/w500${movieData?.poster_path}`} alt="" className="md:absolute absolute -top-27 md:-top-32 left-0 h-36 md:h-auto w-25 md:w-52 md:aspect-[3/4] object-cover rounded"/>
+                     }
 
                     <div className="flex gap-4 md:w-52">
-                        <div className="relative flex justify-center items-center md:flex-1 px-4 md:px-0 bg-blue-400 text-white rounded">
+                        {/* fix text to show current WatchStatus */}
+                        <div className="border border-black relative flex justify-center items-center md:flex-1 px-4 md:px-0 bg-blue-400 text-white rounded hover:cursor-pointer">
                             <div onClick={() => setIsStatusForm((prev) => !prev)} className="flex h-full w-full">
                                 <p className="flex flex-1 justify-center items-center px-[32px] md:p-0 h-full rounded-l">{currentStatus}</p>
                                 <div onClick={() => setIsStatusDropdown(false)} className="hidden md:flex items-center h-full px-2 bg-blue-300 rounded-r">
