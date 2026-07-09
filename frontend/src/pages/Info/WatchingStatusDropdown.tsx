@@ -1,50 +1,41 @@
 import type { MovieListsType } from "../../services/tmdb/movieLists";
 import { useEffect, useState } from "react";
-import StatusDropdown from "./StatusDropdown";
+import { fetchMovies, fetchFavMovies } from "../../services/backend/movies";
 
 type WatchingStatusProps = {
     loading: boolean
     movieData: MovieListsType,
-    isStatusDropdown: boolean,
-    setIsStatusDropdown: React.Dispatch<React.SetStateAction<boolean>>,
     setIsStatusForm: React.Dispatch<React.SetStateAction<boolean>>,
     setCurrentStatus: React.Dispatch<React.SetStateAction<string>>,
     currentStatus: string,
 };
 
-function WatchingStatusDropdown({ loading, movieData, isStatusDropdown, setIsStatusDropdown, setIsStatusForm, setCurrentStatus, currentStatus }: WatchingStatusProps ){
+function WatchingStatusDropdown({ loading, movieData, setIsStatusForm, setCurrentStatus, currentStatus }: WatchingStatusProps ){
     const [checkFavMovies, setCheckFavMovies] = useState<MovieListsType[]>([]);
     const [allMovies, setAllMovies] = useState<MovieListsType[]>([]);
 
-    // useeffect for checking fav movies
     useEffect(() => {
-        async function getFavMovies(){
-            const response = await fetch('http://localhost:3000/movies/favorites');
-            const data: MovieListsType[] = await response.json();
-            setCheckFavMovies(data);
+        async function getDBMovies(){
+            const [
+                favMovies,
+                allMovies,
+            ] = await Promise.all([
+                fetchFavMovies(),
+                fetchMovies(),
+            ]);
+
+            setCheckFavMovies(favMovies);
+            setAllMovies(allMovies);
         };
-        
-        getFavMovies();
+
+        getDBMovies();
     }, []);
-    // console.log(checkFavMovies);
     
     const currentFavMovie = checkFavMovies.find(
         (movie) => movie.id === movieData?.id,
     );
 
     const isFavorite = currentFavMovie?.isFavorite ?? false;
-
-    // useEffect for checking all movies
-    useEffect(() => {
-        async function getMovies(){
-            const res = await fetch(`http://localhost:3000/movies/`)
-            const data: MovieListsType[] = await res.json();
-
-            setAllMovies(data);
-        }
-
-        getMovies();
-    }, []);
 
     const currentMovie = allMovies.find(
         (movie) => movie.id === movieData.id
@@ -62,7 +53,6 @@ function WatchingStatusDropdown({ loading, movieData, isStatusDropdown, setIsSta
         });
     } ,[currentMovie, setCurrentStatus]);
 
-    // PATCH REQUEST for isFavorite
     async function toggleFavorite(){
         const res = await fetch(`http://localhost:3000/movies/${movieData?.id}`, {
             method: "PATCH",
@@ -110,12 +100,11 @@ function WatchingStatusDropdown({ loading, movieData, isStatusDropdown, setIsSta
                         <div className="relative flex justify-center items-center md:flex-1 px-4 md:px-0 bg-blue-400 text-white rounded hover:cursor-pointer">
                             <div onClick={() => setIsStatusForm((prev) => !prev)} className="flex h-full w-full">
                                 <p className="flex flex-1 justify-center items-center px-[32px] md:p-0 h-full rounded-l">{currentStatus}</p>
-                                <div onClick={() => setIsStatusDropdown(false)} className="hidden md:flex items-center h-full px-2 bg-blue-300 rounded-r">
+                                <div className="hidden md:flex items-center h-full px-2 bg-blue-300 rounded-r">
                                     <i className='bx bx-chevron-down text-xl' ></i>
                                 </div>
                             </div>
 
-                            {isStatusDropdown && <StatusDropdown setCurrentStatus={setCurrentStatus} setIsStatusDropdown={setIsStatusDropdown} setIsStatusForm={setIsStatusForm} />}
                         </div>
 
                         <div onClick={() => toggleFavorite()} className="flex justify-center items-center bg-red-600 rounded">

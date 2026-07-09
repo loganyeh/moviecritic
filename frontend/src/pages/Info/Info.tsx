@@ -37,7 +37,6 @@ type InfoProps = {
 function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
     const [loading, setLoading] = useState(true);
     const [info, setInfo] = useState<MovieListsType | null>(null);
-    const [isStatusDropdown, setIsStatusDropdown] = useState(false);
     const [isStatusForm, setIsStatusForm] = useState(false);
     const [currentStatus, setCurrentStatus] = useState("Add to list");
     const [characters, setCharacters] = useState<CreditsType[]>([]);
@@ -46,7 +45,7 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
     const [videos, setVideos] = useState<VideoType[]>([]);
 
     useEffect(() => {
-        if (isStatusDropdown) {
+        if (isStatusForm) {
             document.body.style.overflow = "hidden";
         } else {
             document.body.style.overflow = "auto";
@@ -55,7 +54,7 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
         return () => {
             document.body.style.overflow = "auto";
         };
-    }, [isStatusDropdown]);
+    }, [isStatusForm]);
 
     useEffect(() => {
         async function getData(){
@@ -63,7 +62,10 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
 
             try {
                 const [ 
-                    details, credits, recommendations, videos 
+                    details, 
+                    credits, 
+                    recommendations, 
+                    videos 
                 ] = await Promise.all([
                     fetchDetails(currentMovieId), 
                     fetchCredits(currentMovieId),
@@ -77,7 +79,7 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
                 setRecommendations(recommendations);
                 setVideos(videos);
             } catch (error) {
-                
+                console.error(error);
             } finally {
                 setLoading(false);
             }
@@ -88,7 +90,7 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
 
     if(!info) {
         return <div>
-
+            
         </div>
     };
 
@@ -99,7 +101,7 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
 
                 <div className="flex justify-center">
                     <div className="flex flex-col md:flex-row gap-[32px] p-5 md:p-[32px] md:pb-0 pb-0 xl:px-0 max-w-5xl 2xl:max-w-7xl w-full">
-                        <WatchingStatusDropdown loading={loading} movieData={info} isStatusDropdown={isStatusDropdown} setIsStatusDropdown={setIsStatusDropdown} setIsStatusForm={setIsStatusForm} setCurrentStatus={setCurrentStatus} currentStatus={currentStatus} />
+                        <WatchingStatusDropdown loading={loading} movieData={info} setIsStatusForm={setIsStatusForm} setCurrentStatus={setCurrentStatus} currentStatus={currentStatus} />
 
                         <div className="md:flex md:flex-col md:justify-between flex-1 md:gap-5 min-w-0">
                             <div className="md:flex md:flex-col md:gap-3">

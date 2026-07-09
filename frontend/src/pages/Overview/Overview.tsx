@@ -6,6 +6,7 @@ import WatchedStats from "./WatchedStats";
 
 import { useState, useEffect } from "react";
 import type { MovieListsType } from "../../services/tmdb/movieLists";
+import { fetchFavMovies } from "../../services/backend/movies";
 
 type OverviewProps = {
     setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
@@ -16,9 +17,7 @@ function Overview({ setCurrentMovieId }: OverviewProps ){
 
     useEffect(() => {
         async function getFavorites(){
-            const response = await fetch(`http://localhost:3000/movies/favorites`);
-            const data: MovieListsType[] = await response.json();
-
+            const data = await fetchFavMovies();
             setFavMovies(data);
         };
 
