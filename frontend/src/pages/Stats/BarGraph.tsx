@@ -5,9 +5,11 @@ type BarGraphProps = {
         value: string,
         barHeight: string,
     }[];
+    numOfCols: string,
+    xaxis: number,
 };
 
-function BarGraph({ title, data }: BarGraphProps ){
+function BarGraph({ title, data, numOfCols, xaxis }: BarGraphProps ){
 
     return(
         <>
@@ -27,7 +29,7 @@ function BarGraph({ title, data }: BarGraphProps ){
                 </div>
 
                 <div className="bg-white rounded-xl shadow">
-                    <div className="grid grid-cols-7 text-center">
+                    <div className={`grid grid-cols-${numOfCols} text-center`}>
                         {data.map((col, index) => {
                             return <div key={index} className={`flex gap-1 flex-col justify-end items-center h-44`}>
                                 <p className="text-xs font-medium text-gray-700">{col.value}</p>
@@ -35,8 +37,8 @@ function BarGraph({ title, data }: BarGraphProps ){
                             </div>
                         })}
                     </div>
-                    <div className="grid grid-cols-7 py-3.5 bg-gray-300 rounded-b-xl">
-                        {Array.from({ length: 7 }).map((_, index) => {
+                    <div className={`grid grid-cols-${numOfCols} py-3.5 bg-gray-300 rounded-b-xl`}>
+                        {Array.from({ length: xaxis }).map((_, index) => {
                             return <div key={index} className="flex justify-center items-center text-xs text-gray-700">
                                 {index + 4}
                             </div>

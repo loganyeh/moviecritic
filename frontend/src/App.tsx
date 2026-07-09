@@ -14,7 +14,6 @@ import Stats from "./pages/Stats/Stats";
 import Social from "./pages/Social/Social";
 import Reviews from "./pages/Reviews/Reviews";
 import Submissions from "./pages/Submissions/Submissions";
-import Forum from "./pages/Forum/Forum";
 
 import MainLayout from "./layouts/MainLayout";
 import ProfileLayout from "./layouts/ProfileLayout";
@@ -42,7 +41,6 @@ function App() {
           <Route path="/submissions" element={<Submissions />} />
         </Route>
 
-        <Route path="/forum" element={<Forum />} />
       </Routes>
     </>
   )

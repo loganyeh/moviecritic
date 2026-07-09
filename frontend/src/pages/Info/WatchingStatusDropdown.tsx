@@ -1,6 +1,6 @@
 import type { MovieListsType } from "../../services/tmdb/movieLists";
 import { useEffect, useState } from "react";
-import { fetchMovies, fetchFavMovies } from "../../services/backend/movies";
+import { fetchAllMovies, fetchFavMovies } from "../../services/backend/movies";
 
 type WatchingStatusProps = {
     loading: boolean
@@ -21,7 +21,7 @@ function WatchingStatusDropdown({ loading, movieData, setIsStatusForm, setCurren
                 allMovies,
             ] = await Promise.all([
                 fetchFavMovies(),
-                fetchMovies(),
+                fetchAllMovies(),
             ]);
 
             setCheckFavMovies(favMovies);

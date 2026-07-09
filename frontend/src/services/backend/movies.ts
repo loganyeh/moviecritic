@@ -1,6 +1,6 @@
 import type { MovieListsType } from "../tmdb/movieLists";
 
-export async function fetchMovies(){
+export async function fetchAllMovies(){
     const res = await fetch(`http://localhost:3000/movies/`);
     const data: MovieListsType[] = await res.json();
 
@@ -14,3 +14,16 @@ export async function fetchFavMovies(){
     return data;
 };
 
+export async function fetchWatchingMovies(){
+    const res = await fetch(`http://localhost:3000/movies/watching`);
+    const data: MovieListsType[] = await res.json();
+
+    return data;
+};
+
+export async function fetchCompletedMovies(){
+    const res = await fetch(`http://localhost:3000/movies/completed`);
+    const data = await res.json();
+
+    return data;
+};

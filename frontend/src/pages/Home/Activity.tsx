@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { formatDistanceToNow } from "date-fns";
 import React, { useEffect, useState } from "react";
 import type { MovieListsType } from "../../services/tmdb/movieLists";
-import { fetchMovies } from "../../services/backend/movies";
+import { fetchAllMovies } from "../../services/backend/movies";
 
 type ActivityProps = {
     page: "Home" | "Overview",
@@ -14,7 +14,7 @@ function Activity({ page, setCurrentMovieId }: ActivityProps ){
 
     useEffect(() => {
         async function getIsWatching(){
-            const data = await fetchMovies();
+            const data = await fetchAllMovies();
             setActivity(data);
         };
 

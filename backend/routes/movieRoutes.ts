@@ -22,9 +22,6 @@ router.get("/watching", getWatchingList);
 // GET all COMPLETED LIST movies
 router.get("/completed", getCompletedList);
 
-// GET a single Movie
-// router.get("/:id", getMovie);
-
 // UPDATE a movie
 router.patch("/:id", updateMovie);
 
