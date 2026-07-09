@@ -25,30 +25,24 @@ function Browse({ setCurrentMovieId }: BrowseProps ){
     const [upcoming, setUpcoming] = useState<MovieListsType[]>([]);
 
     useEffect(() => {
-        async function getNowPlaying(){
-            const data = await fetchNowPlaying();
-            setTrendingNow(data);
+        async function getMovieLists(){
+            const [
+                trending,
+                topRated,
+                popular, 
+            ] = await Promise.all([
+                fetchNowPlaying(),
+                fetchTopRated(),
+                fetchPopular(),
+            ]);
+
+            setTrendingNow(trending);
+            setTopRated(topRated)
+            setPopular(popular);
+            setUpcoming(popular);
         };
 
-        async function getPopular(){
-            const data = await fetchPopular();
-            setPopular(data);
-        };
-        
-        async function getTopRated(){
-            const data = await fetchTopRated();
-            setTopRated(data);
-        };
-
-        async function getUpcoming(){
-            const data = await fetchPopular();
-            setUpcoming(data);
-        };
-
-        getNowPlaying();
-        getPopular();
-        getTopRated();
-        getUpcoming();
+        getMovieLists();
     }, []);
 
     useEffect(() => {

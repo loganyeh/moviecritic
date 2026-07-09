@@ -16,28 +16,27 @@ type HomeProps = {
 
 function Home({ setCurrentMovieId }: HomeProps ){
     const [trending, setTrending] = useState<MovieListsType[]>([]);
-    const [movie, setMovie] = useState<MovieListsType[]>([]);
+    const [movies, setMovies] = useState<MovieListsType[]>([]);
     const [tv, setTV] = useState<MovieListsType[]>([]);
     
     useEffect(() => {
-        async function getTrending(){
-            const response = await fetchNowPlaying();
-            setTrending(response);
+        async function getMovieLists(){
+            const [
+                trending,
+                movies,
+                tv
+            ] = await Promise.all([
+                fetchNowPlaying(),
+                fetchPopular(),
+                fetchTopRated(),
+            ]);
+
+            setTrending(trending);
+            setMovies(movies);
+            setTV(tv);
         };
 
-        async function getMovie(){
-            const response = await fetchPopular();
-            setMovie(response.slice(5, 10));
-        };
-
-        async function getTV(){
-            const response = await fetchTopRated();
-            setTV(response.slice(10, 15));
-        };
-        
-        getTrending();
-        getMovie();
-        getTV();
+        getMovieLists();
     }, []);
 
     return(
@@ -55,7 +54,7 @@ function Home({ setCurrentMovieId }: HomeProps ){
                         <ForumActivity />
                         <RecentReviews />
                         <PosterSectionCard sectionHeader="Trending Movies & Shows" data={trending} setCurrentMovieId={setCurrentMovieId} />
-                        <PosterSectionCard sectionHeader="Newly Added Movies" data={movie} setCurrentMovieId={setCurrentMovieId} />
+                        <PosterSectionCard sectionHeader="Newly Added Movies" data={movies} setCurrentMovieId={setCurrentMovieId} />
                         <PosterSectionCard sectionHeader="Newly Added Shows" data={tv} setCurrentMovieId={setCurrentMovieId} />
                     </div>
 
