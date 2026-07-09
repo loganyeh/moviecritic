@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import type { MovieListsType } from "../../../services/tmdb/movieLists";
+import { fetchWatchingMovies } from "../../../services/backend/movies";
 
 type StatusProps = {
     currentStatus: string
@@ -22,9 +23,7 @@ function Status({ currentStatus, setCurrentStatus, info }: StatusProps ){
     // GET all WATCHING movies
     useEffect(() => {
         async function getIsWatching(){
-            const res = await fetch(`http://localhost:3000/list/status/watching`);
-            const data: MovieListsType[] = await res.json();
-
+            const data = await fetchWatchingMovies();
             setCheckMovies(data);
         };
 
@@ -33,7 +32,7 @@ function Status({ currentStatus, setCurrentStatus, info }: StatusProps ){
 
     // toggle watching 
     async function toggleWatching(id: number, status: string){
-        const res = await fetch(`http://localhost:3000/list/status/${id}`, {
+        const res = await fetch(`http://localhost:3000/movies/${id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
