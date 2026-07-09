@@ -66,7 +66,7 @@ function StatusForm({ info, setIsStatusForm, currentStatus, setCurrentStatus }: 
                                     <PrivateCheckbox />
                                 </div>
 
-                                <DeleteBtn setIsStatusForm={setIsStatusForm} setCurrentStatus={setCurrentStatus} id={info?.id} />
+                                <DeleteBtn setIsStatusForm={setIsStatusForm} id={info?.id} />
                             </div>
 
                         </div>

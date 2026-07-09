@@ -21,7 +21,7 @@ import AllTimeRankings from "./AllTimeRankings";
 import WriteAReview from "./WriteAReview";
 
 import type { MovieListsType } from "../../services/tmdb/movieLists";
-import type { CreditsApiType, CreditsType, RecommendationsType } from "../../services/tmdb/movies";
+import type { CreditsType, RecommendationsType } from "../../services/tmdb/movies";
 import type { VideoType } from "../../services/tmdb/movies";
 import { fetchCredits, fetchDetails } from "../../services/tmdb/movies";
 import { fetchRecommendations } from "../../services/tmdb/movies";
