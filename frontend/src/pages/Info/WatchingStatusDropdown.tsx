@@ -46,7 +46,7 @@ function WatchingStatusDropdown({ loading, movieData, setIsStatusForm, setCurren
             if(!currentMovie) {
                 return "Add to List";
             } else if(currentMovie) {
-                return currentMovie.watchStatus;
+                return currentMovie.watchStatus ?? "Add to List";
             } else if (currentStatus === "") {
                 return "Add to List";
             } else {
