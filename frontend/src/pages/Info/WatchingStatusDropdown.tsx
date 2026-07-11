@@ -9,7 +9,7 @@ type WatchingStatusProps = {
     setCurrentStatus: React.Dispatch<React.SetStateAction<string>>,
     currentStatus: string,
 };
-
+ 
 function WatchingStatusDropdown({ loading, movieData, setIsStatusForm, setCurrentStatus, currentStatus }: WatchingStatusProps ){
     const [checkFavMovies, setCheckFavMovies] = useState<MovieListsType[]>([]);
     const [allMovies, setAllMovies] = useState<MovieListsType[]>([]);

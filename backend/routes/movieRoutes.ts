@@ -6,7 +6,7 @@ import {
     getCompletedList,
     updateMovie,
     deleteMovie
-} from "../controllers/movieControllers.ts";
+} from "../controllers/movieControllers.js";
 
 const router = express.Router();
 

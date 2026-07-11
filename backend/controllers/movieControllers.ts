@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import Movie from "../models/movieModel.ts";
+import Movie from "../models/movieModel.js";
 import mongoose from "mongoose";
 
 // GET all movies
