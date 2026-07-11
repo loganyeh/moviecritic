@@ -126,8 +126,8 @@ function Stats(){
                     <div className="flex gap-[32px] md:gap-14 flex-1 flex-col px-5 md:px-0 pt-6 py-14">
                         <UserListToggle />
                         <StatsOverview />
-                        <BarGraph title="Score" data={score} numOfCols={"7"} xaxis={7} />
-                        <BarGraph title="Episode Count" data={episodeCount} numOfCols={"5"} xaxis={5} />
+                        <BarGraph title="Score" data={score} xaxis={7} />
+                        <BarGraph title="Episode Count" data={episodeCount} xaxis={5} />
 
                         <div className="flex flex-col xl:grid xl:grid-cols-3 gap-[32px] xl:gap-[32px]">
                             <Distribution title="Format" data={format} />

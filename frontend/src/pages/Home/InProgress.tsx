@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import type { MovieListsType } from "../../services/tmdb/movieLists";
+import { fetchWatchingMovies } from "../../services/backend/movies";
 
 type InProgressProps = {
     setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
@@ -11,9 +12,7 @@ function InProgress({ setCurrentMovieId }: InProgressProps ){
 
     useEffect(() => {
         async function getList(){
-            const response = await fetch(`http://localhost:3000/list/status/watching`);
-            const data: MovieListsType[] = await response.json();
-
+            const data = await fetchWatchingMovies();
             setInProgress(data);
         };
 

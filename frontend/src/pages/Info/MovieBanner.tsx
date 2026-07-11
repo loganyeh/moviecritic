@@ -1,11 +1,8 @@
-
-
 type MovieBannerProps = {
     loading: boolean,
     title: string,
     backdrop_path: string;
 };
-
 
 function MovieBanner({ loading, title, backdrop_path }: MovieBannerProps ){
 

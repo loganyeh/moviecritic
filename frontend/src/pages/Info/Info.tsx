@@ -89,9 +89,7 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
     }, [currentMovieId]);
 
     if(!info) {
-        return <div>
-            
-        </div>
+        return null;
     };
 
     return(
