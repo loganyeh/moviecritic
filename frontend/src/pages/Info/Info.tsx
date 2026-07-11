@@ -138,8 +138,8 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
                             </div>
 
                             <Relations recommendations={recommendations} status={info.status} setCurrentMovieId={setCurrentMovieId} />
-                            <Characters characters={characters} />
-                            <Staff crew={crew} />
+                            <Characters characters={characters.slice(0, 6)} />
+                            <Staff crew={crew.slice(0, 4)} />
 
                             <div className="flex flex-col xl:grid xl:grid-cols-2 gap-10 md:gap-[32px]">
                                 <StatusDistribution />
