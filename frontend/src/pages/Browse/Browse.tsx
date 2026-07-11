@@ -1,7 +1,3 @@
-import DesktopHeader from "../../components/DesktopHeader";
-import FloatingNav from "../../components/FloatingNav";
-import Footer from "../../components/Footer";
-
 import BrowseDropdown from "./BrowseDropdown";
 import DesktopSearch from "./DesktopSearch";
 import DesktopTopList from "./DesktopTopList";
@@ -11,7 +7,7 @@ import CurrentMovies from "./CurrentMovies";
 
 import { useState, useEffect } from "react";
 
-import { fetchNowPlaying, fetchPopular, fetchTopRated, fetchUpcoming } from "../../services/tmdb/movieLists";
+import { fetchNowPlaying, fetchPopular, fetchTopRated } from "../../services/tmdb/movieLists";
 import { fetchMovie } from "../../services/tmdb/search";
 import type { MovieListsType } from "../../services/tmdb/movieLists";
 import SearchQuery from "./SearchQuery";
@@ -21,7 +17,6 @@ type BrowseProps = {
 };
 
 function Browse({ setCurrentMovieId }: BrowseProps ){
-    const currentMoviesTitles = ["TRENDING NOW", "POPULAR THIS SEASON", "UPCOMING NEXT SEASON", "ALL TIME POPULAR"];
     const [search, setSearch] = useState<MovieListsType[]>([]);
     const [query, setQuery] = useState("");
     const [trendingNow, setTrendingNow] = useState<MovieListsType[]>([]);
@@ -30,30 +25,24 @@ function Browse({ setCurrentMovieId }: BrowseProps ){
     const [upcoming, setUpcoming] = useState<MovieListsType[]>([]);
 
     useEffect(() => {
-        async function getNowPlaying(){
-            const data = await fetchNowPlaying();
-            setTrendingNow(data);
+        async function getMovieLists(){
+            const [
+                trending,
+                topRated,
+                popular, 
+            ] = await Promise.all([
+                fetchNowPlaying(),
+                fetchTopRated(),
+                fetchPopular(),
+            ]);
+
+            setTrendingNow(trending);
+            setTopRated(topRated)
+            setPopular(popular);
+            setUpcoming(popular);
         };
 
-        async function getPopular(){
-            const data = await fetchPopular();
-            setPopular(data);
-        };
-        
-        async function getTopRated(){
-            const data = await fetchTopRated();
-            setTopRated(data);
-        };
-
-        async function getUpcoming(){
-            const data = await fetchPopular();
-            setUpcoming(data);
-        };
-
-        getNowPlaying();
-        getPopular();
-        getTopRated();
-        getUpcoming();
+        getMovieLists();
     }, []);
 
     useEffect(() => {
@@ -66,9 +55,7 @@ function Browse({ setCurrentMovieId }: BrowseProps ){
     }, [query]);
 
     return(
-        <>
-            <DesktopHeader />
-            
+        <>  
             {/* Page Container */}
             <div className="flex justify-center bg-gray-200">
                 <div className="flex flex-col gap-6 xl:gap-14 2xl:gap-10 p-3 pt-4 pb-10 lg:px-5 xl:p-0 xl:py-12 max-w-5xl 2xl:max-w-7xl w-full">
@@ -92,9 +79,6 @@ function Browse({ setCurrentMovieId }: BrowseProps ){
 
                 </div>
             </div>
-
-            <FloatingNav />
-            <Footer />
         </>
     )
 };

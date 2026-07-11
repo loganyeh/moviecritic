@@ -1,6 +1,6 @@
 
 type DeleteBtnProps = {
-    id: number
+    id: number,
     setIsStatusForm: React.Dispatch<React.SetStateAction<boolean>>,
 };
 
@@ -15,7 +15,7 @@ function DeleteBtn({ id, setIsStatusForm }: DeleteBtnProps ){
     return(
         <>
             <div className="flex justify-end">
-                <button onClick={() => {deleteMovie(id); setIsStatusForm(false)}} className="px-4 py-1.5 text-sm bg-gray-200 text-gray-600 rounded">Delete</button>
+                <button onClick={() => {deleteMovie(id); setIsStatusForm(false)}} className="px-4 py-1.5 text-sm bg-gray-200 text-gray-600 rounded hover:bg-gray-300 hover:text-red-600 active:text-red-600 hover:cursor-pointer">Delete</button>
             </div>
         </>
     );

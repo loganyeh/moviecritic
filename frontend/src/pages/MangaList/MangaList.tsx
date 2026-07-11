@@ -1,8 +1,3 @@
-import DesktopHeader from "../../components/DesktopHeader";
-import ProfileBanner from "../Overview/ProfileBanner";
-import ProfileNav from "../../components/ProfileNav";
-import Footer from "../../components/Footer";
-import FloatingNav from "../../components/FloatingNav";
 import MobileListSearch from "../AnimeList/MobileListSearch";
 import WatchingStatusList from "../AnimeList/WatchingStatusList";
 import FilterType from "../AnimeList/FilterType";
@@ -15,6 +10,7 @@ import ShuffleBtn from "../AnimeList/ShuffleBtn";
 
 import { useEffect, useState } from "react";
 import type { MovieListsType } from "../../services/tmdb/movieLists";
+import { fetchWatchingMovies, fetchCompletedMovies } from "../../services/backend/movies";
 
 type MangaListProps = {
     setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
@@ -25,32 +21,25 @@ function MangaList({ setCurrentMovieId }: MangaListProps ){
     const [watching, setWatching] = useState<MovieListsType[]>([]);
     const [completed, setCompleted] = useState<MovieListsType[]>([]);
 
-    // GET all WATCHING movies
     useEffect(() => {
-        async function getWatching(){
-            const response = await fetch(`http://localhost:3000/list/status/watching`);
-            const data: MovieListsType[] = await response.json();
+        async function getMovieLists(){
+            const [
+                watching, 
+                completed,
+            ] = await Promise.all([
+                fetchWatchingMovies(),
+                fetchCompletedMovies(),
+            ]);
 
-            setWatching(data);
-        };
-
-        async function getCompleted(){
-            const res = await fetch(`http://localhost:3000/list/status/completed`);
-            const data: MovieListsType[] = await res.json();
-    
-            setCompleted(data);
-        };
-    
-        getWatching();
-        getCompleted();
+            setWatching(watching);
+            setCompleted(completed);
+        }
+        
+        getMovieLists();
     }, []);
 
     return(
         <>  
-            <DesktopHeader />
-            <ProfileBanner />
-            <ProfileNav />
-
             <div className="flex justify-center bg-gray-200">
                 <div className="flex justify-between gap-10 p-5 pb-16 md:p-[32px] md:pb-16 xl:px-0 max-w-5xl 2xl:max-w-7xl w-full bg-gray-200">
                     <div className="hidden md:flex flex-1 flex-col items-start gap-6">
@@ -76,16 +65,10 @@ function MangaList({ setCurrentMovieId }: MangaListProps ){
                             </div>
 
                             {completed.length !== 0 && <WatchingStatusList sectionName="Completed" watchData={completed} setCurrentMovieId={setCurrentMovieId} />}
-                            {/* <WatchingStatusList sectionName="Paused" /> */}
-                            {/* <WatchingStatusList sectionName="Dropped" /> */}
-                            {/* <WatchingStatusList sectionName="Planning" /> */}
                         </div>
                     </div>
                 </div>
             </div>
-
-            <FloatingNav />
-            <Footer />
         </>
     );
 };

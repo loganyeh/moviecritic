@@ -6,12 +6,9 @@ import ForumActivity from "./ForumActivity";
 import InProgress from "./InProgress";
 import CurrentPoll from "./CurrentPoll";
 import Activity from "./Activity";
-import FloatingNav from "../../components/FloatingNav";
-import Footer from "../../components/Footer";
-import DesktopHeader from "../../components/DesktopHeader";
 
 import type { MovieListsType } from "../../services/tmdb/movieLists";
-import { fetchNowPlaying, fetchPopular, fetchTopRated, fetchUpcoming } from "../../services/tmdb/movieLists";
+import { fetchNowPlaying, fetchPopular, fetchTopRated } from "../../services/tmdb/movieLists";
 
 type HomeProps = {
     setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
@@ -19,34 +16,31 @@ type HomeProps = {
 
 function Home({ setCurrentMovieId }: HomeProps ){
     const [trending, setTrending] = useState<MovieListsType[]>([]);
-    const [movie, setMovie] = useState<MovieListsType[]>([]);
+    const [movies, setMovies] = useState<MovieListsType[]>([]);
     const [tv, setTV] = useState<MovieListsType[]>([]);
     
     useEffect(() => {
-        async function getTrending(){
-            const response = await fetchNowPlaying();
-            setTrending(response);
+        async function getMovieLists(){
+            const [
+                trending,
+                movies,
+                tv
+            ] = await Promise.all([
+                fetchNowPlaying(),
+                fetchPopular(),
+                fetchTopRated(),
+            ]);
+
+            setTrending(trending);
+            setMovies(movies);
+            setTV(tv);
         };
 
-        async function getMovie(){
-            const response = await fetchPopular();
-            setMovie(response.slice(5, 10));
-        };
-
-        async function getTV(){
-            const response = await fetchTopRated();
-            setTV(response.slice(10, 15));
-        };
-        
-        getTrending();
-        getMovie();
-        getTV();
+        getMovieLists();
     }, []);
 
     return(
         <>
-            <DesktopHeader />
-
             {/* page container */}
             <div className="flex justify-center px-5 pt-10 py-14 bg-gray-200">
                 <div className="flex flex-col xl:flex-row gap-5 xl:gap-10 max-w-5xl 2xl:max-w-7xl w-full">
@@ -60,7 +54,7 @@ function Home({ setCurrentMovieId }: HomeProps ){
                         <ForumActivity />
                         <RecentReviews />
                         <PosterSectionCard sectionHeader="Trending Movies & Shows" data={trending} setCurrentMovieId={setCurrentMovieId} />
-                        <PosterSectionCard sectionHeader="Newly Added Movies" data={movie} setCurrentMovieId={setCurrentMovieId} />
+                        <PosterSectionCard sectionHeader="Newly Added Movies" data={movies} setCurrentMovieId={setCurrentMovieId} />
                         <PosterSectionCard sectionHeader="Newly Added Shows" data={tv} setCurrentMovieId={setCurrentMovieId} />
                     </div>
 
@@ -70,9 +64,6 @@ function Home({ setCurrentMovieId }: HomeProps ){
                 </div>
             </div>
 
-            <FloatingNav />
-
-            <Footer />
         </>
     );
 };

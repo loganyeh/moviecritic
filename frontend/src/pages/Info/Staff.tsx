@@ -7,12 +7,6 @@ type StaffProps = {
 
 
 function Staff({ crew }: StaffProps ){
-    const staff = [
-        {name: 'Eiichirou Oda', role: 'Original Creator'},
-        {name: 'Kounosuke Uda', role: 'Director (eps 1-278)'},
-        {name: 'Kazuya Hisada', role: 'Character Design (eps 385-891)'},
-        {name: 'Noboru Koizumi', role: 'Character Design (eps: 1-425)'},
-    ];
 
     return(
         <>

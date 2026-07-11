@@ -1,6 +1,3 @@
-import DesktopHeader from "../../components/DesktopHeader";
-import Footer from "../../components/Footer";
-import FloatingNav from "../../components/FloatingNav";
 import MovieBanner from "./MovieBanner";
 import Details from "./Details";
 import Description from "./Description";
@@ -24,7 +21,7 @@ import AllTimeRankings from "./AllTimeRankings";
 import WriteAReview from "./WriteAReview";
 
 import type { MovieListsType } from "../../services/tmdb/movieLists";
-import type { CreditsApiType, CreditsType, RecommendationsType } from "../../services/tmdb/movies";
+import type { CreditsType, RecommendationsType } from "../../services/tmdb/movies";
 import type { VideoType } from "../../services/tmdb/movies";
 import { fetchCredits, fetchDetails } from "../../services/tmdb/movies";
 import { fetchRecommendations } from "../../services/tmdb/movies";
@@ -38,8 +35,8 @@ type InfoProps = {
 };
 
 function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
-    const [info, setInfo] = useState<MovieListsType>();
-    const [isStatusDropdown, setIsStatusDropdown] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [info, setInfo] = useState<MovieListsType | null>(null);
     const [isStatusForm, setIsStatusForm] = useState(false);
     const [currentStatus, setCurrentStatus] = useState("Add to list");
     const [characters, setCharacters] = useState<CreditsType[]>([]);
@@ -48,7 +45,7 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
     const [videos, setVideos] = useState<VideoType[]>([]);
 
     useEffect(() => {
-        if (isStatusDropdown) {
+        if (isStatusForm) {
             document.body.style.overflow = "hidden";
         } else {
             document.body.style.overflow = "auto";
@@ -57,60 +54,64 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
         return () => {
             document.body.style.overflow = "auto";
         };
-    }, [isStatusDropdown]);
+    }, [isStatusForm]);
 
     useEffect(() => {
-        async function getDetails(currentMovieId: number){
-            const data: MovieListsType = await fetchDetails(currentMovieId);
-            setInfo(data);
+        async function getData(){
+            setLoading(true);
+
+            try {
+                const [ 
+                    details, 
+                    credits, 
+                    recommendations, 
+                    videos 
+                ] = await Promise.all([
+                    fetchDetails(currentMovieId), 
+                    fetchCredits(currentMovieId),
+                    fetchRecommendations(currentMovieId),
+                    fetchVideos(currentMovieId),
+                ]);
+
+                setInfo(details);
+                setCharacters(credits.cast);
+                setCrew(credits.crew);
+                setRecommendations(recommendations);
+                setVideos(videos);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+            }
         };
 
-        async function getCreditsCast(currentMovieId: number){
-            const data: CreditsApiType = await fetchCredits(currentMovieId);
-            setCharacters(data.cast.slice(0, 6));
-        };
-
-        async function getCreditsCrew(currentMovieId: number){
-            const data: CreditsApiType = await fetchCredits(currentMovieId);
-            setCrew(data.crew.slice(0, 4));
-        };
-
-        async function getRecommendations(currentMovieId: number){
-            const data: RecommendationsType[] = await fetchRecommendations(currentMovieId);
-            setRecommendations(data);
-        }
-
-        async function getVideos(currentMovieId: number){
-            const data: VideoType[] = await fetchVideos(currentMovieId);
-
-            setVideos(data);
-        };
-
-        getDetails(currentMovieId);
-        getCreditsCast(currentMovieId);
-        getCreditsCrew(currentMovieId);
-        getRecommendations(currentMovieId);
-        getVideos(currentMovieId);
+        getData();
     }, [currentMovieId]);
+
+    if(!info) {
+        return null;
+    };
 
     return(
         <>
-            <DesktopHeader />
-
             <div>
-                <MovieBanner title={info?.title} backdrop_path={info?.backdrop_path} />
+                <MovieBanner loading={loading} title={info.title} backdrop_path={info.backdrop_path} />
 
                 <div className="flex justify-center">
                     <div className="flex flex-col md:flex-row gap-[32px] p-5 md:p-[32px] md:pb-0 pb-0 xl:px-0 max-w-5xl 2xl:max-w-7xl w-full">
-                        <WatchingStatusDropdown movieData={info} isStatusDropdown={isStatusDropdown} setIsStatusDropdown={setIsStatusDropdown} setIsStatusForm={setIsStatusForm} setCurrentStatus={setCurrentStatus} currentStatus={currentStatus} />
+                        <WatchingStatusDropdown loading={loading} movieData={info} setIsStatusForm={setIsStatusForm} setCurrentStatus={setCurrentStatus} currentStatus={currentStatus} />
 
                         <div className="md:flex md:flex-col md:justify-between flex-1 md:gap-5 min-w-0">
                             <div className="md:flex md:flex-col md:gap-3">
-                                <MovieTitle title={info?.title || ""} />
+                                <MovieTitle loading={loading} title={info.title || ""} />
                                 {/* Description */}
-                                <p className="hidden md:block text-sm bg-white text-gray-500 break-words">
-                                    {info?.overview}
-                                </p>
+                                {loading ? 
+                                    <div className="border h-15 w-full bg-black"></div>
+                                    :
+                                    <p className="hidden md:block text-sm bg-white text-gray-500 break-words">
+                                        {info.overview}
+                                    </p>
+                                }
                             </div>
                             <InfoNav />
                         </div>
@@ -133,10 +134,10 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
                         <div className="flex flex-col gap-10 md:gap-[32px] lg:flex-1 min-w-0">
 
                             <div className="md:hidden">
-                                <Description overview={info?.overview} />
+                                <Description overview={info.overview} />
                             </div>
 
-                            <Relations recommendations={recommendations} status={info?.status} setCurrentMovieId={setCurrentMovieId} />
+                            <Relations recommendations={recommendations} status={info.status} setCurrentMovieId={setCurrentMovieId} />
                             <Characters characters={characters} />
                             <Staff crew={crew} />
 
@@ -146,11 +147,11 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
                             </div>
 
                             <div className="xl:hidden">
-                                <Trailer title={info?.title} backdrop_path={info?.backdrop_path} />
+                                <Trailer title={info.title} backdrop_path={info.backdrop_path} />
                             </div>
 
                             <div className="hidden xl:grid grid-cols-2 gap-10 md:gap-[32px]">
-                                <Trailer title={info?.title} backdrop_path={info?.backdrop_path} />
+                                <Trailer title={info.title} backdrop_path={info.backdrop_path} />
                                 <Following />
                             </div>
 
@@ -178,9 +179,6 @@ function Info({ currentMovieId, setCurrentMovieId }: InfoProps ){
 
                 {isStatusForm && <StatusForm info={info} setIsStatusForm={setIsStatusForm} currentStatus={currentStatus} setCurrentStatus={setCurrentStatus} />}
             </div>
-
-            <FloatingNav />
-            <Footer />
         </>
     );
 };

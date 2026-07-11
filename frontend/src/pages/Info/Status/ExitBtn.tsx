@@ -10,7 +10,7 @@ function ExitBtn({ setIsStatusForm }: ExitBtnProps ){
     return(
         <>
             <button onClick={() => setIsStatusForm(false)} className="absolute top-4 right-4">
-                <i className='bx bx-x text-2xl text-white' ></i>
+                <i className='bx bx-x text-2xl text-white hover:cursor-pointer' ></i>
             </button>
         </>
     );

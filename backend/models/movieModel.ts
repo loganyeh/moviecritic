@@ -19,7 +19,7 @@ const movieSchema = new mongoose.Schema({
      },
     watchStatus: { 
         type: String,
-        default: '',
+        default: 'Add to List',
      },
 }, { timestamps: true });
 

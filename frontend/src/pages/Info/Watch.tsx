@@ -5,10 +5,6 @@ type WatchProps = {
 };
 
 function Watch({ videos }: WatchProps ){
-    const watch = [
-        {thumbnail: '', episodeName: 'Episode 130 - Scent of'},
-        {thumbnail: '', episodeName: 'Episode 129 - It All Started'},
-    ];
 
     return(
         <>

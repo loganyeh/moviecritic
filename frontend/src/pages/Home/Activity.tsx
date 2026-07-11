@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { formatDistanceToNow } from "date-fns";
 import React, { useEffect, useState } from "react";
 import type { MovieListsType } from "../../services/tmdb/movieLists";
+import { fetchAllMovies } from "../../services/backend/movies";
 
 type ActivityProps = {
     page: "Home" | "Overview",
@@ -13,9 +14,7 @@ function Activity({ page, setCurrentMovieId }: ActivityProps ){
 
     useEffect(() => {
         async function getIsWatching(){
-            const response = await fetch('http://localhost:3000/list/status');
-            const data: MovieListsType[] = await response.json();
-
+            const data = await fetchAllMovies();
             setActivity(data);
         };
 
@@ -66,7 +65,7 @@ function Activity({ page, setCurrentMovieId }: ActivityProps ){
                                 </div>
 
                                 <div className="flex flex-col justify-between items-end text-[11px] shrink-0">
-                                    <time className="font-semibold">{formatDistanceToNow(new Date(movie.updatedAt), { addSuffix: true })}</time>
+                                    {movie.updatedAt && <time className="font-semibold">{formatDistanceToNow(new Date(movie.updatedAt), { addSuffix: true })}</time>}
 
                                     <div className="flex gap-2 text-sm">
                                         <i className='bx bxs-chat' ></i>
