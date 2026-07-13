@@ -12,9 +12,28 @@ Backend:
 
 ## Screenshots
 
-### Home Page
+### Home 
 
 ![Home Page](./screenshots/home.png)
+
+### Overview 
+![Overview Page](./screenshots/overview-page.png)
+
+### Browse 
+
+![Browse Page](./screenshots/browse.png)
+![Active Browse Page](./screenshots/browse-active.png)
+
+### Movie Details
+![Movie Details Page](./screenshots/movie-description.png)
+![Favorites and Watch Status](./screenshots/favorites-and-watch-status.png)
+![Watching Status Dropdown](./screenshots/watching-status-dropdown.png)
+
+### Movies List 
+![Movies List Page](./screenshots/movies-list.png)
+
+### Mobile 
+![Mobile Version](./screenshots/mobile-version.png)
 
 ## Features
 
