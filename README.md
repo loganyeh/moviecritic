@@ -40,7 +40,11 @@ https://moviecritic-mi3f.onrender.com
 
 ### Mobile
 
-<img src="./screenshots/mobile-version.png" alt="Mobile Version" width="300">
+<div>
+    <img src="./screenshots/mobile-version.png" alt="Mobile Version" width="300">
+    <img src="./screenshots/mobile-browse.png" alt="Mobile Browse" width="300">
+    <img src="./screenshots/mobile-movie-details.png" alt="Mobile Version" width="300">
+</div>
 
 ## Features
 
