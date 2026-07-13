@@ -42,8 +42,6 @@ https://moviecritic-mi3f.onrender.com
 
 <div>
     <img src="./screenshots/mobile-version.png" alt="Mobile Version" width="300">
-    <img src="./screenshots/mobile-browse.png" alt="Mobile Browse" width="300">
-    <img src="./screenshots/mobile-movie-details.png" alt="Mobile Version" width="300">
     <img src="./screenshots/mobile-nav.png" alt="Mobile Navigation" width="300">
 </div>
 
@@ -97,7 +95,7 @@ moviecritic/
 ### Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/moviecritic.git
+git clone https://github.com/loganyeh/moviecritic.git
 ```
 
 ### Frontend
