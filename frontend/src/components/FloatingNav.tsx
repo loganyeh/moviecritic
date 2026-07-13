@@ -28,7 +28,7 @@ function FloatingNav(){
                 {isNav && <div className="border border-gray-100 grid grid-cols-3 gap-3 px-2 py-4 rounded shadow">
                     {navIcons.map((nav, index) => {
                         return <Link key={index} to={nav.route} className="flex gap-1 flex-col justify-center items-center">
-                            <i onClick={index === 8 ? handleNavClick : null} className={`${nav.icon} text-3xl`} ></i>
+                            <i onClick={index === 8 ? handleNavClick : undefined} className={`${nav.icon} text-3xl`} ></i>
                             <p className="text-[10px] font-medium">{nav.text}</p>
                         </Link>
                     })}

@@ -1,6 +1,6 @@
 # MovieCritic
 
-A full-stack movie tracking application that allows users to browse movies, view detailed information, save favorites, and manage personal watching statuses. Built with React, TypeScript, Express, MongoDB, and the TMDB API.
+A full-stack movie tracking application that allows users to browse movies, view detailed information, save favorites, and manage personal watching statuses. The application uses a React frontend, Express REST API, MongoDB database, and TMDB API integration, with separate frontend and backend deployments.
 
 ## Live Demo
 
@@ -9,6 +9,8 @@ https://moviecritic-seven.vercel.app/
 
 Backend:  
 https://moviecritic-mi3f.onrender.com
+
+(The backend URL provides REST API endpoints used by the frontend.)
 
 ## Screenshots
 
@@ -52,8 +54,6 @@ https://moviecritic-mi3f.onrender.com
 - Add movies to favorites
 - Manage watching and completed movie lists
 - Responsive design
-- Built a REST API with Express and MongoDB for managing movie data
-- Implemented CRUD operations for movie list management
 
 ## Tech Stack
 
@@ -136,11 +136,21 @@ MONGO_URI=your_mongodb_connection_string
 
 - Created reusable React components for movie cards, lists, and UI sections
 - Managed application state with React hooks
+- Built a REST API with Express and MongoDB for managing movie data
+- Implemented CRUD operations for movie list management
 - Built Express controllers and routes for movie list management
 - Created MongoDB schemas and models using Mongoose
 - Implemented CRUD functionality for movie lists
 - Configured environment variables for local and production deployments
 - Deployed frontend with Vercel and backend with Render
+
+## API Features
+
+- Retrieve movie lists through REST API endpoints
+- Add movies to personal lists
+- Update movie watch status
+- Remove movies from lists
+- Filter movies by watch status
 
 ## Future Improvements
 
