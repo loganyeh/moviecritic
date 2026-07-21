@@ -6,9 +6,10 @@ type WatchingStatusProps = {
     sectionName: string,
     watchData: MovieListsType[],
     setCurrentMovieId: React.Dispatch<React.SetStateAction<number>>,
+    loading: boolean
 };
 
-function WatchingStatusList({ sectionName, watchData, setCurrentMovieId }: WatchingStatusProps ){
+function WatchingStatusList({ sectionName, watchData, setCurrentMovieId, loading }: WatchingStatusProps ){
 
     return(
         <>
@@ -34,30 +35,46 @@ function WatchingStatusList({ sectionName, watchData, setCurrentMovieId }: Watch
                     </div>
 
                     <div className="flex flex-col gap-6">
-                        {watchData.map((movie, index) => {
-                            return <div key={index} className="flex items-start md:justify-between md:items-center gap-4">
-                                <Link to={'/info'} onClick={() => setCurrentMovieId(movie.id)} className="flex items-center gap-4 max-w-[190px] md:w-full">
-                                    <div className="w-12 aspect-square shrink-0 bg-gray-300 rounded">
-                                        <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="h-full w-full text-xs object-cover rounded" />
-                                    </div>
-                                    <p className="hidden flex-1 md:block break-words min-w-0 font-medium text-gray-600">{movie.title}</p>
-                                </Link>
-
-                                <div className="md:hidden flex flex-col gap-3 w-full text-gray-500">
-                                    <p className="font-medium text-gray-600">{movie.title}</p>
-                                    <div className="flex justify-between text-sm font-light">
-                                        <p>Score: 10</p>
-                                        <p>Progress: 25</p>
-                                    </div>
+                        {loading ?
+                            <div className="flex items-start md:justify-between md:items-center gap-4">
+                                <div className="flex items-center gap-4 max-w-[190px] md:w-full">
+                                    <div className="w-12 aspect-square shrink-0 bg-gray-300 rounded"></div>
+                                    <p className="hidden flex-1 md:block h-6 min-w-0 font-medium bg-black animate-pulse"></p>
                                 </div>
 
-                                <div className="hidden md:flex gap-16 lg:gap-24 2xl:gap-32 text-sm text-gray-500">
-                                    <p>10</p>
-                                    <p>25</p>
-                                    <p>ONA</p>
+                                <div className="md:hidden flex flex-col gap-3 w-full">
+                                    <p className="h-6 bg-black animate-pulse"></p>
+                                    <div className="h-5"></div>
                                 </div>
+
+                                <div className="hidden md:flex gap-16 lg:gap-24 2xl:gap-32 text-sm text-gray-500"></div>
                             </div>
-                        })}
+                            :
+                            (watchData.map((movie, index) => {
+                                return <div key={index} className="flex items-start md:justify-between md:items-center gap-4">
+                                    <Link to={'/info'} onClick={() => setCurrentMovieId(movie.id)} className="flex items-center gap-4 max-w-[190px] md:w-full">
+                                        <div className="w-12 aspect-square shrink-0 bg-gray-300 rounded">
+                                            <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="h-full w-full text-xs object-cover rounded" />
+                                        </div>
+                                        <p className="hidden flex-1 md:block break-words min-w-0 font-medium text-gray-600">{movie.title}</p>
+                                    </Link>
+
+                                    <div className="md:hidden flex flex-col gap-3 w-full text-gray-500">
+                                        <p className="font-medium text-gray-600">{movie.title}</p>
+                                        <div className="flex justify-between text-sm font-light">
+                                            <p>Score: 10</p>
+                                            <p>Progress: 25</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="hidden md:flex gap-16 lg:gap-24 2xl:gap-32 text-sm text-gray-500">
+                                        <p>10</p>
+                                        <p>25</p>
+                                        <p>ONA</p>
+                                    </div>
+                                </div>
+                        }))
+                        }
 
                         {watchData.length === 0 && <div className="flex justify-center items-center">
                             <p className="text-lg font-medium text-gray-700">Currently not watching any movies :(</p>

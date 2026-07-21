@@ -17,23 +17,28 @@ type MangaListProps = {
 };
 
 function MangaList({ setCurrentMovieId }: MangaListProps ){
+    const [loading, setLoading] = useState(true);
     const mangaLists = ["All", "Watching", "Completed", "Paused", "Dropped", "Planning"];
     const [watching, setWatching] = useState<MovieListsType[]>([]);
     const [completed, setCompleted] = useState<MovieListsType[]>([]);
 
     useEffect(() => {
         async function getMovieLists(){
-            const [
-                watching, 
-                completed,
-            ] = await Promise.all([
-                fetchWatchingMovies(),
-                fetchCompletedMovies(),
-            ]);
-
-            setWatching(watching);
-            setCompleted(completed);
-        }
+            try {
+                const [
+                    watching, 
+                    completed,
+                ] = await Promise.all([
+                    fetchWatchingMovies(),
+                    fetchCompletedMovies(),
+                ]);
+    
+                setWatching(watching);
+                setCompleted(completed);
+            } finally {
+                setLoading(false);
+            };
+        };
         
         getMovieLists();
     }, []);
@@ -61,10 +66,10 @@ function MangaList({ setCurrentMovieId }: MangaListProps ){
                                 <div className="hidden md:flex justify-end">
                                     <FilterType />
                                 </div>
-                                <WatchingStatusList sectionName="Watching" watchData={watching} setCurrentMovieId={setCurrentMovieId} />
+                                <WatchingStatusList sectionName="Watching" watchData={watching} setCurrentMovieId={setCurrentMovieId} loading={loading} />
                             </div>
 
-                            {completed.length !== 0 && <WatchingStatusList sectionName="Completed" watchData={completed} setCurrentMovieId={setCurrentMovieId} />}
+                            {completed.length !== 0 && <WatchingStatusList sectionName="Completed" watchData={completed} setCurrentMovieId={setCurrentMovieId} loading={loading} />}
                         </div>
                     </div>
                 </div>

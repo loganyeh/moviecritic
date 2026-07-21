@@ -9,12 +9,17 @@ type FavoritesProps = {
 };
 
 function Favorites({ setCurrentMovieId }: FavoritesProps ){
+    const [loading, setLoading] = useState(false);
     const [movies, setMovies] = useState<MovieListsType[]>([]);
 
     useEffect(() => {
         async function getMovies(){
-            const data = await fetchFavMovies();
-            setMovies(data);
+            try {   
+                const data = await fetchFavMovies();
+                setMovies(data);
+            } finally {
+                setLoading(false);
+            };
         };
 
         getMovies();
@@ -23,7 +28,7 @@ function Favorites({ setCurrentMovieId }: FavoritesProps ){
     return(
         <>
             <div className="flex flex-col items-center gap-10 px-6 py-10 pb-16 bg-gray-200">
-                <FavoritesCard sectionName="Movies" favoriteData={movies} setCurrentMovieId={setCurrentMovieId} />
+                <FavoritesCard sectionName="Movies" favoriteData={movies} setCurrentMovieId={setCurrentMovieId} loading={loading} />
             </div>
         </>
     );

@@ -13,12 +13,17 @@ type OverviewProps = {
 };
 
 function Overview({ setCurrentMovieId }: OverviewProps ){
+    const [loading, setLoading] = useState(true);
     const [favMovies, setFavMovies] = useState<MovieListsType[]>([]);
 
     useEffect(() => {
         async function getFavorites(){
-            const data = await fetchFavMovies();
-            setFavMovies(data);
+            try {
+                const data = await fetchFavMovies();
+                setFavMovies(data);
+            } finally {
+                setLoading(false);
+            };
         };
 
         getFavorites();
@@ -32,8 +37,8 @@ function Overview({ setCurrentMovieId }: OverviewProps ){
                     <div className="hidden xl:flex flex-col gap-5 max-w-sm 2xl:max-w-lg w-full">
                         <ActivityHistory />
                         <GenreOverview />
-                        {favMovies.length !== 0 && <FavoritesCard title="Movies" favData={favMovies} setCurrentMovieId={setCurrentMovieId} />}
-                        {favMovies.length !== 0 && <FavoritesCard title="Shows" favData={favMovies} setCurrentMovieId={setCurrentMovieId} />}
+                        {favMovies.length !== 0 && <FavoritesCard title="Movies" favData={favMovies} setCurrentMovieId={setCurrentMovieId} loading={loading} />}
+                        {favMovies.length !== 0 && <FavoritesCard title="Shows" favData={favMovies} setCurrentMovieId={setCurrentMovieId} loading={loading} />}
                     </div>
 
                     <div className="flex flex-col xl:flex-1 gap-6">
