@@ -57,12 +57,12 @@ function Activity({ page, setCurrentMovieId }: ActivityProps ){
                     {loading ?
                         (Array.from({ length: 3}).map((_, index) => {
                             return <div key={index} className="flex rounded shadow">
-                                <div className={`${page === "Overview" ? "w-14" : "w-24 md:w-[88px] 2xl:w-20"} aspect-[3/4] bg-gray-300 rounded-l`}></div>
+                                <div className={`${page === "Overview" ? "w-14" : "w-24 md:w-[88px] 2xl:w-20"} aspect-[3/4] bg-gray-300 rounded-l animate-pulse`}></div>
 
                                 <div className="flex justify-between gap-6 p-3.5 w-full bg-white rounded">
                                     <div className="flex flex-col gap-2 2xl:gap-1 justify-between text-xs">
-                                        <p className={`${page === "Overview" ? "hidden" : ""} bg-black h-4 w-14`}></p>
-                                        <p className={`${page === "Overview" ? "flex items-center h-full text-sm" : "text-xs"} bg-black h-8 md:h-4 w-32 md:w-60`}></p>
+                                        <p className={`${page === "Overview" ? "hidden" : ""} bg-black h-4 w-14 animate-pulse`}></p>
+                                        <p className={`${page === "Overview" ? "flex items-center h-full text-sm" : "text-xs"} bg-black h-8 md:h-4 w-32 md:w-60 animate-pulse`}></p>
                                         <div className={`${page === "Overview" ? "hidden" : ""} w-10 aspect-square bg-gray-300 rounded`}></div>
                                     </div>
                                 </div>
